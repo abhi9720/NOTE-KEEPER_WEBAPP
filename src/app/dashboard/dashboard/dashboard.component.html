@@ -1,0 +1,38 @@
+<div class="flex h-screen">
+    <!-- Sidebar -->
+        <div class="max-w-1/6 min-w-fit overflow-y-auto bg-teal-600 relative text-white"  [ngClass]="{'p-2': !sidebarHidden}">
+
+        <div class="flex gap-2 mb-4">
+            <h2 [ngClass]="{'hidden': sidebarHidden}" class="text-3xl font-bold">Note Keeper</h2>
+            <button (click)="toggleSidebar()" [class.fixed]="sidebarHidden" [class.sticky]="!sidebarHidden"
+                class="toggle-button bg-teal-100">
+                <i class="fa fa-bars"></i>
+            </button>
+
+        </div>
+
+        <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
+
+        <p [ngClass]="{'hidden': sidebarHidden}" class="text-xl font-semibold">Pin Board</p>
+
+        <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
+
+        
+        <div [ngClass]="{'hidden': sidebarHidden}">
+            <app-notebook-list></app-notebook-list>
+        </div>
+
+        <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
+
+        <p [ngClass]="{'hidden': sidebarHidden}" class="text-xl font-semibold">Remaider</p>
+
+    </div>
+
+    <!-- Right Part -->
+    <div class="w-5/6 flex-grow overflow-y-auto flex flex-col rightpart relative">
+        <div class="flex flex-col flex-grow">
+            
+            <app-note-list></app-note-list>
+        </div>
+    </div>
+</div>

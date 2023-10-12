@@ -1,0 +1,52 @@
+<div class="flex-grow">
+
+  <div class="sticky top-0 p-2  bg-white" style="z-index: 10000;">
+
+    <div class="p-3 rounded-lg "
+      style="background-image: url({{bgImageUrl}}); background-size: cover; background-position: center;">
+
+      <div>
+        <p class="text-xl font-semibold text-white">{{ getGreeting() }}</p>
+        <p class="text-gray-200">{{ currentDate | date: 'longDate' }}</p>
+      </div>
+
+      <div class="bg-gray-100 flex flex-wrap gap-4 sticky top-0 p-2 px-3 rounded-lg mt-4">
+
+        <div class="flex  justify-center" style="align-items: center;">
+          <p class="text-xl font-semibold m-0">{{ NotebookSelectedName }}</p>
+          <button class="text-teal-600 hover:text-teal-800 p-2">
+            <i class="fa fa-edit"></i>
+
+          </button>
+          <button (click)="openNotebookShareDialog()"
+            class="card-menu-button text-teal-600 hover:text-teal-800 flex justify-center items-center gap-2">
+            <i class="fa fa-share"></i>
+          </button>
+        </div>
+
+
+        <input type="text" placeholder="Search notes" (input)="searchNotes($event)"
+          class="p-2 pr-10 rounded-lg border flex-grow border-teal-300 focus:ring focus:ring-teal-300" />
+
+
+
+        <!-- <button (click)="openNoteModal()" type="button"
+          class="px-3 py-2 text-xs font-medium text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
+          Add Note
+        </button> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap align-center masonry-container">
+    <app-note *ngFor="let note of filteredNotes" [note]="note" (checkboxClicked)="updateCheckbox($event)"></app-note>
+  </div>
+
+
+  <div class="fab-container">
+    <button class="fab-button !bg-teal-800" (click)="openNoteModal()">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+
+</div>

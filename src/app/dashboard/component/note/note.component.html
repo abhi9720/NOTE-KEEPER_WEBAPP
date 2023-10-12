@@ -1,0 +1,49 @@
+<div class="note-card p-4 rounded-lg shadow-md" [style.background-color]="noteClass">
+  <div *ngIf="isMenuOpen" (click)="closeMenu()" class="fixed top-0 left-0 w-screen h-screen  z-10"></div>
+
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-lg font-semibold">{{ note.title }}</h3>
+   
+
+    <div class="relative inline-block flex gap-2">
+      <button class="text-teal-600 hover:text-teal-800 p-2" (click)="editNote()">
+        <i class="fa fa-edit"></i>
+      </button>
+      <button type="button" class="text-gray-600 hover:text-teal-800 p-2" (click)="toggleMenu()">
+        <i class="fa fa-ellipsis-v"></i>
+      </button>
+
+      <div *ngIf="isMenuOpen"
+        class="absolute top-[30px] left-[-20px] rounded-md bg-white	border border-gray-100 border-1 p-2 flex flex-col align-center gap-2 z-40" >
+        <button class="card-menu-button text-gray-600 hover:text-gray-800 flex justify-center items-center gap-2 " (click)="deleteNote()">
+          <i class="fa fa-trash"></i> Delete
+        </button>
+
+        <button class="card-menu-button text-gray-600 hover:text-gray-800 flex justify-center items-center gap-2 " (click)="shareNote()">
+          <i class="fa fa-share"></i> Share
+        </button>
+
+        <button class="card-menu-button text-gray-500 hover:text-gray-600 flex justify-center items-center gap-2 " (click)="moveNote()">
+          <i class="fa fa-arrows-alt"></i> Move
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="text-base text-gray-700">{{ note.body }}</p>
+
+  <ul *ngIf="note.listType === 'checkbox'" class="checklist">
+    <li *ngFor="let item of note.listItems; let i = index;" class="flex items-center">
+      <span class="checkbox w-5 h-5 border border-gray-400 rounded-full cursor-pointer mr-2"
+        [class.checked]="item.checked" (click)="toggleCheckbox(i)"></span>
+      {{ item.label }}
+    </li>
+  </ul>
+
+  <ul *ngIf="note.listType === 'bullet'" class="bullet-list">
+    <li *ngFor="let item of note.listItems">{{ item.label }}</li>
+  </ul>
+
+  
+</div>

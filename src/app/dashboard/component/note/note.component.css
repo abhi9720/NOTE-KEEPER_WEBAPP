@@ -1,0 +1,59 @@
+.note-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 10px;
+  min-width: 300px;
+  width: calc(100%/5);
+  max-width: 400px;
+ 
+}
+
+
+.note-card p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.checklist,
+.bullet-list {
+  list-style: none;
+  padding: 0;
+}
+
+.checklist li,
+.bullet-list li {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #666;
+  border-radius: 3px;
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.checkbox.checked {
+  background-color: #60a5fa;
+  color: #fff;
+  border: none;
+}
+
+.bullet-list li::before {
+  content: '•';
+  color: #60a5fa;
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+
+.note-card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
