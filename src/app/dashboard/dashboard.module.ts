@@ -21,6 +21,7 @@ import { CardModule } from 'primeng/card';
  import { AccessInputEmailComponent } from './component/access-input-email/access-input-email.component';
 import { MoveNoteDialogComponent } from './component/move-note-dialog/move-note-dialog.component';
 import { MenuModule } from 'primeng/menu';
+import { PinboardComponent } from './component/pinboard/pinboard.component';
 
 
 @NgModule({
@@ -28,13 +29,13 @@ import { MenuModule } from 'primeng/menu';
     DashboardComponent,
     NoteListComponent,
     NotebookListComponent,
+    PinboardComponent,
     NoteComponent,
     AddUpdateNoteComponent,
     ModelComponent,
     NotebookInputComponent,
-    NoteComponent,
     AccessInputEmailComponent,
-         MoveNoteDialogComponent
+    MoveNoteDialogComponent
   ],
   imports: [
     DashboardRoutingModule,

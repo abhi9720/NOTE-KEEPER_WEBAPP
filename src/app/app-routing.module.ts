@@ -6,7 +6,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 const routes: Routes = [
   // Define routes for each module
   { path: 'auth', loadChildren: () => AuthModule },
-  { path: '', loadChildren: () => DashboardModule },
+  { path: 'dashboard', loadChildren: () => DashboardModule },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
  
 ];
