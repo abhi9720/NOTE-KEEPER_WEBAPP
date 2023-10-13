@@ -3,6 +3,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { NgModule } from "@angular/core";
 import { PinboardComponent } from "./component/pinboard/pinboard.component";
 import { NoteListComponent } from "./component/note-list/note-list.component";
+import { RemainderComponent } from "./component/remainder/remainder.component";
 
 const dashboardRoutes: Routes = [
   // { path: 'pinned', component: PinboardComponent, pathMatch: 'full' },
@@ -13,16 +14,17 @@ const dashboardRoutes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
+      { path: 'remainder', component: RemainderComponent },
       { path: 'notes', component: NoteListComponent },
-      { path: '', component: PinboardComponent },
+      { path: 'pinned', component: PinboardComponent },
     ]
 
   }
 ];
-  
-  @NgModule({
-    imports: [RouterModule.forChild(dashboardRoutes)],
-    exports: [RouterModule],
-    
-  })
-  export class DashboardRoutingModule {}
+
+@NgModule({
+  imports: [RouterModule.forChild(dashboardRoutes)],
+  exports: [RouterModule],
+
+})
+export class DashboardRoutingModule { }

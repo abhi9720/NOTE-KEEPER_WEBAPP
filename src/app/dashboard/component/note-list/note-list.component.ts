@@ -6,7 +6,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
 
 import { NoteService } from '../../service/note.service';
 import { AddUpdateNoteComponent } from '../add-update-note/add-update-note.component';
-import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 
@@ -14,7 +13,7 @@ import { AccessInputEmailComponent } from '../access-input-email/access-input-em
   selector: 'app-note-list',
   templateUrl: './note-list.component.html',
   styleUrls: ['./note-list.component.css'],
-  providers: [DialogService, MessageService],
+  providers: [DialogService],
 })
 export class NoteListComponent implements OnInit, AfterViewInit {
   currentDate: Date;
@@ -109,6 +108,8 @@ export class NoteListComponent implements OnInit, AfterViewInit {
       maximizable: true,
       data: {},
       baseZIndex: 10000,
+      dismissableMask: true
+
     });
 
     ref.onClose.subscribe((result) => {
@@ -125,11 +126,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
       draggable: true,
       maximizable: true,
       baseZIndex: 10000,
-      closeOnEscape: true,
-      resizable: true,
-      closable: true,
-      modal: true,
-
+      dismissableMask: true
     });
 
     ref.onClose.subscribe((recipientEmail) => {

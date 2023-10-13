@@ -12,13 +12,13 @@
 
         <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
 
-        <a routerLink="/remainder" [ngClass]="{'hidden': sidebarHidden}"
+        <a routerLink="/dashboard/remainder" [ngClass]="{'hidden': sidebarHidden}"
             class="block text-xl font-semibold p-2 hover:bg-teal-700">Reminder</a>
 
         <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
 
 
-        <a routerLink="/dashboard" [ngClass]="{'hidden': sidebarHidden}"
+        <a routerLink="/dashboard/pinned" [ngClass]="{'hidden': sidebarHidden}"
             class="block text-xl font-semibold p-2 hover:bg-teal-700">Pin Board</a>
 
         <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
@@ -33,6 +33,7 @@
 
     <!-- Right Part -->
     <div class="w-5/6 flex-grow overflow-y-auto flex flex-col rightpart relative">
+
         <div class="flex flex-col flex-grow">
             <router-outlet></router-outlet>
         </div>

@@ -17,13 +17,15 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { AccessInputEmailComponent } from './component/access-input-email/access-input-email.component';
 import { MoveNoteDialogComponent } from './component/move-note-dialog/move-note-dialog.component';
 import { MenuModule } from 'primeng/menu';
 import { PinboardComponent } from './component/pinboard/pinboard.component';
 import { RemainderAddUpdateComponent } from './component/remainder-add-update/remainder-add-update.component';
+import { RemainderComponent } from './component/remainder/remainder.component';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { RemainderAddUpdateComponent } from './component/remainder-add-update/re
     NotebookInputComponent,
     AccessInputEmailComponent,
     MoveNoteDialogComponent,
-    RemainderAddUpdateComponent
+    RemainderAddUpdateComponent,
+    RemainderComponent
   ],
   imports: [
     DashboardRoutingModule,
@@ -54,7 +57,9 @@ import { RemainderAddUpdateComponent } from './component/remainder-add-update/re
     DropdownModule,
     MenuModule,
     DividerModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputTextareaModule,
+    CalendarModule
   ],
   providers: [
     DatePipe,

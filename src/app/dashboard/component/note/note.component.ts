@@ -91,6 +91,8 @@ export class NoteComponent implements OnChanges {
       maximizable: true,
       data: this.note,
       baseZIndex: 10000,
+      dismissableMask: true
+
     });
 
     ref.onClose.subscribe((result) => {
@@ -126,6 +128,8 @@ export class NoteComponent implements OnChanges {
       draggable: true,
       maximizable: true,
       baseZIndex: 10000,
+      dismissableMask: true
+
     });
 
     ref.onClose.subscribe((recipientEmail) => {
@@ -151,6 +155,8 @@ export class NoteComponent implements OnChanges {
       width: this.dialogWidth,
       data: {}, // Pass available notebooks
       baseZIndex: 10000,
+      dismissableMask: true
+
     });
 
     ref.onClose.subscribe((destinationNotebookId) => {

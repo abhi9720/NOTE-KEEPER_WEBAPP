@@ -3,17 +3,17 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../../service/note.service';
 import { DialogService } from 'primeng/dynamicdialog';
- 
+
 @Component({
   selector: 'app-pinboard',
   templateUrl: './pinboard.component.html',
   styleUrls: ['./pinboard.component.css'],
-  providers: [DialogService], 
+  providers: [DialogService],
 })
 export class PinboardComponent implements OnInit {
   pinnedNotes: any = [];
 
-  constructor(private noteService: NoteService) {}
+  constructor(private noteService: NoteService) { }
 
   ngOnInit() {
     this.noteService.getPinNotes().subscribe((notes) => {
@@ -21,16 +21,13 @@ export class PinboardComponent implements OnInit {
     });
   }
 
-  
-  updateCheckbox(checkboxItem:any) {
 
-    
-    
+  updateCheckbox(checkboxItem: any) {
     const { noteId, listItemIndex, checked } = checkboxItem;
 
-    console.log(noteId,listItemIndex,checked);
-    
-     const requestBody = {
+    console.log(noteId, listItemIndex, checked);
+
+    const requestBody = {
       listItemIndex: listItemIndex,
       checked: checked,
     };

@@ -4,3 +4,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.p-component-overlay.p-datepicker-mask {
+    display: none !important;
+}

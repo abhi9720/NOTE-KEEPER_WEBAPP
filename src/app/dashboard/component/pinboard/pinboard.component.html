@@ -1,4 +1,3 @@
-<div class="flex flex-wrap align-center masonry-container">
+<div class="flex flex-row flex-wrap align-center">
     <app-note *ngFor="let note of pinnedNotes" [note]="note" (checkboxClicked)="updateCheckbox($event)"></app-note>
-    
 </div>
