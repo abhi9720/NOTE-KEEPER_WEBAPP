@@ -16,12 +16,12 @@ export class AccessInputEmailComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onShareNotebook() {
     if (this.shareForm.valid) {
       const recipientEmail = this.shareForm.get('email')?.value;
-      this.ref.close(recipientEmail); 
+      this.ref.close(recipientEmail);
     }
   }
 }

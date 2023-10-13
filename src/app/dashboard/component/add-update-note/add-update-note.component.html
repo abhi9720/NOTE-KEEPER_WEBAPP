@@ -1,63 +1,69 @@
-<!-- add-update-note.component.html -->
-<div class="p-4">
+<div class="p-1 w-full">
+
   <form [formGroup]="noteForm" (ngSubmit)="submit()">
     <div class="mb-4">
-      <input formControlName="title" class="w-full p-2 border-none bg-slate-100 rounded focus:outline-none text-xl font-bold" placeholder="Title">
+      <input formControlName="title"
+        class="w-full p-2 border-none bg-slate-100 rounded focus:outline-none text-xl font-bold" placeholder="Title">
     </div>
     <div class="mb-4">
-      <textarea formControlName="body" class="w-full p-2 border-none bg-slate-100 rounded-lg focus:outline-none text-lg" placeholder="Write your note content here"></textarea>
+      <textarea formControlName="body" class="w-full p-2 border-none bg-slate-100 rounded-lg focus:outline-none text-lg"
+        placeholder="Write your note content here"></textarea>
     </div>
 
     <div class="mb-4">
       <label class="text-gray-600 font-semibold">Note Color:</label>
       <div class="color-swatches">
-        <div
-          class="color-swatch red"
-          (click)="selectColor('rgb(254 205 211)')"
-        ></div>
-        <div
-          class="color-swatch blue"
-          (click)="selectColor('rgb(224 231 255)')"
-        ></div>
-        <div
-          class="color-swatch green"
-          (click)="selectColor('rgb(204 251 241)')"
-        ></div>
-        <div
-          class="color-swatch pink"
-          (click)="selectColor('rgb(254 243 199)')"
-        ></div>
-        <div
-          class="color-swatch yellow"
-          (click)="selectColor('rgb(249 168 212)')"
-        ></div>
+        <div [ngClass]="{'selected-color': selectedColor === 'rgb(254 205 211)'}" class="color-swatch red"
+          (click)="selectColor('rgb(254 205 211)')"></div>
+        <div [ngClass]="{'selected-color': selectedColor === 'rgb(224 231 255)'}" class="color-swatch blue"
+          (click)="selectColor('rgb(224 231 255)')"></div>
+        <div [ngClass]="{'selected-color': selectedColor === 'rgb(204 251 241)'}" class="color-swatch green"
+          (click)="selectColor('rgb(204 251 241)')"></div>
+        <div [ngClass]="{'selected-color': selectedColor === 'rgb(254 243 199)'}" class="color-swatch pink"
+          (click)="selectColor('rgb(254 243 199)')"></div>
+        <div [ngClass]="{'selected-color': selectedColor === 'rgb(249 168 212)'}" class="color-swatch yellow"
+          (click)="selectColor('rgb(249 168 212)')"></div>
       </div>
     </div>
-    
-    <div class="mb-4">
-      <label class="text-gray-600 font-semibold">List Type:</label>
-      <select formControlName="listType" class="ml-2 border rounded focus:outline-none text-lg">
-        <option value="null">Add List</option>
-        <option value="checkbox">Checkbox List</option>
-        <option value="bullet">Bullet List</option>
-      </select>
+
+
+    <div class="mb-4 relative">
+      <!-- <label class="text-gray-600 font-semibold">List Type:</label> -->
+      <div class="relative inline-block w-full">
+        <select formControlName="listType"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg appearance-none focus:outline-none focus:border-blue-400 focus:ring focus:ring-blue-300 text-lg bg-white text-gray-700">
+          <option value="">Select List Type</option>
+          <option value="checkbox">Checkbox List</option>
+          <option value="bullet">Bullet List</option>
+        </select>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          <i class="fa fa-angle-down text-gray-600"></i>
+        </div>
+      </div>
     </div>
+
+
     <div class="mb-4" *ngFor="let listItems of listItems.controls; let i = index">
       <ng-container [ngSwitch]="listItems.get('type')?.value">
         <div *ngSwitchCase="'checkbox'">
-          <ul class="ml-4">
-            <li *ngFor="let item of (listItems.get('items')?.value || []); let j = index" class="mb-2 flex items-center">
+          <ul class="ml-4 list-none">
+            <li *ngFor="let item of (listItems.get('items')?.value || []); let j = index"
+              class="mb-2 flex items-center">
               <input type="checkbox" formControlName="{{ i }}.items.{{ j }}.checked" class="mr-2">
-              <input formControlName="{{ i }}.items.{{ j }}.label" class="w-full p-2 border rounded focus:outline-none text-lg">
-              <button class="text-red-600 ml-2" (click)="removeUserInputItem(j)">Remove</button>
+              <input formControlName="{{ i }}.items.{{ j }}.label"
+                class="w-full p-2 border rounded focus:outline-none text-lg">
+              <button class="text-red-600 ml-2" (click)="removeUserInputItem(j)">
+                <i class="fa fa-trash"></i>
+              </button>
             </li>
           </ul>
         </div>
         <div *ngSwitchCase="'bullet'">
-          <ul class="ml-4">
-            <li *ngFor="let item of (listItems.get('items')?.value || []); let j = index" class="mb-2 flex items-center">
-              <span class="text-gray-600">•</span>
-              <input formControlName="{{ i }}.items.{{ j }}.label" class="w-full p-2 border rounded focus:outline-none text-lg">
+          <ul class="ml-4 list-disc">
+            <li *ngFor="let item of (listItems.get('items')?.value || []); let j = index"
+              class="mb-2 flex items-center">
+              <input formControlName="{{ i }}.items.{{ j }}.label"
+                class="w-full p-2 border rounded focus:outline-none text-lg">
               <button class="text-red-600 ml-2" (click)="removeUserInputItem(j)">Remove</button>
             </li>
           </ul>
@@ -65,10 +71,13 @@
       </ng-container>
     </div>
 
-    <button *ngIf="noteForm.get('listType')?.value !== 'null'" class="text-teal-500 font-semibold p-2 rounded-lg bg-teal-100 hover:bg-teal-200 focus:outline-none text-lg" (click)="addUserInputItem()">Add Item</button>
+    <button *ngIf="noteForm.get('listType')?.value && noteForm.get('listType')?.value !== 'null'"
+      class="text-teal-500 font-semibold p-2 rounded-lg bg-teal-100 hover:bg-teal-200 focus:outline-none text-lg"
+      (click)="addUserInputItem()">Add Item</button>
 
     <div class="flex justify-end">
-      <button type="submit" class="text-white bg-teal-500 rounded-lg p-2 hover:bg-teal-600 focus:outline-none text-xl">Add Note</button>
+      <button type="submit"
+        class="text-white bg-teal-500 rounded-lg p-2 hover:bg-teal-600 focus:outline-none text-xl">Add Note</button>
     </div>
   </form>
 </div>

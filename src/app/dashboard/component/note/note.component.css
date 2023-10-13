@@ -3,16 +3,22 @@
   border-radius: 8px;
   padding: 12px;
   margin: 10px;
-  min-width: 300px;
+  min-width: 200px;
   width: calc(100%/5);
-  max-width: 400px;
- 
+
+
 }
 
 
 .note-card p {
   font-size: 1rem;
   margin: 0.5rem 0;
+}
+
+@media(max-width:800px) {
+  .note-card {
+    width: 95%;
+  }
 }
 
 .checklist,
@@ -56,4 +62,14 @@
 
 .note-card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+::ng-deep .p-button.p-confirm-dialog-accept {
+  background-color: #14B8A6;
+}
+
+::ng-deep .p-button.p-confirm-dialog-reject {
+  color: #666;
+  background-color: white;
 }

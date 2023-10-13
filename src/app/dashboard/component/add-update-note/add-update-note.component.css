@@ -1,32 +1,40 @@
 /* Add this to your CSS or component-specific styles */
 .color-swatches {
-    display: flex;
-    gap: 8px; /* Adjust the gap as needed */
-  }
-  
-  .color-swatch {
-    width: 30px; /* Adjust the size as needed */
-    height: 30px; /* Adjust the size as needed */
-    cursor: pointer;
-    border-radius: 50%;
-  }
-  
-  .red {
-    background-color: #f87171;
-  }
-    
-  .blue {
-    background-color:#60a5fa;
-  }
-  
-  .green {
-    background-color : #86efac;
-  }
-  
-  .yellow {
-    background-color:#fef08a
-  }
-  
-  .pink{
-    background-color: rgb(249 168 212);
-  }
+  display: flex;
+  gap: 8px;
+  /* Adjust the gap as needed */
+}
+
+.color-swatch {
+  width: 30px;
+  /* Adjust the size as needed */
+  height: 30px;
+  /* Adjust the size as needed */
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #f87171;
+}
+
+.blue {
+  background-color: #60a5fa;
+}
+
+.green {
+  background-color: #86efac;
+}
+
+.yellow {
+  background-color: #fef08a
+}
+
+.pink {
+  background-color: rgb(249 168 212);
+}
+
+.selected-color {
+  border: 5px solid #817a7a;
+
+}

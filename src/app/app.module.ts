@@ -19,7 +19,7 @@ import { DividerModule } from 'primeng/divider';
     FormsModule,
     HttpClientModule,
     DividerModule
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

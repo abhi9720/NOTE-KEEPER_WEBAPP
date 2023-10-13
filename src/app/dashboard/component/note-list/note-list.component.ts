@@ -14,7 +14,7 @@ import { AccessInputEmailComponent } from '../access-input-email/access-input-em
   selector: 'app-note-list',
   templateUrl: './note-list.component.html',
   styleUrls: ['./note-list.component.css'],
-  providers: [DialogService, MessageService], 
+  providers: [DialogService, MessageService],
 })
 export class NoteListComponent implements OnInit, AfterViewInit {
   currentDate: Date;
@@ -28,32 +28,34 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.masonry = new Masonry(this.el.nativeElement.querySelector('.masonry-container'), {
       itemSelector: '.note-card',
-      columnWidth: '.note-card',
+      // columnWidth: '250px',
+      resize: true,
+
       percentPosition: true,
-      horizontalOrder:true,
+      // horizontalOrder: true,
     });
   }
 
   refreshMasonryLayout() {
-     console.log(this.masonry);
-     
+    console.log(this.masonry);
+
     if (this.masonry) {
-     setTimeout(() => {
-      this.masonry.reloadItems()
-      this.masonry.layout();
-     }, 100);
-     }
+      setTimeout(() => {
+        this.masonry.reloadItems()
+        this.masonry.layout();
+      }, 100);
+    }
   }
 
- 
+
   constructor(
     private media: MediaMatcher,
     private dialogService: DialogService,
     private notebookSelectionService: NotebookSelectionService,
-    private noteService: NoteService ,
+    private noteService: NoteService,
     private datePipe: DatePipe,
     private el: ElementRef
-    
+
   ) {
     this.currentDate = new Date();
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -65,14 +67,14 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
-  
+
+  isMobileScreen = false;
   setDialogWidth() {
-    
-    
+    this.isMobileScreen = this.mobileQuery.matches
     this.dialogWidth = this.mobileQuery.matches ? '90%' : '40%';
   }
 
-  notes:any = [];
+  notes: any = [];
   filteredNotes: any[] = [];
 
   NotebookSelectedName = null;
@@ -80,19 +82,19 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
       console.log(selectedNotebook);
-      
+
       if (selectedNotebook) {
-        this.NotebookSelectedName =  selectedNotebook.name;
+        this.NotebookSelectedName = selectedNotebook.name;
         this.noteService.getNotesByNotebookId(selectedNotebook.id).subscribe(notes => {
-          
+
           this.notes = notes;
-          this.filteredNotes =  this.notes;
-         
+          this.filteredNotes = this.notes;
+
           this.refreshMasonryLayout()
-                
+
         });
 
-        
+
       } else {
         this.notes = [];
       }
@@ -103,10 +105,10 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     const ref = this.dialogService.open(AddUpdateNoteComponent, {
       header: 'Add Note',
       width: this.dialogWidth,
-      draggable:true,
-      maximizable:true,
-      data: {},  
-      baseZIndex: 10000, 
+      draggable: true,
+      maximizable: true,
+      data: {},
+      baseZIndex: 10000,
     });
 
     ref.onClose.subscribe((result) => {
@@ -123,25 +125,25 @@ export class NoteListComponent implements OnInit, AfterViewInit {
       draggable: true,
       maximizable: true,
       baseZIndex: 10000,
-      closeOnEscape:true,
-      resizable:true,
-      closable:true,
-      modal:true,
-     
+      closeOnEscape: true,
+      resizable: true,
+      closable: true,
+      modal: true,
+
     });
 
     ref.onClose.subscribe((recipientEmail) => {
-      
+
       console.log(recipientEmail);
-    
+
       if (recipientEmail) {
       }
     });
   }
 
-  ImageUrl ={
-    "Morning":"https://c4.wallpaperflare.com/wallpaper/532/857/84/5k-good-morning-mountain-hill-wallpaper-preview.jpg",
-    "Noon":"https://c4.wallpaperflare.com/wallpaper/306/119/776/hawaii-haleakala-dawn-landscape-wallpaper-preview.jpg",
+  ImageUrl = {
+    "Morning": "https://c4.wallpaperflare.com/wallpaper/532/857/84/5k-good-morning-mountain-hill-wallpaper-preview.jpg",
+    "Noon": "https://c4.wallpaperflare.com/wallpaper/306/119/776/hawaii-haleakala-dawn-landscape-wallpaper-preview.jpg",
     "Night": "https://c4.wallpaperflare.com/wallpaper/800/831/598/digital-art-neon-mountains-lake-wallpaper-preview.jpg"
   }
 
@@ -150,33 +152,33 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   getGreeting() {
     const currentHour = new Date().getHours();
     let greeting;
-  
+
     if (currentHour >= 5 && currentHour < 12) {
       greeting = "Good morning!";
-      this.bgImageUrl =  this.ImageUrl["Morning"]
+      this.bgImageUrl = this.ImageUrl["Morning"]
     } else if (currentHour >= 12 && currentHour < 18) {
       greeting = "Good afternoon!";
-      this.bgImageUrl =  this.ImageUrl["Noon"]
+      this.bgImageUrl = this.ImageUrl["Noon"]
     } else {
       greeting = "Good evening!";
-      this.bgImageUrl =  this.ImageUrl["Night"]
+      this.bgImageUrl = this.ImageUrl["Night"]
 
     }
-  
+
     return greeting;
   }
 
 
 
-  updateCheckbox(checkboxItem:any) {
+  updateCheckbox(checkboxItem: any) {
 
-    
-    
+
+
     const { noteId, listItemIndex, checked } = checkboxItem;
 
-    console.log(noteId,listItemIndex,checked);
-    
-     const requestBody = {
+    console.log(noteId, listItemIndex, checked);
+
+    const requestBody = {
       listItemIndex: listItemIndex,
       checked: checked,
     };
@@ -191,14 +193,14 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   }
 
   searchNotes(event: any) {
-    console.log(event, );
-    
-   const searchText =  event.target.value;
+    console.log(event,);
+
+    const searchText = event.target.value;
     this.filteredNotes = this.notes.filter((note: any) => {
       return note.body.toLowerCase().includes(searchText.toLowerCase()) || note.title.toLowerCase().includes(searchText.toLowerCase());
     });
     this.refreshMasonryLayout()
   }
-  
+
 
 }

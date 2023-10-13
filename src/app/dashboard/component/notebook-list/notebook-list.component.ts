@@ -7,35 +7,41 @@ import { NoteService } from '../../service/note.service';
   templateUrl: './notebook-list.component.html',
   styleUrls: ['./notebook-list.component.css']
 })
-export class NotebookListComponent implements OnInit{
-  Notebooks: any[]=[];
-
+export class NotebookListComponent implements OnInit {
+  Notebooks: any[] = [];
+  showNoteBooks = false;
   addNotebookClicked = false;
 
   constructor(
     private notebookSelectionService: NotebookSelectionService,
-    private noteService: NoteService  
-  ) {}
-  
+    private noteService: NoteService
+  ) { }
+
+
+
   selectNotebook(notebook: any) {
     this.notebookSelectionService.selectNotebook(notebook);
   }
 
   addNotebook(newNotebookName: string) {
-    
-     const newNotebook = { name: newNotebookName };
-     console.log(newNotebook);
-     
+
+    const newNotebook = { name: newNotebookName };
+    console.log(newNotebook);
+
     this.noteService.addNotebook(newNotebookName).subscribe((response) => {
-       if (response) {
+      if (response) {
         this.Notebooks.push(newNotebook);
       }
     });
-    this.addNotebookClicked =  false
+    this.addNotebookClicked = false
+  }
+
+  toggleNoteBookList(value: boolean) {
+    this.showNoteBooks = value;
   }
 
   ngOnInit() {
-     this.noteService.getNotebookNames().subscribe(notebooks => {
+    this.noteService.getNotebookNames().subscribe(notebooks => {
       this.Notebooks = notebooks;
       this.selectNotebook(this.Notebooks[0])
     });

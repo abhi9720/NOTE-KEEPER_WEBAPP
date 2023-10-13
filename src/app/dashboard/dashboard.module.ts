@@ -16,12 +16,14 @@ import { NotebookInputComponent } from './component/notebook-input/notebook-inpu
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { CardModule } from 'primeng/card';
- import { AccessInputEmailComponent } from './component/access-input-email/access-input-email.component';
+import { AccessInputEmailComponent } from './component/access-input-email/access-input-email.component';
 import { MoveNoteDialogComponent } from './component/move-note-dialog/move-note-dialog.component';
 import { MenuModule } from 'primeng/menu';
 import { PinboardComponent } from './component/pinboard/pinboard.component';
+import { RemainderAddUpdateComponent } from './component/remainder-add-update/remainder-add-update.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { PinboardComponent } from './component/pinboard/pinboard.component';
     ModelComponent,
     NotebookInputComponent,
     AccessInputEmailComponent,
-    MoveNoteDialogComponent
+    MoveNoteDialogComponent,
+    RemainderAddUpdateComponent
   ],
   imports: [
     DashboardRoutingModule,
@@ -50,11 +53,12 @@ import { PinboardComponent } from './component/pinboard/pinboard.component';
     CardModule,
     DropdownModule,
     MenuModule,
-    DividerModule
-  ] ,
+    DividerModule,
+    ConfirmDialogModule
+  ],
   providers: [
     DatePipe,
-  
+
   ],
 })
 export class DashboardModule { }

@@ -10,34 +10,39 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 export class AddUpdateNoteComponent {
   noteForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public ref: DynamicDialogRef, private config:DynamicDialogConfig) {
+  constructor(private fb: FormBuilder, public ref: DynamicDialogRef, private config: DynamicDialogConfig) {
     this.noteForm = this.fb.group({
       title: [''],
       body: [''],
       color: ['#fff'],
-      listType: ['null'], 
+      listType: [''],
       listItems: this.fb.array([]), // Use a FormArray to handle listItems
     });
 
     if (this.config?.data) {
       const data = this.config.data;
+      console.log(data);
+
       this.noteForm.patchValue(data);
     }
   }
 
+  selectedColor: string | null = null;
+
   selectColor(color: string) {
     this.noteForm.get('color')?.setValue(color);
+    this.selectedColor = color;
   }
 
-  
+
   get listItems(): FormArray {
     return this.noteForm.get('listItems') as FormArray;
   }
 
   // Add user input items to the FormArray dynamically
   addUserInputItem(): void {
-    const type =  this.noteForm.value.listType
-    
+    const type = this.noteForm.value.listType
+
     const listItems = this.noteForm.get('listItems') as FormArray;
 
     if (type === 'text') {
@@ -62,8 +67,8 @@ export class AddUpdateNoteComponent {
     listItems.removeAt(index);
   }
 
-  submit(){
+  submit() {
     console.log(this.noteForm.value);
-    
+
   }
 }

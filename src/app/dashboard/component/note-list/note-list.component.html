@@ -38,7 +38,8 @@
     </div>
   </div>
 
-  <div class="flex flex-wrap align-center masonry-container">
+  <div class="flex flex-wrap justify-center bg-red-100 align-center"
+    [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen}">
     <app-note *ngFor="let note of filteredNotes" [note]="note" (checkboxClicked)="updateCheckbox($event)"></app-note>
   </div>
 
