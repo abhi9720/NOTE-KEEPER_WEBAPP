@@ -48,7 +48,7 @@ export class NoteComponent implements OnChanges {
   setDialogWidth() {
 
 
-    this.dialogWidth = this.mobileQuery.matches ? '90%' : '40%';
+    this.dialogWidth = this.mobileQuery.matches ? '95%' : '40%';
   }
 
 
@@ -111,7 +111,6 @@ export class NoteComponent implements OnChanges {
       message: 'Are you sure you want to delete this note?',
       accept: () => {
         // User confirmed, perform the delete action here
-        alert("delete")
       },
       reject: () => {
         // User canceled

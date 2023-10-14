@@ -6,29 +6,29 @@ import { Observable, of } from 'rxjs';
     providedIn: 'root',
 })
 export class NoteService {
-  
- 
+
+
 
     private apiUrl = 'your-api-url';
 
-     dummyNotebookNames = [
+    dummyNotebookNames = [
         { id: 1, name: 'Notebook 1' },
         { id: 2, name: 'Notebook 2' },
     ];
 
-     dummyNotes = [
+    dummyNotes = [
         {
             "id": 1,
             "title": "Sample Title",
-            "color":'rgb(254 205 211)',
+            "color": 'rgb(254 205 211)',
             "body": "In the updateCheckbox function in the NoteListComponent, you should expect an object as the parameter, not individual variables for noteId, listItemIndex, and checked. In the updateCheckbox function in the NoteListComponent, you should expect an object as the parameter, not individual variables for noteId, listItemIndex, and checked. ",
             "listType": "",
-            
+
         },
         {
             "id": 2,
             "title": "Sample Title",
-            "color":'rgb(254 243 199)',
+            "color": 'rgb(254 243 199)',
             "body": "Sample Body Text",
             "listType": "checkbox",
             "listItems": [
@@ -59,7 +59,7 @@ export class NoteService {
         {
             "id": 3,
             "title": "Sample Title",
-            "color":'rgb(249 168 212)',
+            "color": 'rgb(249 168 212)',
             "body": "Sample Body Text Sample Body Text Sample Body Text",
             "listType": "checkbox",
             "listItems": [
@@ -91,7 +91,7 @@ export class NoteService {
         {
             "id": 4,
             "title": "Sample Title",
-            "color":'rgb(224 231 255)',
+            "color": 'rgb(224 231 255)',
             "body": "Sample Body Text",
             "listType": "bullet",
             "listItems": [
@@ -103,12 +103,12 @@ export class NoteService {
                 },
                 {
                     "label": "Task 2",
-                    "checked": true
+                    "checked": false
                 },
 
                 {
                     "label": "Step X",
-                    "checked": true
+                    "checked": false
                 },
                 {
                     "label": "Step Y",
@@ -123,7 +123,7 @@ export class NoteService {
         {
             "id": 5,
             "title": "Sample Title",
-            "color":'rgb(254 243 199)',
+            "color": 'rgb(254 243 199)',
             "body": "Sample Body Text",
             "listType": "checkbox",
             "listItems": [
@@ -154,7 +154,7 @@ export class NoteService {
         {
             "id": 6,
             "title": "Sample Title",
-            "color":'rgb(204 251 241)',
+            "color": 'rgb(204 251 241)',
             "body": "Sample Body Text",
             "listType": "checkbox",
             "listItems": [
@@ -186,7 +186,7 @@ export class NoteService {
     ];
 
     addNotebook(newNotebookName: string): Observable<any> {
-        const newnotebook = { id: Math.random()*20, name: newNotebookName };
+        const newnotebook = { id: Math.random() * 20, name: newNotebookName };
         // this.dummyNotebookNames.push(newnotebook);
         return of(newnotebook)
     }
@@ -194,7 +194,7 @@ export class NoteService {
     constructor(private http: HttpClient) { }
 
     getNotebookNames(): Observable<any[]> {
-      
+
 
         return of(this.dummyNotebookNames);
     }
@@ -208,7 +208,7 @@ export class NoteService {
 
         // return this.http.get<any>(url);
 
-       
+
         return of(this.dummyNotes);
 
     }
@@ -216,12 +216,12 @@ export class NoteService {
 
     shareNote(noteId: string, recipientEmail: string): Observable<any> {
         const url = `${this.apiUrl}/notes/${noteId}/share`; // Adjust the API endpoint accordingly
-    
+
         // You can send a POST request to the server to share the note
         const requestBody = {
-          recipientEmail: recipientEmail,
+            recipientEmail: recipientEmail,
         };
-    
+
         return this.http.post(url, requestBody);
-      }
+    }
 }

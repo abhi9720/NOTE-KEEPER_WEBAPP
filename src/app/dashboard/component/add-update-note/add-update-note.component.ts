@@ -21,9 +21,38 @@ export class AddUpdateNoteComponent {
 
     if (this.config?.data) {
       const data = this.config.data;
-      console.log(data);
 
-      this.noteForm.patchValue(data);
+      if (this.config?.data) {
+        const data = this.config.data;
+        console.log(data);
+
+        this.noteForm.patchValue({
+          title: data.title,
+          body: data.body,
+          color: data.color,
+          listType: data.listType,
+        });
+
+
+        if (data.listItems) {
+          const listItemsFormArray = this.noteForm.get('listItems') as FormArray;
+
+          while (listItemsFormArray.length) {
+            listItemsFormArray.removeAt(0);
+          }
+
+          // Patch the listItems FormArray with the data from your sample data
+          data.listItems.forEach((item: any) => {
+            listItemsFormArray.push(this.fb.group({
+              label: item.label,
+              checked: item.checked,
+            }));
+          });
+        }
+      }
+
+
+      console.log(data, this.noteForm.value);
     }
   }
 
@@ -40,29 +69,20 @@ export class AddUpdateNoteComponent {
   }
 
   // Add user input items to the FormArray dynamically
-  addUserInputItem(): void {
+  addlistItems(): void {
     const type = this.noteForm.value.listType
-
     const listItems = this.noteForm.get('listItems') as FormArray;
-
-    if (type === 'text') {
+    if (type === 'checkbox' || type === 'bullet') {
       listItems.push(
         this.fb.group({
-          type: [type],
-          items: this.fb.array([this.fb.control('')]),
-        })
-      );
-    } else if (type === 'checkbox' || type === 'bullet') {
-      listItems.push(
-        this.fb.group({
-          type: [type],
-          items: this.fb.array([this.fb.group({ label: '', checked: false })]),
+          label: [''],
+          checked: [false]
         })
       );
     }
   }
 
-  removeUserInputItem(index: number): void {
+  removelistItems(index: number): void {
     const listItems = this.noteForm.get('listItems') as FormArray;
     listItems.removeAt(index);
   }

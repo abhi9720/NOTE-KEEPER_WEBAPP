@@ -1,14 +1,10 @@
 <div class="flex items-center">
   <div class="relative flex-grow">
-    <input
-      [(ngModel)]="newNotebookName"
-      class="w-full p-2 text-black border border-gray-300 rounded-md focus:outline-none focus:border-teal-500"
-      placeholder="Enter notebook name and blur to save"
-    />
-    <button
-      (click)="saveNotebook()"
-      class="absolute right-0 top-0 h-full p-2 bg-teal-800 text-white rounded-r-md focus:outline-none hover:bg-teal-900 transition-all duration-300"
-    >
+    <input [(ngModel)]="newNotebookName"
+      class="w-full p-2 text-black border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
+      placeholder="Enter notebook name" />
+    <button (click)="saveNotebook()"
+      class="absolute right-0 top-0 h-full p-2 bg-teal-800 text-white rounded-r-md focus:outline-none hover:bg-teal-900 transition-all duration-300">
       <i class="fa fa-check" aria-hidden="true"></i>
     </button>
   </div>

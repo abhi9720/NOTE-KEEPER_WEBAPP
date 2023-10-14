@@ -1,36 +1,39 @@
 <div class="min-h-screen flex items-center justify-center bg-teal-500">
-    <div class="max-w-md w-full bg-white p-8 shadow-lg rounded-lg text-text">
-      <h2 class="text-3xl font-custom text-center mb-4">Register</h2>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="mb-4">
-          <label for="username" class="text-gray-600 font-semibold text-sm block">Username</label>
-          <div class="relative">
-            <i class="fa fa-user absolute left-3 top-3 text-gray-400"></i>
-            <input formControlName="username" type="text" id="username" class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-teal-400">
-          </div>
+  <div class="max-w-md w-full bg-white p-8 shadow-lg rounded-lg text-text">
+    <h2 class="text-3xl font-custom text-center mb-4">Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="username" class="text-gray-600 font-semibold text-sm block">Username</label>
+        <div class="relative">
+          <i class="fa fa-user absolute left-3 top-3 text-gray-400"></i>
+          <input formControlName="username" type="text" id="username"
+            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-green-400">
         </div>
-        <div class="mb-4">
-          <label for="email" class="text-gray-600 font-semibold text-sm block">Email</label>
-          <div class="relative">
-            <i class="fa fa-envelope absolute left-3 top-3 text-gray-400"></i>
-            <input formControlName="email" type="email" id="email" class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-teal-400">
-          </div>
+      </div>
+      <div class="mb-4">
+        <label for="email" class="text-gray-600 font-semibold text-sm block">Email</label>
+        <div class="relative">
+          <i class="fa fa-envelope absolute left-3 top-3 text-gray-400"></i>
+          <input formControlName="email" type="email" id="email"
+            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-green-400">
         </div>
-        <div class="mb-4">
-          <label for="password" class="text-gray-600 font-semibold text-sm block">Password</label>
-          <div class="relative">
-            <i class="fa fa-lock absolute left-3 top-3 text-gray-400"></i>
-            <input formControlName="password" type="password" id="password" class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-teal-400">
-          </div>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="text-gray-600 font-semibold text-sm block">Password</label>
+        <div class="relative">
+          <i class="fa fa-lock absolute left-3 top-3 text-gray-400"></i>
+          <input formControlName="password" type="password" id="password"
+            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-green-400">
         </div>
-         
-        <button type="submit" class="w-full bg-teal-500 text-white font-semibold py-2 rounded-lg hover:bg-teal-600">Register</button>
-        <div class="mt-4 text-center text-gray-600">
-          Or Continue with:
-          <a href="#" class="ml-2 text-teal-500"><i class="fa fa-google"></i> Google</a>
-          <a href="#" class="ml-2 text-gray-700"><i class="fa fa-github"></i> GitHub</a>
-        </div>
-      </form>
-    </div>
+      </div>
+
+      <button type="submit"
+        class="w-full bg-teal-500 text-white font-semibold py-2 rounded-lg hover:bg-teal-600">Register</button>
+      <div class="mt-4 text-center text-gray-600">
+        Or Continue with:
+        <a href="#" class="ml-2 text-green-500"><i class="fa fa-google"></i> Google</a>
+        <a href="#" class="ml-2 text-gray-700"><i class="fa fa-github"></i> GitHub</a>
+      </div>
+    </form>
   </div>
-  
+</div>

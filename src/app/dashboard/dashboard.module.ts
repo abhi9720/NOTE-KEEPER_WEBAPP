@@ -41,7 +41,8 @@ import { RemainderComponent } from './component/remainder/remainder.component';
     AccessInputEmailComponent,
     MoveNoteDialogComponent,
     RemainderAddUpdateComponent,
-    RemainderComponent
+    RemainderComponent,
+
   ],
   imports: [
     DashboardRoutingModule,

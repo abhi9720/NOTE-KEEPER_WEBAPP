@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotebookSelectionService } from '../../service/notebook-selection.service';
 import { NoteService } from '../../service/note.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notebook-list',
@@ -14,9 +15,15 @@ export class NotebookListComponent implements OnInit {
 
   constructor(
     private notebookSelectionService: NotebookSelectionService,
-    private noteService: NoteService
-  ) { }
+    private noteService: NoteService,
+    private router: Router
+  ) {
+  }
 
+  isActive(route: string): boolean {
+
+    return this.router.url === route;
+  }
 
 
   selectNotebook(notebook: any) {

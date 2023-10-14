@@ -1,8 +1,7 @@
-// pinboard.component.ts
-
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { NoteService } from '../../service/note.service';
 import { DialogService } from 'primeng/dynamicdialog';
+import Masonry from 'masonry-layout';
 
 @Component({
   selector: 'app-pinboard',
@@ -12,13 +11,38 @@ import { DialogService } from 'primeng/dynamicdialog';
 })
 export class PinboardComponent implements OnInit {
   pinnedNotes: any = [];
-
-  constructor(private noteService: NoteService) { }
+  masonry: any;
+  constructor(private noteService: NoteService, private el: ElementRef
+  ) { }
 
   ngOnInit() {
     this.noteService.getPinNotes().subscribe((notes) => {
       this.pinnedNotes = notes;
     });
+  }
+
+
+  ngAfterViewInit() {
+    this.masonry = new Masonry(this.el.nativeElement.querySelector('.masonry-container'), {
+      itemSelector: '.note-card',
+      // columnWidth: '250px',
+      resize: true,
+
+      percentPosition: true,
+      // horizontalOrder: true,
+    });
+  }
+
+
+  refreshMasonryLayout() {
+    console.log(this.masonry);
+
+    if (this.masonry) {
+      setTimeout(() => {
+        this.masonry.reloadItems()
+        this.masonry.layout();
+      }, 100);
+    }
   }
 
 

@@ -1,30 +1,24 @@
 <div class="w-full mx-auto p-4 bg-white rounded-lg">
     <form [formGroup]="reminderForm" (ngSubmit)="createReminder()" class="space-y-4">
         <input pInputText type="text" placeholder="Title" formControlName="title"
-            class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300" />
+            class="w-full p-2 border-none bg-slate-100 rounded focus:outline-none focus:border-none text-xl font-bold" />
 
-        <textarea rows="5" pInputTextarea [autoResize]="true" placeholder="Note" formControlName="note"
-            class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300 w-full h-auto border rounded p-2 focus:outline-none text-lg"></textarea>
+        <textarea rows="5" pInputTextarea [autoResize]="true" placeholder="Write Reminder Note" formControlName="note"
+            class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-green-300 w-full h-auto border rounded p-2 focus:outline-none text-lg"></textarea>
 
 
 
-        <p-calendar formControlName="datetime" [showTime]="true" [showSeconds]="true" [style]="{'width':'100%'}"
-            [readonlyInput]="true" [touchUI]="true" placeholder="Choose Date and Time"></p-calendar>
+        <p-calendar formControlName="datetime" [showTime]="true" [showSeconds]="true" [readonlyInput]="true"
+            [showButtonBar]="true" [touchUI]="true" placeholder="Choose Date and Time"></p-calendar>
 
         <!-- <input type="datetime-local" placeholder="Reminder Date & Time" 
-            class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300" /> -->
+            class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-green-300" /> -->
 
-        <div class="flex justify-between">
+        <div class="flex justify-end">
             <button type="submit"
-                class="max-w-md px-3 py-2 bg-blue-500 text-white rounded py-2 hover:bg-blue-600 focus:ring focus:ring-blue-300">
+                class="max-w-md px-3 py-2 bg-teal-500 text-white rounded py-2 hover:bg-teal-600 focus:ring focus:ring-green-300">
                 Create Reminder
             </button>
-
-            <button type="button" (click)="Cancel()"
-                class="max-w-md px-3 py-2  text-black rounded py-2 hover:bg-gray-200 focus:ring focus:ring-blue-300">
-                Cancel
-            </button>
         </div>
-
     </form>
 </div>

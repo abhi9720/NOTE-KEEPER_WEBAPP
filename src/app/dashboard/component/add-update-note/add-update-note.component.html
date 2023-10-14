@@ -3,7 +3,9 @@
   <form [formGroup]="noteForm" (ngSubmit)="submit()">
     <div class="mb-4">
       <input formControlName="title"
-        class="w-full p-2 border-none bg-slate-100 rounded focus:outline-none text-xl font-bold" placeholder="Title">
+        class="w-full p-2 border-none bg-slate-100 rounded focus:outline-none focus:border-none text-xl font-bold"
+        placeholder="Title">
+
     </div>
     <div class="mb-4">
       <textarea formControlName="body" class="w-full p-2 border-none bg-slate-100 rounded-lg focus:outline-none text-lg"
@@ -42,39 +44,24 @@
       </div>
     </div>
 
-
-    <div class="mb-4" *ngFor="let listItems of listItems.controls; let i = index">
-      <ng-container [ngSwitch]="listItems.get('type')?.value">
-        <div *ngSwitchCase="'checkbox'">
-          <ul class="ml-4 list-none">
-            <li *ngFor="let item of (listItems.get('items')?.value || []); let j = index"
-              class="mb-2 flex items-center">
-              <input type="checkbox" formControlName="{{ i }}.items.{{ j }}.checked" class="mr-2">
-              <input formControlName="{{ i }}.items.{{ j }}.label"
-                class="w-full p-2 border rounded focus:outline-none text-lg">
-              <button class="text-red-600 ml-2" (click)="removeUserInputItem(j)">
-                <i class="fa fa-trash"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div *ngSwitchCase="'bullet'">
-          <ul class="ml-4 list-disc">
-            <li *ngFor="let item of (listItems.get('items')?.value || []); let j = index"
-              class="mb-2 flex items-center">
-              <input formControlName="{{ i }}.items.{{ j }}.label"
-                class="w-full p-2 border rounded focus:outline-none text-lg">
-              <button class="text-red-600 ml-2" (click)="removeUserInputItem(j)">Remove</button>
-            </li>
-          </ul>
-        </div>
-      </ng-container>
+    <div class="mb-4 w-full" formArrayName="listItems">
+      <div class="w-full" *ngFor="let item of listItems.controls; let i = index" [formGroupName]="i">
+        <label class="inline-flex w-full items-center mb-2">
+          <input *ngIf="noteForm.get('listType')?.value === 'checkbox'" type="checkbox"
+            class="form-checkbox h-5 w-5 text-indigo-600" formControlName="checked">
+          <input class="w-full p-2 border rounded focus:outline-none text-lg ml-3" formControlName="label"
+            placeholder="List Item">
+        </label>
+      </div>
     </div>
 
-    <button *ngIf="noteForm.get('listType')?.value && noteForm.get('listType')?.value !== 'null'"
-      class="text-teal-500 font-semibold p-2 rounded-lg bg-teal-100 hover:bg-teal-200 focus:outline-none text-lg"
-      (click)="addUserInputItem()">Add Item</button>
 
+
+
+
+    <button *ngIf="noteForm.get('listType')?.value && noteForm.get('listType')?.value !== 'null'"
+      class="text-green-500 font-semibold p-2 rounded-lg bg-teal-100 hover:bg-teal-200 focus:outline-none text-lg"
+      (click)="addlistItems()">Add Item</button>
     <div class="flex justify-end">
       <button type="submit"
         class="text-white bg-teal-500 rounded-lg p-2 hover:bg-teal-600 focus:outline-none text-xl">Add Note</button>

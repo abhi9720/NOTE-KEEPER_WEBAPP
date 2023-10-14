@@ -3,7 +3,8 @@
     <a (click)="toggleNoteBookList(true)" routerLink="./notes"
       class="block text-xl font-semibold p-2 hover:bg-teal-700 flex-grow">NOTEBOOKS</a>
 
-    <button (click)="toggleNoteBookList(!showNoteBooks)" class="ml-2 rounded-lg px-2 py-1">
+    <button *ngIf="isActive('/dashboard/notes')" (click)="toggleNoteBookList(!showNoteBooks)"
+      class="ml-2 rounded-lg px-2 py-1">
       <i class="fa fa-sort-desc" aria-hidden="true"></i>
     </button>
 

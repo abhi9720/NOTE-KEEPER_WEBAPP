@@ -1,19 +1,18 @@
-.rightpart::-webkit-scrollbar { 
-    display: none; 
+.rightpart::-webkit-scrollbar {
+  display: none;
 }
 
 
-  /* Button to toggle sidebar */
-  .toggle-button {
-    top: 10px;
-    left: 10px;
-    width: fit-content;
-    height: fit-content;
-    color: black;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    z-index: 200000;
-  }
- 
+/* Button to toggle sidebar */
+.toggle-button {
+  top: 10px;
+  left: 10px;
+  width: fit-content;
+  height: fit-content;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 1000;
+}

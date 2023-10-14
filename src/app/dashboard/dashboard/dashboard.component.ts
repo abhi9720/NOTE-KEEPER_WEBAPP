@@ -5,7 +5,7 @@ import { NoteListComponent } from '../component/note-list/note-list.component';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  
+
 })
 export class DashboardComponent {
 
@@ -17,7 +17,6 @@ export class DashboardComponent {
     this.sidebarHidden = !this.sidebarHidden;
 
     if (this.noteListComponent) {
-      // controlling layour of notelistcomponent
       this.noteListComponent.refreshMasonryLayout();
     }
   }

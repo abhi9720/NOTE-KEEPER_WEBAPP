@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RemainderAddUpdateComponent {
   reminderForm: FormGroup;
-  @Output() closeModal = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {
     this.reminderForm = this.fb.group({
@@ -18,9 +17,7 @@ export class RemainderAddUpdateComponent {
     });
   }
 
-  Cancel() {
-    this.closeModal.emit(true)
-  }
+
   createReminder() {
     if (this.reminderForm.valid) {
       const { title, note, datetime } = this.reminderForm.value;

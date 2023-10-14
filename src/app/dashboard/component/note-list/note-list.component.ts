@@ -70,7 +70,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   isMobileScreen = false;
   setDialogWidth() {
     this.isMobileScreen = this.mobileQuery.matches
-    this.dialogWidth = this.mobileQuery.matches ? '90%' : '40%';
+    this.dialogWidth = this.mobileQuery.matches ? '95%' : '40%';
   }
 
   notes: any = [];
