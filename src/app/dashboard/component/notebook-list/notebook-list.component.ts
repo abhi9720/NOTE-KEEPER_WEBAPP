@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotebookSelectionService } from '../../service/notebook-selection.service';
 import { NoteService } from '../../service/note.service';
 import { Router } from '@angular/router';
+import { NotebookService } from '../../service/notebook.service';
 
 @Component({
   selector: 'app-notebook-list',
@@ -15,7 +16,7 @@ export class NotebookListComponent implements OnInit {
 
   constructor(
     private notebookSelectionService: NotebookSelectionService,
-    private noteService: NoteService,
+    private notebookService: NotebookService,
     private router: Router
   ) {
   }
@@ -35,11 +36,18 @@ export class NotebookListComponent implements OnInit {
     const newNotebook = { name: newNotebookName };
     console.log(newNotebook);
 
-    this.noteService.addNotebook(newNotebookName).subscribe((response) => {
-      if (response) {
-        this.Notebooks.push(newNotebook);
+    this.notebookService.createNotebook(newNotebookName).subscribe(
+      (response) => {
+        if (response) {
+          this.Notebooks.push(response);
+          console.log(this.Notebooks);
+
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
     this.addNotebookClicked = false
   }
 
@@ -48,10 +56,11 @@ export class NotebookListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.noteService.getNotebookNames().subscribe(notebooks => {
-      this.Notebooks = notebooks;
-      this.selectNotebook(this.Notebooks[0])
-    });
+    this.notebookService.getNotebooks().subscribe(
+      (notebooks: any) => {
+        this.Notebooks = notebooks;
+        this.selectNotebook(this.Notebooks[0])
+      });
   }
 
 }

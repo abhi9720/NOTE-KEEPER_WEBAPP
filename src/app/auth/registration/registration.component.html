@@ -1,4 +1,4 @@
-<div class="min-h-screen flex items-center justify-center bg-teal-500">
+<div class="min-h-screen flex items-center justify-center bg-[#0052cc]">
   <div class="max-w-md w-full bg-white p-8 shadow-lg rounded-lg text-text">
     <h2 class="text-3xl font-custom text-center mb-4">Register</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -7,7 +7,7 @@
         <div class="relative">
           <i class="fa fa-user absolute left-3 top-3 text-gray-400"></i>
           <input formControlName="username" type="text" id="username"
-            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-green-400">
+            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-blue-400">
         </div>
       </div>
       <div class="mb-4">
@@ -15,7 +15,7 @@
         <div class="relative">
           <i class="fa fa-envelope absolute left-3 top-3 text-gray-400"></i>
           <input formControlName="email" type="email" id="email"
-            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-green-400">
+            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-blue-400">
         </div>
       </div>
       <div class="mb-4">
@@ -23,16 +23,22 @@
         <div class="relative">
           <i class="fa fa-lock absolute left-3 top-3 text-gray-400"></i>
           <input formControlName="password" type="password" id="password"
-            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-green-400">
+            class="w-full pl-10 pr-3 py-2 rounded-lg border-2 focus:border-blue-400">
         </div>
       </div>
 
       <button type="submit"
-        class="w-full bg-teal-500 text-white font-semibold py-2 rounded-lg hover:bg-teal-600">Register</button>
+        class="w-full bg-[#0052cc] text-white font-semibold py-2 rounded-lg hover:bg-blue-600">Register</button>
       <div class="mt-4 text-center text-gray-600">
         Or Continue with:
-        <a href="#" class="ml-2 text-green-500"><i class="fa fa-google"></i> Google</a>
-        <a href="#" class="ml-2 text-gray-700"><i class="fa fa-github"></i> GitHub</a>
+        <a href="#" class="ml-2 text-[#091e42]"><i class="fa fa-google"></i> Google</a>
+        <a href="#" class="ml-2 text-[#091e42]"><i class="fa fa-github"></i> GitHub</a>
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="text-gray-600">Already have an account? <a routerLink="/auth/login"
+            class="text-[#091e42] hover:underline">Sign In</a>
+        </p>
       </div>
     </form>
   </div>

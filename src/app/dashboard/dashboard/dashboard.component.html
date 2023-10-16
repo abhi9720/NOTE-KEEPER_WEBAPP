@@ -1,30 +1,46 @@
 <div class="flex h-screen">
     <!-- Sidebar -->
-    <div class="overflow-y-auto bg-teal-600 relative text-white" [ngClass]="{'p-2 w-64': !sidebarHidden}">
+    <div class="overflow-y-auto bg-blue-600 w-64 min-h-screen text-white text-white"
+        [ngClass]="{'p-2 min-w-fit': !sidebarHidden}">
 
-        <div class="flex gap-4">
-            <h2 [ngClass]="{'hidden': sidebarHidden}" class="text-3xl font-bold">Note Keeper</h2>
-            <button (click)="toggleSidebar()" [class.fixed]="sidebarHidden" [class.sticky]="!sidebarHidden"
-                class="toggle-button bg-teal-100 p-2">
-                <i class="fa fa-bars"></i>
-            </button>
-        </div>
+        <div class="flex flex-col h-full">
 
-        <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
+            <div class="flex justify-between gap-4">
+                <h2 [ngClass]="{'hidden': sidebarHidden}" class="text-2xl font-bold">Note Keeper</h2>
+                <button (click)="toggleSidebar()" [class.fixed]="sidebarHidden" [class.sticky]="!sidebarHidden"
+                    class="toggle-button bg-blue-100 p-2">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
 
-        <a routerLink="/dashboard/remainder" [ngClass]="{'hidden': sidebarHidden}"
-            class="block text-xl font-semibold p-2 hover:bg-teal-700">Reminder</a>
+            <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
 
-        <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
+            <a routerLink="/dashboard/remainder" [ngClass]="{'hidden': sidebarHidden}"
+                class="block font-semibold p-2 hover:bg-blue-700 flex-grow">REMAINDER</a>
 
+            <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
 
-        <a routerLink="/dashboard" [ngClass]="{'hidden': sidebarHidden}"
-            class="block text-xl font-semibold p-2 hover:bg-teal-700">Dashboard</a>
+            <a routerLink="/dashboard" [ngClass]="{'hidden': sidebarHidden}"
+                class="block font-semibold p-2 hover-bg-blue-700 flex-grow">DASHBOARD</a>
 
-        <p-divider [ngClass]="{'hidden': sidebarHidden}"></p-divider>
+            <p-divider [ngClass]="{'hidden !m-[10px]': sidebarHidden}"></p-divider>
 
-        <div [ngClass]="{'hidden': sidebarHidden}">
-            <app-notebook-list></app-notebook-list>
+            <div class="flex-grow h-full overflow-y-auto" [ngClass]="{'hidden': sidebarHidden}">
+                <app-notebook-list></app-notebook-list>
+            </div>
+
+            <div class="flex justify-between align-center text-center p-2 cursor-pointer hover:bg-blue-500 rounded">
+                <div class="flex gap-2 justify-between align-center text-center">
+                    <img src="https://avatars.githubusercontent.com/u/68281476?v=4" alt="User Profile"
+                        class="w-8 h-8 rounded-full">
+                    <h2 [ngClass]="{'hidden': sidebarHidden}" class="text-xl font-semibold">John Doe</h2>
+                </div>
+
+                <div class="flex gap-2 justify-between align-center text-center bor">
+                    <i class="fa fa-sort-desc" aria-hidden="true"></i>
+
+                </div>
+            </div>
         </div>
 
 
@@ -32,8 +48,7 @@
 
 
     <!-- Right Part -->
-    <div class="w-5/6 flex-grow overflow-y-auto flex flex-col rightpart relative">
-
+    <div class="w-5/6 bg-gray-100 flex-grow overflow-y-auto flex flex-col rightpart relative">
         <div class="flex flex-col flex-grow">
             <router-outlet></router-outlet>
         </div>

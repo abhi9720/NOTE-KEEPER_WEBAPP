@@ -5,8 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DividerModule } from 'primeng/divider';
+import { AuthInterceptor } from './core/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { DividerModule } from 'primeng/divider';
     HttpClientModule,
     DividerModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "font-awesome": "^4.7.0",
+    "jwt-decode": "^3.1.2",
     "masonry-layout": "^4.2.2",
     "primeicons": "^6.0.1",
     "primeng": "^15.4.1",

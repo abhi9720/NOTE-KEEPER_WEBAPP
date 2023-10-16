@@ -2,10 +2,10 @@
   <form [formGroup]="shareForm">
     <div class="relative">
       <input type="text" formControlName="email" placeholder="Enter recipient's email"
-        class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-green-300 focus:outline-none" />
+        class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-300 focus:outline-none" />
 
       <button (click)="onShareNotebook()" [disabled]="!shareForm.valid" type="button"
-        class="absolute right-0 px-3 py-2 text-sm font-medium text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-green-800">
+        class="absolute right-0 px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Share
       </button>
     </div>

@@ -1,11 +1,22 @@
-@import "primeng/resources/themes/lara-light-teal/theme.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.text-primary-dark {
+    color: #0052cc;
+}
 
-.p-component-overlay.p-datepicker-mask {
-    display: none !important;
+.bg-primary-dark {
+    background-color: #0052cc;
+}
+
+.text-black-dark {
+    color: #091e42;
+}
+
+.bg-primary-dark {
+    background-color: #091e42;
 }

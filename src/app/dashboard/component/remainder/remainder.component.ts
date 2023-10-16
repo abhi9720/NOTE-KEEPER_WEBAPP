@@ -38,9 +38,8 @@ export class RemainderComponent {
       closable: true,
       draggable: true,
       maximizable: true,
-      keepInViewport: true,
-      data: {},
-      baseZIndex: 10000,
+
+      autoZIndex: true,
       dismissableMask: true
 
     });

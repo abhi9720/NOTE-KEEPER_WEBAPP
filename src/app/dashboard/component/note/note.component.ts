@@ -17,6 +17,8 @@ import { ConfirmationService } from 'primeng/api';
 export class NoteComponent implements OnChanges {
   @Input() note: any;
   @Output() checkboxClicked = new EventEmitter<any>();
+  @Output() pinClicked = new EventEmitter<any>();
+
   noteClass: string = '';
 
   mobileQuery!: MediaQueryList;
@@ -66,18 +68,22 @@ export class NoteComponent implements OnChanges {
     console.log(this.note.listItems, itemIndex);
 
     const checkboxItem = {
-      noteId: this.note.id, // Assuming 'id' is the unique identifier for a note
+      noteId: this.note._id, // Assuming 'id' is the unique identifier for a note
       listItemIndex: itemIndex,
       checked: !this.note.listItems[itemIndex].checked,
     };
     this.checkboxClicked.emit(checkboxItem);
-    this.note.listItems[itemIndex].checked = !this.note.listItems[itemIndex].checked
+    // this.note.listItems[itemIndex].checked = !this.note.listItems[itemIndex].checked
   }
 
+  togglePin() {
+
+    this.pinClicked.emit(this.note._id)
+  }
 
   isMenuOpen = false;
 
-  toggleMenu() {
+  OpenMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
@@ -90,9 +96,8 @@ export class NoteComponent implements OnChanges {
       draggable: true,
       maximizable: true,
       data: this.note,
-      baseZIndex: 10000,
+      autoZIndex: true,
       dismissableMask: true
-
     });
 
     ref.onClose.subscribe((result) => {
@@ -133,15 +138,15 @@ export class NoteComponent implements OnChanges {
 
     ref.onClose.subscribe((recipientEmail) => {
       if (recipientEmail) {
-        alert(recipientEmail);
 
-        this.noteService.shareNote(this.note.id, recipientEmail).subscribe((response) => {
-          if (response.success) {
-            // Handle success, e.g., show a confirmation message
-          } else {
-            // Handle error, e.g., show an error message
-          }
-        });
+
+        // this.noteService.shareNote(this.note.id, recipientEmail).subscribe((response) => {
+        //   if (response.success) {
+        //     // Handle success, e.g., show a confirmation message
+        //   } else {
+        //     // Handle error, e.g., show an error message
+        //   }
+        // });
       }
     });
 

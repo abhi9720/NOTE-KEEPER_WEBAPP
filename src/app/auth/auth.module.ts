@@ -1,25 +1,16 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
- 
-const authRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegistrationComponent},
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+import { AuthRoutingModule } from './auth-routing.module';
+import { DividerModule } from 'primeng/divider';
+import { InputTextModule } from 'primeng/inputtext';
 
-];
-
-@NgModule({
-  imports: [RouterModule.forChild(authRoutes)],
-  exports: [RouterModule]
-})
-export class AuthRoutingModule {}
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   declarations: [LoginComponent, RegistrationComponent],
-  imports: [AuthRoutingModule, FormsModule,ReactiveFormsModule]
+  imports: [AuthRoutingModule, InputTextModule, DividerModule, FormsModule, ReactiveFormsModule, PasswordModule]
 })
-export class AuthModule {}
+export class AuthModule { }

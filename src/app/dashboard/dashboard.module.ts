@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddUpdateNoteComponent } from './component/add-update-note/add-update-note.component';
 import { ModelComponent } from './component/model/model.component';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { ButtonModule } from 'primeng/button';
 import { NotebookInputComponent } from './component/notebook-input/notebook-input.component';
@@ -26,7 +26,8 @@ import { MenuModule } from 'primeng/menu';
 import { PinboardComponent } from './component/pinboard/pinboard.component';
 import { RemainderAddUpdateComponent } from './component/remainder-add-update/remainder-add-update.component';
 import { RemainderComponent } from './component/remainder/remainder.component';
-
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,6 @@ import { RemainderComponent } from './component/remainder/remainder.component';
     MoveNoteDialogComponent,
     RemainderAddUpdateComponent,
     RemainderComponent,
-
   ],
   imports: [
     DashboardRoutingModule,
@@ -60,7 +60,9 @@ import { RemainderComponent } from './component/remainder/remainder.component';
     DividerModule,
     ConfirmDialogModule,
     InputTextareaModule,
-    CalendarModule
+    CalendarModule,
+    MessagesModule,
+    ToastModule
   ],
   providers: [
     DatePipe,

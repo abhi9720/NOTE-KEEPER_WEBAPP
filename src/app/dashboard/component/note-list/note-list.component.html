@@ -1,6 +1,6 @@
 <div class="flex-grow">
 
-  <div class="sticky top-0 p-2  bg-white" style="z-index: 10000;">
+  <div class="sticky top-0 p-2">
 
     <div class="p-3 rounded-lg "
       style="background-image: url({{bgImageUrl}}); background-size: cover; background-position: center;">
@@ -14,40 +14,54 @@
 
         <div class="flex  justify-center" style="align-items: center;">
           <p class="text-xl font-semibold m-0">{{ NotebookSelectedName }}</p>
-          <button class="text-green-600 hover:text-green-800 p-2">
+          <button class="text-blue-600 hover:text-blue-800 p-2">
             <i class="fa fa-edit"></i>
 
           </button>
           <button (click)="openNotebookShareDialog()"
-            class="card-menu-button text-green-600 hover:text-green-800 flex justify-center items-center gap-2">
+            class="card-menu-button text-blue-600 hover:text-blue-800 flex justify-center items-center gap-2">
             <i class="fa fa-share"></i>
           </button>
         </div>
 
 
         <input type="text" placeholder="Search notes" (input)="searchNotes($event)"
-          class="p-2 pr-10 rounded-lg border flex-grow border-green-300 focus:ring focus:ring-green-300" />
+          class="p-2 pr-10 rounded-lg border flex-grow border-blue-300 focus:ring focus:ring-blue-300" />
 
 
 
         <!-- <button (click)="openNoteModal()" type="button"
-          class="px-3 py-2 text-xs font-medium text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-green-800">
+          class="px-3 py-2 text-xs font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Add Note
         </button> -->
       </div>
     </div>
   </div>
+  <ng-container *ngIf="filteredNotes.length; else noNotesTemplate">
 
-  <div class="flex flex-wrap justify-center bg-white align-center"
-    [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen}">
-    <app-note *ngFor="let note of filteredNotes" [note]="note" (checkboxClicked)="updateCheckbox($event)"></app-note>
-  </div>
+    <div class="flex flex-wrap justify-center align-center"
+      [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen}">
+      <app-note *ngFor="let note of filteredNotes; let i =  index" [note]="note" (pinClicked)="togglePin($event,i)"
+        (checkboxClicked)="updateCheckbox($event,i)"></app-note>
+    </div>
 
+  </ng-container>
+
+  <ng-template #noNotesTemplate>
+    <div class="flex items-center justify-center h-40">
+      <div class="text-gray-400 text-center">
+        <i class="fa fa-sticky-note fa-3x"></i>
+        <p class="text-xl mt-2">No notes in this notebook.</p>
+      </div>
+    </div>
+  </ng-template>
 
   <div class="fab-container">
-    <button class="fab-button !bg-teal-800" (click)="openNoteModal()">
+    <button class="fab-button !bg-blue-800" (click)="openNoteModal()">
       <i class="fa fa-plus"></i>
     </button>
   </div>
+
+  <p-toast></p-toast>
 
 </div>

@@ -13,22 +13,27 @@ export class RemainderAddUpdateComponent {
     this.reminderForm = this.fb.group({
       title: ['', [Validators.required]],
       note: [''],
-      datetime: [new Date(), [Validators.required]],
+      date: [new Date(), [Validators.required]], // Separate date control
+      time: [new Date().toLocaleTimeString(), [Validators.required]], // Separate time control
     });
   }
 
-
   createReminder() {
     if (this.reminderForm.valid) {
-      const { title, note, datetime } = this.reminderForm.value;
+      console.log(this.reminderForm.value);
+
+      const { title, note, date, time } = this.reminderForm.value;
+
+      // Combine date and time to create a full datetime string
+      const datetime = `${date} ${time}`;
 
       // You can send the reminder data to your backend or handle it as needed
       console.log('Reminder Title: ', title);
       console.log('Reminder Note: ', note);
-      console.log('Reminder Date & Time: ', datetime);
+      console.log('Full Date & Time: ', datetime);
 
       // Clear the form
-      this.reminderForm.reset();
+      // this.reminderForm.reset();
     }
   }
 }

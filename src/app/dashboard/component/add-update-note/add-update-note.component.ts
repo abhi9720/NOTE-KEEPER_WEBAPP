@@ -22,37 +22,29 @@ export class AddUpdateNoteComponent {
     if (this.config?.data) {
       const data = this.config.data;
 
-      if (this.config?.data) {
-        const data = this.config.data;
-        console.log(data);
-
-        this.noteForm.patchValue({
-          title: data.title,
-          body: data.body,
-          color: data.color,
-          listType: data.listType,
-        });
+      this.noteForm.patchValue({
+        title: data.title,
+        body: data.body,
+        color: data.color,
+        listType: data.listType,
+      });
 
 
-        if (data.listItems) {
-          const listItemsFormArray = this.noteForm.get('listItems') as FormArray;
+      if (data.listItems) {
+        const listItemsFormArray = this.noteForm.get('listItems') as FormArray;
 
-          while (listItemsFormArray.length) {
-            listItemsFormArray.removeAt(0);
-          }
-
-          // Patch the listItems FormArray with the data from your sample data
-          data.listItems.forEach((item: any) => {
-            listItemsFormArray.push(this.fb.group({
-              label: item.label,
-              checked: item.checked,
-            }));
-          });
+        while (listItemsFormArray.length) {
+          listItemsFormArray.removeAt(0);
         }
+
+        // Patch the listItems FormArray with the data from your sample data
+        data.listItems.forEach((item: any) => {
+          listItemsFormArray.push(this.fb.group({
+            label: item.label,
+            checked: item.checked,
+          }));
+        });
       }
-
-
-      console.log(data, this.noteForm.value);
     }
   }
 
@@ -88,7 +80,8 @@ export class AddUpdateNoteComponent {
   }
 
   submit() {
-    console.log(this.noteForm.value);
+
+    this.ref.close(this.noteForm.value)
 
   }
 }

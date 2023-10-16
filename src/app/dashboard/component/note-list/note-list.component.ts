@@ -8,12 +8,13 @@ import { NoteService } from '../../service/note.service';
 import { AddUpdateNoteComponent } from '../add-update-note/add-update-note.component';
 import { DatePipe } from '@angular/common';
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-note-list',
   templateUrl: './note-list.component.html',
   styleUrls: ['./note-list.component.css'],
-  providers: [DialogService],
+  providers: [DialogService, MessageService],
 })
 export class NoteListComponent implements OnInit, AfterViewInit {
   currentDate: Date;
@@ -35,6 +36,10 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  showMessage(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity, summary, detail });
+  }
+
   refreshMasonryLayout() {
     console.log(this.masonry);
 
@@ -53,7 +58,8 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     private notebookSelectionService: NotebookSelectionService,
     private noteService: NoteService,
     private datePipe: DatePipe,
-    private el: ElementRef
+    private el: ElementRef,
+    private messageService: MessageService
 
   ) {
     this.currentDate = new Date();
@@ -79,19 +85,25 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   NotebookSelectedName = null;
 
   ngOnInit() {
+
+
     this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
       console.log(selectedNotebook);
 
       if (selectedNotebook) {
         this.NotebookSelectedName = selectedNotebook.name;
-        this.noteService.getNotesByNotebookId(selectedNotebook.id).subscribe(notes => {
+        this.noteService.getNotesByNoteBook(selectedNotebook._id).subscribe(
+          (notes: any) => {
 
-          this.notes = notes;
-          this.filteredNotes = this.notes;
-
-          this.refreshMasonryLayout()
-
-        });
+            this.notes = notes;
+            this.filteredNotes = this.notes;
+            console.log(this.notes);
+            this.refreshMasonryLayout()
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
 
 
       } else {
@@ -101,19 +113,31 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   }
 
   openNoteModal() {
+
     const ref = this.dialogService.open(AddUpdateNoteComponent, {
       header: 'Add Note',
       width: this.dialogWidth,
       draggable: true,
       maximizable: true,
       data: {},
-      baseZIndex: 10000,
+      autoZIndex: true,
       dismissableMask: true
-
     });
 
-    ref.onClose.subscribe((result) => {
-      if (result) {
+    ref.onClose.subscribe((data) => {
+      console.log(data);
+      if (data) {
+        this.noteService.createNote(data).subscribe(
+          (res) => {
+
+            this.showMessage('info', 'Information', 'Note Created')
+          },
+          (err) => {
+            this.showMessage('error', 'Error', 'Failed to Create Note')
+
+          }
+
+        )
       }
     });
   }
@@ -166,10 +190,24 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   }
 
 
+  togglePin(noteId: any, idx: number) {
+    console.log(noteId);
+    this.noteService.pinNote(noteId).subscribe(
+      (response) => {
+        this.showMessage('success', 'Success', 'Card Pinned')
 
-  updateCheckbox(checkboxItem: any) {
+        this.notes[idx] = response
+      },
+      (error) => {
+        console.log(error);
 
+      }
 
+    )
+
+  }
+
+  updateCheckbox(checkboxItem: any, idx: any) {
 
     const { noteId, listItemIndex, checked } = checkboxItem;
 
@@ -181,12 +219,18 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     };
 
     // Make an HTTP POST request to update the list item.
-    // this.http
-    //   .post(`/notes/${noteId}/update-list-item`, requestBody)
-    //   .subscribe((response) => {
-    //     // Handle the response, such as updating the local data.
-    //     // You can choose to update the local data here if needed.
-    //   });
+    this.noteService.updateNoteCheckBox(noteId, requestBody).subscribe(
+      (response) => {
+        if (response)
+          this.notes[idx] = response
+        this.showMessage('info', 'Information', 'Checkbox Updated')
+
+      },
+      (error) => {
+        console.log(error);
+
+      }
+    )
   }
 
   searchNotes(event: any) {

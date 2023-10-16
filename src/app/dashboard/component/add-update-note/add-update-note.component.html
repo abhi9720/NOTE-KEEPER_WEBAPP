@@ -19,7 +19,7 @@
           (click)="selectColor('rgb(254 205 211)')"></div>
         <div [ngClass]="{'selected-color': selectedColor === 'rgb(224 231 255)'}" class="color-swatch blue"
           (click)="selectColor('rgb(224 231 255)')"></div>
-        <div [ngClass]="{'selected-color': selectedColor === 'rgb(204 251 241)'}" class="color-swatch green"
+        <div [ngClass]="{'selected-color': selectedColor === 'rgb(204 251 241)'}" class="color-swatch blue"
           (click)="selectColor('rgb(204 251 241)')"></div>
         <div [ngClass]="{'selected-color': selectedColor === 'rgb(254 243 199)'}" class="color-swatch pink"
           (click)="selectColor('rgb(254 243 199)')"></div>
@@ -59,12 +59,12 @@
 
 
 
-    <button *ngIf="noteForm.get('listType')?.value && noteForm.get('listType')?.value !== 'null'"
-      class="text-green-500 font-semibold p-2 rounded-lg bg-teal-100 hover:bg-teal-200 focus:outline-none text-lg"
+    <button type="button" *ngIf="noteForm.get('listType')?.value && noteForm.get('listType')?.value !== 'null'"
+      class="text-blue-500 font-semibold p-2 rounded-lg bg-blue-100 hover:bg-blue-200 focus:outline-none text-lg"
       (click)="addlistItems()">Add Item</button>
     <div class="flex justify-end">
       <button type="submit"
-        class="text-white bg-teal-500 rounded-lg p-2 hover:bg-teal-600 focus:outline-none text-xl">Add Note</button>
+        class="text-white bg-blue-500 rounded-lg p-2 hover:bg-blue-600 focus:outline-none text-xl">Add Note</button>
     </div>
   </form>
 </div>

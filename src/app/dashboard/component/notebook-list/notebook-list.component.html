@@ -1,10 +1,10 @@
 <div>
   <div class="flex justify-between items-center">
     <a (click)="toggleNoteBookList(true)" routerLink="./notes"
-      class="block text-xl font-semibold p-2 hover:bg-teal-700 flex-grow">NOTEBOOKS</a>
+      class="block font-semibold p-2 hover:bg-blue-700 flex-grow">NOTEBOOKS</a>
 
     <button *ngIf="isActive('/dashboard/notes')" (click)="toggleNoteBookList(!showNoteBooks)"
-      class="ml-2 rounded-lg px-2 py-1">
+      class="ml-2 rounded-lg px-2 py-1 text-white">
       <i class="fa fa-sort-desc" aria-hidden="true"></i>
     </button>
 
@@ -19,7 +19,7 @@
   <ul class="bg-secondary p-2 space-y-2 transition-all duration-300 ease-in-out"
     [ngClass]="{'h-0 opacity-0': !showNoteBooks, 'h-auto opacity-100': showNoteBooks}">
     <li *ngFor="let notebook of Notebooks"
-      class="p-2 rounded-md cursor-pointer hover:bg-teal-100 hover:text-gray-600 hover:font-semibold transition-colors "
+      class="p-2 rounded-md cursor-pointer hover:bg-blue-700 hover:text-gray-100 hover:font-semibold transition-colors "
       (click)="selectNotebook(notebook)">
       {{ notebook.name }}
     </li>
