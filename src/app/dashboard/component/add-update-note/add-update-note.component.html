@@ -64,7 +64,8 @@
       (click)="addlistItems()">Add Item</button>
     <div class="flex justify-end">
       <button type="submit"
-        class="text-white bg-blue-500 rounded-lg p-2 hover:bg-blue-600 focus:outline-none text-xl">Add Note</button>
+        class="text-white bg-blue-500 rounded-lg p-2 hover:bg-blue-600 focus:outline-none text-xl">{{isEdit
+        ?'Update':'Add'}} Note</button>
     </div>
   </form>
 </div>

@@ -5,7 +5,8 @@ import { NoteService } from '../../service/note.service';
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 import { MoveNoteDialogComponent } from '../move-note-dialog/move-note-dialog.component';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { NotebookSelectionService } from '../../service/notebook-selection.service';
 
 
 @Component({
@@ -28,7 +29,11 @@ export class NoteComponent implements OnChanges {
   constructor(private dialogService: DialogService,
     private noteService: NoteService,
     private media: MediaMatcher,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private notebookSelectionService: NotebookSelectionService,
+    private messageService: MessageService,
+
+
   ) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -48,8 +53,6 @@ export class NoteComponent implements OnChanges {
 
 
   setDialogWidth() {
-
-
     this.dialogWidth = this.mobileQuery.matches ? '95%' : '40%';
   }
 
@@ -61,6 +64,11 @@ export class NoteComponent implements OnChanges {
 
   closeMenu() {
     this.isMenuOpen = false;
+  }
+
+
+  showMessage(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity, summary, detail });
   }
 
   toggleCheckbox(itemIndex: number) {
@@ -100,10 +108,31 @@ export class NoteComponent implements OnChanges {
       dismissableMask: true
     });
 
-    ref.onClose.subscribe((result) => {
-      if (result) {
-        // Handle the result (updated or new note) here
+    ref.onClose.subscribe((data) => {
+      if (data) {
+
+
+        console.log(data);
+
+        this.noteService.updateNote(data._id, data).subscribe(
+          (res) => {
+            if (res) {
+              console.log(res);
+              this.note = res;
+              console.log(this.note);
+
+            }
+            this.showMessage('info', 'Information', 'Note Updated')
+          },
+          (err) => {
+            this.showMessage('error', 'Error', 'Failed to Update Note')
+
+          }
+
+        )
       }
+
+
     });
 
 

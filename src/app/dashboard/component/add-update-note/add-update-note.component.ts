@@ -9,7 +9,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class AddUpdateNoteComponent {
   noteForm: FormGroup;
-
+  isEdit = false;
+  noteId = null;
   constructor(private fb: FormBuilder, public ref: DynamicDialogRef, private config: DynamicDialogConfig) {
     this.noteForm = this.fb.group({
       title: [''],
@@ -20,8 +21,11 @@ export class AddUpdateNoteComponent {
     });
 
     if (this.config?.data) {
-      const data = this.config.data;
+      console.log(this.config.data);
 
+      const data = this.config.data;
+      this.noteId = this.config.data._id;
+      this.isEdit = true
       this.noteForm.patchValue({
         title: data.title,
         body: data.body,
@@ -79,7 +83,8 @@ export class AddUpdateNoteComponent {
   }
 
   submit() {
-
+    const data = this.noteForm.value;
+    this.noteForm.value._id = this.noteId;
     this.ref.close(this.noteForm.value)
 
   }
