@@ -48,14 +48,14 @@
 }
 
 .checkbox.checked {
-  background-color: #60a5fa;
+  background-color: #1e40af;
   color: #fff;
   border: none;
 }
 
 .bullet-list li::before {
   content: '•';
-  color: #60a5fa;
+  color: #1e40af;
   font-size: 1.2rem;
   margin-right: 8px;
 }
@@ -67,7 +67,7 @@
 
 
 ::ng-deep .p-button.p-confirm-dialog-accept {
-  background-color: #14B8A6;
+  background-color: #1e40af;
 }
 
 ::ng-deep .p-button.p-confirm-dialog-reject {

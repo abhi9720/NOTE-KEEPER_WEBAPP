@@ -2,7 +2,7 @@
 
   <button class="pin-button absolute bottom-0 right-0 p-2"
     [ngClass]="{'text-gray-400':!note.isPinned,'text-blue-600':note.isPinned, 'pinned': note.isPinned }"
-    (click)="togglePin()">
+    (click)="pinClicked()">
     <i class="fa fa-lg fa-thumb-tack rotate-[30deg]" aria-hidden="true"></i>
   </button>
 

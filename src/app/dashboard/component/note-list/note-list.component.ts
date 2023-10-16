@@ -209,19 +209,21 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   }
 
 
-  togglePin(noteId: any, idx: number) {
-    console.log(noteId);
-    this.noteService.pinNote(noteId).subscribe(
-      (response) => {
-        this.showMessage('success', 'Success', 'Card Pinned')
+  deleteNote(noteId: any, idx: number) {
 
-        this.notes[idx] = response
-      },
-      (error) => {
-        console.log(error);
+    this.noteService.deleteNote(noteId).subscribe(
+      (response) => {
+        this.notes.splice(idx, 1);
+        console.log(this.notes);
+
+        this.showMessage('info', 'Information', 'Note Deleted')
+        this.refreshMasonryLayout()
+      }
+      , (error) => {
+        console.log("Error", error);
+        this.showMessage('error', 'Error', 'Failed to Delete Note')
 
       }
-
     )
 
   }

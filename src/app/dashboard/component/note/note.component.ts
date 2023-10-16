@@ -18,7 +18,7 @@ import { NotebookSelectionService } from '../../service/notebook-selection.servi
 export class NoteComponent implements OnChanges {
   @Input() note: any;
   @Output() checkboxClicked = new EventEmitter<any>();
-  @Output() pinClicked = new EventEmitter<any>();
+  @Output() deleteNoteEmitter = new EventEmitter<any>();
 
   noteClass: string = '';
 
@@ -84,9 +84,23 @@ export class NoteComponent implements OnChanges {
     // this.note.listItems[itemIndex].checked = !this.note.listItems[itemIndex].checked
   }
 
-  togglePin() {
+  pinClicked() {
 
-    this.pinClicked.emit(this.note._id)
+    // this.pinClicked.emit(this.note._id)
+    const idx = 1;
+
+    this.noteService.pinNote(this.note._id).subscribe(
+      (response) => {
+        this.showMessage('success', 'Success', 'Card Pinned')
+
+        this.note = response
+      },
+      (error) => {
+        console.log(error);
+
+      }
+
+    )
   }
 
   isMenuOpen = false;
@@ -144,7 +158,7 @@ export class NoteComponent implements OnChanges {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this note?',
       accept: () => {
-        // User confirmed, perform the delete action here
+        this.deleteNoteEmitter.emit(this.note._id)
       },
       reject: () => {
         // User canceled
