@@ -1,27 +1,33 @@
-<div>
-  <div class="flex justify-between items-center">
-    <a (click)="toggleNoteBookList(true)" routerLink="./notes"
-      class="block font-semibold p-2 hover:bg-blue-700 flex-grow">NOTEBOOKS</a>
+<div class="flex flex-col justify-between items-center sticky top-0 bg-blue-600">
+  <div class="flex justify-between w-full">
+    <a (click)="fetchNoteBooks()" routerLink="./note"
+      class="block sticky top-0 font-semibold p-2 hover:bg-blue-700 flex-grow">
+      NOTEBOOKS
 
-    <button *ngIf="isActive('/dashboard/notes')" (click)="toggleNoteBookList(!showNoteBooks)"
-      class="ml-2 rounded-lg px-2 py-1 text-white">
-      <i class="fa fa-sort-desc" aria-hidden="true"></i>
-    </button>
+      <i *ngIf="isFetching" class="fa fa-refresh fa-spin"></i>
+    </a>
+
+
 
     <button (click)="addNotebookClicked = !addNotebookClicked"
-      class="ml-2 rounded-lg px-2 py-1 bg-gray-100 text-slate-800 hover:text-gray-500">
-      <i class="fa fa-plus" aria-hidden="true"></i>
+      class="w-10 rounded-lg px-2 py-1 bg-gray-100 text-slate-800 hover:text-gray-500">
+      <i *ngIf="!addNotebookClicked" class="fa fa-plus" aria-hidden="true"></i>
+      <i *ngIf="addNotebookClicked" class="pi pi-times"></i>
+
     </button>
   </div>
 
   <app-notebook-input *ngIf="addNotebookClicked" (notebookAdded)="addNotebook($event)"></app-notebook-input>
 
-  <ul class="bg-secondary p-2 space-y-2 transition-all duration-300 ease-in-out"
-    [ngClass]="{'h-0 opacity-0': !showNoteBooks, 'h-auto opacity-100': showNoteBooks}">
-    <li *ngFor="let notebook of Notebooks"
-      class="p-2 rounded-md cursor-pointer hover:bg-blue-700 hover:text-gray-100 hover:font-semibold transition-colors "
-      (click)="selectNotebook(notebook)">
-      {{ notebook.name }}
-    </li>
-  </ul>
 </div>
+
+
+<!-- [ngClass]="{'h-0 opacity-0': !showNoteBooks, 'h-auto opacity-100': showNoteBooks}" -->
+<ul class="p-2 mt-2 space-y-2 transition-all duration-300 ease-in-out" [ngClass]="{'bg-blue-700':Notebooks.length}">
+  <li *ngFor="let notebook of Notebooks"
+    class="p-2 ml-5 text-sm font-semibold rounded-md cursor-pointer hover:bg-blue-900 hover:text-gray-100 hover:font-semibold transition-colors "
+    (click)="selectNotebook(notebook)">
+    {{ notebook.name }}
+
+  </li>
+</ul>

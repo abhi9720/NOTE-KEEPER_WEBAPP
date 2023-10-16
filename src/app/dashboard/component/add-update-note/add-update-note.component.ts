@@ -37,7 +37,6 @@ export class AddUpdateNoteComponent {
           listItemsFormArray.removeAt(0);
         }
 
-        // Patch the listItems FormArray with the data from your sample data
         data.listItems.forEach((item: any) => {
           listItemsFormArray.push(this.fb.group({
             label: item.label,

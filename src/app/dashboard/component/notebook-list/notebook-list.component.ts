@@ -13,7 +13,7 @@ export class NotebookListComponent implements OnInit {
   Notebooks: any[] = [];
   showNoteBooks = false;
   addNotebookClicked = false;
-
+  isFetching = false
   constructor(
     private notebookSelectionService: NotebookSelectionService,
     private notebookService: NotebookService,
@@ -22,26 +22,24 @@ export class NotebookListComponent implements OnInit {
   }
 
   isActive(route: string): boolean {
-
     return this.router.url === route;
   }
 
 
   selectNotebook(notebook: any) {
     this.notebookSelectionService.selectNotebook(notebook);
+    this.router.navigate(['/dashboard/note'])
   }
 
   addNotebook(newNotebookName: string) {
 
     const newNotebook = { name: newNotebookName };
-    console.log(newNotebook);
 
-    this.notebookService.createNotebook(newNotebookName).subscribe(
+    this.notebookService.createNotebook(newNotebook).subscribe(
       (response) => {
         if (response) {
           this.Notebooks.push(response);
           console.log(this.Notebooks);
-
         }
       },
       (error) => {
@@ -56,9 +54,15 @@ export class NotebookListComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.fetchNoteBooks();
+  }
+
+  fetchNoteBooks() {
+    this.isFetching = true
     this.notebookService.getNotebooks().subscribe(
       (notebooks: any) => {
         this.Notebooks = notebooks;
+        this.isFetching = false;
         this.selectNotebook(this.Notebooks[0])
       });
   }

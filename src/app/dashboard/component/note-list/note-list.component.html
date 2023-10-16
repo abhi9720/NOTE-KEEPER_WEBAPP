@@ -1,9 +1,9 @@
-<div class="flex-grow">
+<div class="flex-grow flex flex-col h-screen">
 
-  <div class="sticky top-0 p-2">
+  <div class="p-2 bg-gray-100">
 
-    <div class="p-3 rounded-lg "
-      style="background-image: url({{bgImageUrl}}); background-size: cover; background-position: center;">
+    <div class=" p-3 rounded-lg "
+      style=" background-image: url({{bgImageUrl}}); background-size: cover; background-position: center;">
 
       <div>
         <p class="text-xl font-semibold text-white">{{ getGreeting() }}</p>
@@ -37,17 +37,17 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="filteredNotes.length; else noNotesTemplate">
+  <!-- <ng-container *ngIf="filteredNotes.length; else noNotesTemplate"> -->
 
-    <div class="flex flex-wrap justify-center align-center"
-      [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen}">
-      <app-note *ngFor="let note of filteredNotes; let i =  index" [note]="note" (pinClicked)="togglePin($event,i)"
-        (checkboxClicked)="updateCheckbox($event,i)"></app-note>
-    </div>
+  <div class="flex flex-grow  overflow-y-auto flex-wrap justify-center align-center"
+    [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen}">
+    <app-note *ngFor="let note of filteredNotes; let i =  index" [note]="note" (pinClicked)="togglePin($event,i)"
+      (checkboxClicked)="updateCheckbox($event,i)"></app-note>
+  </div>
 
-  </ng-container>
+  <!-- </ng-container> -->
 
-  <ng-template #noNotesTemplate>
+  <ng-template *ngIf="!filteredNotes.length">
     <div class="flex items-center justify-center h-40">
       <div class="text-gray-400 text-center">
         <i class="fa fa-sticky-note fa-3x"></i>

@@ -3,7 +3,10 @@
 }
 
 
-/* Button to toggle sidebar */
+::-webkit-scrollbar {
+  display: none !important;
+}
+
 .toggle-button {
   top: 10px;
   left: 10px;

@@ -9,6 +9,7 @@ import { AddUpdateNoteComponent } from '../add-update-note/add-update-note.compo
 import { DatePipe } from '@angular/common';
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 import { MessageService } from 'primeng/api';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-note-list',
@@ -30,11 +31,15 @@ export class NoteListComponent implements OnInit, AfterViewInit {
       itemSelector: '.note-card',
       // columnWidth: '250px',
       resize: true,
-
       percentPosition: true,
-      // horizontalOrder: true,
+      horizontalOrder: true,
     });
+
+    console.log(this.masonry);
   }
+
+
+
 
   showMessage(severity: string, summary: string, detail: string) {
     this.messageService.add({ severity, summary, detail });
@@ -59,7 +64,8 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     private noteService: NoteService,
     private datePipe: DatePipe,
     private el: ElementRef,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private route: ActivatedRoute
 
   ) {
     this.currentDate = new Date();
@@ -86,6 +92,12 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+    this.route.paramMap.subscribe((params: ParamMap) => {
+
+      const noteId = params.get('noteId');
+
+
+    })
 
     this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
       console.log(selectedNotebook);
@@ -126,10 +138,17 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
     ref.onClose.subscribe((data) => {
       console.log(data);
+      data.notebookId = this.notebookSelectionService.getLastSelectedNotebook()._id;
       if (data) {
+        console.log(data);
+
         this.noteService.createNote(data).subscribe(
           (res) => {
-
+            if (res) {
+              console.log(res);
+              this.filteredNotes.push(res);
+              this.refreshMasonryLayout()
+            }
             this.showMessage('info', 'Information', 'Note Created')
           },
           (err) => {
