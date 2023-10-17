@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import jwt_decode from "jwt-decode";
+import { environment } from 'src/environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:3000/v1/auth';
+  private baseUrl = `${environment.baseUrl}/v1/auth`;
   private key = "AuthToken"
 
   constructor(private http: HttpClient, private router: Router) { }

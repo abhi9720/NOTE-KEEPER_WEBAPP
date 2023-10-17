@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotebookService {
 
-  private baseUrl = 'http://localhost:3000/v1/notebooks';
+  private baseUrl = `${environment.baseUrl}/v1/notebooks`;
 
   constructor(private http: HttpClient) { }
 
