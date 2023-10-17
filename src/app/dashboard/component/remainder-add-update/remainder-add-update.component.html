@@ -3,8 +3,8 @@
         <input pInputText type="text" placeholder="Title" formControlName="title"
             class="w-full p-2 border-none bg-slate-100 rounded focus:outline-none focus:border-none text-xl font-bold" />
 
-        <textarea rows="5" pInputTextarea [autoResize]="true" placeholder="Write Reminder Note" formControlName="note"
-            class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300 w-full h-auto border rounded p-2 focus:outline-none text-lg"></textarea>
+        <textarea rows="3" pInputTextarea [autoResize]="true" placeholder="Write Reminder Note" formControlName="body"
+            class="w-full px-3 py-2 border rounded bg-gray-50 w-full h-auto border rounded p-2 focus:outline-none text-lg"></textarea>
 
 
 
@@ -13,7 +13,7 @@
         </p-calendar> -->
 
 
-        <input type="datetime-local" formControlName="datetime" placeholder="Reminder Date & Time" class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300
+        <input type="datetime-local" formControlName="reminder" placeholder="Reminder Date & Time" class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300
                hover:bg-white hover:border-gray-300 focus:outline-none" />
 
 

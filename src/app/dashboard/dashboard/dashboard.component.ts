@@ -29,8 +29,12 @@ export class DashboardComponent {
   }
 
   isMobileScreen() {
+    this.isMobile = this.mobileQuery.matches;;
     return this.sidebarHidden = this.mobileQuery.matches;
   }
+
+  isMobile = false;
+
 
   toggleSidebar() {
     this.sidebarHidden = !this.sidebarHidden;

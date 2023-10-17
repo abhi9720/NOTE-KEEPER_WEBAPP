@@ -15,8 +15,6 @@ export class NoteService {
     return this.http.post(`${this.baseUrl}/`, note);
   }
 
-
-
   updateCheckbox(noteId: string, listItemIndex: number, checked: boolean): Observable<any> {
     return this.http.put(`${this.baseUrl}/${noteId}/update-checkbox/${listItemIndex}`, { checked });
   }
@@ -50,4 +48,9 @@ export class NoteService {
     return this.http
       .put(`${this.baseUrl}/${noteId}/update-checkbox`, requestBody)
   }
+
+  getRemainder() {
+    return this.http.get(`${this.baseUrl}/remainders`)
+  }
+
 }

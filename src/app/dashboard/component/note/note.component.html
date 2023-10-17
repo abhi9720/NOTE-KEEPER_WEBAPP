@@ -1,4 +1,5 @@
-<div class="note-card p-4 rounded-lg shadow-md relative" [style.background-color]="noteClass">
+<div class="note-card  p-6 bg-white border border-gray-200 rounded-lg shadow relative"
+  [style.background-color]="note.color">
 
   <button class="pin-button absolute bottom-0 right-0 p-2"
     [ngClass]="{'text-gray-400':!note.isPinned,'text-blue-600':note.isPinned, 'pinned': note.isPinned }"
@@ -12,8 +13,8 @@
 
 
 
-  <div class="flex justify-between items-center mb-4">
-    <h3 class="text-lg font-semibold">{{ note.title }}</h3>
+  <div class="flex justify-between items-center">
+    <h3 class="text-lg font-semibold mb-4">{{ note.title }}</h3>
 
 
     <div class="relative inline-block flex gap-2">

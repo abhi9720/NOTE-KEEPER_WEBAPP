@@ -28,6 +28,7 @@ import { RemainderAddUpdateComponent } from './component/remainder-add-update/re
 import { RemainderComponent } from './component/remainder/remainder.component';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
+import { RemainderCardComponent } from './component/remainder-card/remainder-card.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ToastModule } from 'primeng/toast';
     MoveNoteDialogComponent,
     RemainderAddUpdateComponent,
     RemainderComponent,
+    RemainderCardComponent,
   ],
   imports: [
     DashboardRoutingModule,

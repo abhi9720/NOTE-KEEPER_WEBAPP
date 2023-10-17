@@ -8,8 +8,13 @@
 
     </div>
     <div class="mb-4">
-      <textarea formControlName="body" class="w-full p-2 border-none bg-slate-100 rounded-lg focus:outline-none text-lg"
-        placeholder="Write your note content here"></textarea>
+
+      <textarea rows="3" pInputTextarea [autoResize]="true" placeholder="Write your note content here"
+        formControlName="body"
+        class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300 w-full h-auto border rounded p-2 focus:outline-none text-lg"></textarea>
+
+      <!-- <textarea formControlName="body" class="w-full p-2 border-none bg-slate-100 rounded-lg focus:outline-none text-lg"
+        placeholder="Write your note content here"></textarea> -->
     </div>
 
     <div class="mb-4">
@@ -51,6 +56,11 @@
             class="form-checkbox h-5 w-5 text-indigo-600" formControlName="checked">
           <input class="w-full p-2 border rounded focus:outline-none text-lg ml-3" formControlName="label"
             placeholder="List Item">
+
+          <button (click)="removelistItems(i)" class="cursor-pointer p-2 bg-gray-100 ml-2 text-red-500">
+            <i class="fa fa-trash"></i>
+          </button>
+
         </label>
       </div>
     </div>

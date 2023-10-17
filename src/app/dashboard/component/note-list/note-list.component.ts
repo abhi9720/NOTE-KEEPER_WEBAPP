@@ -99,10 +99,14 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
     })
 
+
+
     this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
       console.log(selectedNotebook);
 
       if (selectedNotebook) {
+        console.log(selectedNotebook);
+
         this.NotebookSelectedName = selectedNotebook.name;
         this.noteService.getNotesByNoteBook(selectedNotebook._id).subscribe(
           (notes: any) => {

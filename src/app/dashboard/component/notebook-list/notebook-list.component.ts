@@ -11,7 +11,7 @@ import { NotebookService } from '../../service/notebook.service';
 })
 export class NotebookListComponent implements OnInit {
   Notebooks: any[] = [];
-  showNoteBooks = false;
+  showNoteBooks = true;
   addNotebookClicked = false;
   isFetching = false
   constructor(
@@ -28,6 +28,10 @@ export class NotebookListComponent implements OnInit {
 
   selectNotebook(notebook: any) {
     this.notebookSelectionService.selectNotebook(notebook);
+  }
+
+  noteBookClicked(notebook: any) {
+    this.selectNotebook(notebook)
     this.router.navigate(['/dashboard/note'])
   }
 
@@ -49,12 +53,13 @@ export class NotebookListComponent implements OnInit {
     this.addNotebookClicked = false
   }
 
-  toggleNoteBookList(value: boolean) {
-    this.showNoteBooks = value;
+  toggleNoteBookList() {
+    this.showNoteBooks = !this.showNoteBooks;
+
   }
 
   ngOnInit() {
-    // this.fetchNoteBooks();
+    this.fetchNoteBooks();
   }
 
   fetchNoteBooks() {

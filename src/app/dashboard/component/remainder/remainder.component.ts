@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RemainderAddUpdateComponent } from '../remainder-add-update/remainder-add-update.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { NoteService } from '../../service/note.service';
 
 @Component({
   selector: 'app-remainder',
@@ -10,21 +11,35 @@ import { MediaMatcher } from '@angular/cdk/layout';
   providers: [DialogService],
 
 })
-export class RemainderComponent {
+export class RemainderComponent implements OnInit {
 
 
   isReminderModalOpen: boolean = false;
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
   dialogWidth = '50%';
+  remainders: any = [];
 
-  constructor(private media: MediaMatcher, private dialogService: DialogService) {
+
+  constructor(private media: MediaMatcher, private dialogService: DialogService, private noteService: NoteService) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => this.setDialogWidth();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     this.setDialogWidth();
 
+  }
+
+  ngOnInit(): void {
+    this.noteService.getRemainder().subscribe(
+      (response) => {
+        this.remainders = response;
+        console.log(response);
+      },
+      (error) => {
+        console.log("Error ", error);
+      }
+    )
   }
 
   setDialogWidth() {
@@ -38,16 +53,24 @@ export class RemainderComponent {
       closable: true,
       draggable: true,
       maximizable: true,
-
       autoZIndex: true,
       dismissableMask: true
 
     });
 
-    ref.onClose.subscribe((result) => {
-      if (result) {
-        // Handle the result if needed
+    ref.onClose.subscribe((remainder) => {
+      if (remainder) {
+        this.noteService.createNote(remainder).subscribe(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
       }
     });
   }
+
+
 }

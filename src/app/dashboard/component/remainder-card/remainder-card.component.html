@@ -1,0 +1,38 @@
+<div class="flex flex-col justify-between h-full">
+    <div class="flex justify-between">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{remainder.title}}
+        </h5>
+
+        <button
+            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            (click)="OpenMenu()">
+            <i class="fa fa-ellipsis-v"></i>
+        </button>
+    </div>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{remainder.body}}</p>
+
+    <div *ngIf="isMenuOpen"
+        class="absolute bg-gray-100 top-5 right-2 rounded-md bg-white border border-gray-200 shadow-lg p-2  z-40">
+        <button
+            class="card-menu-button px-3 py-1 rounded text-gray-600 hover:text-gray-800 hover:bg-gray-100 flex items-center gap-3"
+            (click)="deleteRemainder()">
+            <i class="fa fa-trash"></i> Delete
+        </button>
+
+        <button
+            class="card-menu-button px-3 py-1 rounded text-gray-600 hover:text-gray-800 hover:bg-gray-100 flex items-center gap-3"
+            (click)="editRemainder()">
+            <i class="fa fa-edit"></i> Edit
+        </button>
+    </div>
+
+    <div class="bg-gray-100 rounded-lg p-2">
+        <span class="text-gray-500">
+            <i class="fa fa-bell text-yellow-500"></i>
+            Remainder
+            <strong>
+                {{remainder.remainderDate | date: 'dd/MM/yyyy HH:mm:ss'}}
+            </strong>
+        </span>
+    </div>
+</div>
