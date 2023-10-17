@@ -1,4 +1,3 @@
 export const environment = {
-    baseUrl: 'https://api-notewisepro.onrender.com'
-
+    baseUrl: 'http://localhost:3000'
 };

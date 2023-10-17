@@ -17,7 +17,7 @@ export class RemainderComponent implements OnInit {
   isReminderModalOpen: boolean = false;
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
-  dialogWidth = '50%';
+  dialogWidth = '30%';
   remainders: any = [];
 
 
@@ -43,7 +43,11 @@ export class RemainderComponent implements OnInit {
   }
 
   setDialogWidth() {
-    this.dialogWidth = this.mobileQuery.matches ? '95%' : '50%';
+    this.dialogWidth = this.mobileQuery.matches ? '95%' : '30%';
+  }
+
+  deleteRemainder(event: any, i: number) {
+    this.remainders.splice(i, 1)
   }
 
   openReminderModal() {
@@ -63,6 +67,7 @@ export class RemainderComponent implements OnInit {
         this.noteService.createNote(remainder).subscribe(
           (response) => {
             console.log(response);
+            this.remainders.push(response)
           },
           (error) => {
             console.log(error);

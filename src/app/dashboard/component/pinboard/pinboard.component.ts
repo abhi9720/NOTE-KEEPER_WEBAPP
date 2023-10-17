@@ -21,6 +21,14 @@ export class PinboardComponent implements OnInit {
     });
   }
 
+  removeNote(event: any, idx: number) {
+    alert("remove note" + idx)
+    this.pinnedNotes.splice(1, idx)
+
+    console.log(this.pinnedNotes);
+
+  }
+
 
   ngAfterViewInit() {
     this.masonry = new Masonry(this.el.nativeElement.querySelector('.masonry-container'), {
@@ -29,7 +37,7 @@ export class PinboardComponent implements OnInit {
       resize: true,
 
       percentPosition: true,
-      // horizontalOrder: true,
+      horizontalOrder: true,
     });
   }
 

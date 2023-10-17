@@ -1,11 +1,11 @@
 .note-card {
-  border: 1px solid #ddd;
+  border: 1px solid #d8cece;
   border-radius: 8px;
   padding: 12px;
   margin: 10px;
   min-width: 200px;
   width: calc(100%/5);
-  background-color: #eff994;
+  background-color: white;
 }
 
 

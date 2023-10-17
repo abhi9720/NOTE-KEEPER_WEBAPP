@@ -9,7 +9,9 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrls: ['./remainder-add-update.component.css']
 })
 export class RemainderAddUpdateComponent {
+
   reminderForm: FormGroup;
+  isUpdate = false;
 
   constructor(private fb: FormBuilder, private noteService: NoteService,
     public ref: DynamicDialogRef, private config: DynamicDialogConfig
@@ -17,22 +19,27 @@ export class RemainderAddUpdateComponent {
     this.reminderForm = this.fb.group({
       title: ['', [Validators.required]],
       body: [''],
-      reminder: [new Date(), [Validators.required]],
+      remainderDate: [this.getFormattedDateTime(new Date()), [Validators.required]],
     });
 
 
+
+
     if (this.config?.data) {
-      // Patch data if it is update
+      this.isUpdate = true
+      this.config.data.remainderDate = this.getFormattedDateTime(this.config.data.remainderDate)
+      this.reminderForm.patchValue(this.config.data)
     }
+  }
+
+  getFormattedDateTime(date: any) {
+    return new Date(date).toISOString().substring(0, 16)
   }
 
   createReminder() {
     if (this.reminderForm.valid) {
       console.log(this.reminderForm.value);
-
       this.ref.close(this.reminderForm.value)
-
-
       // Clear the form
       this.reminderForm.reset();
     }

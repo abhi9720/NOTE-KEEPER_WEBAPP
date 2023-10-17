@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import jwt_decode from "jwt-decode";
-import { environment } from 'src/environment/environment.prod';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'

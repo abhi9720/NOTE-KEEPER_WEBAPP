@@ -16,7 +16,7 @@ export class AddUpdateNoteComponent {
       title: [''],
       body: [''],
       color: ['#fff'],
-      listType: [''],
+      listType: [null],
       listItems: this.fb.array([]), // Use a FormArray to handle listItems
     });
 

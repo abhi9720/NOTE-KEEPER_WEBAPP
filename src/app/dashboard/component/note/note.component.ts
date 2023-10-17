@@ -40,7 +40,7 @@ export class NoteComponent implements OnChanges {
     this.mobileQueryListener = () => this.setDialogWidth();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     this.setDialogWidth();
-    this.confirmationService
+
   }
 
   ngOnChanges() {
@@ -81,13 +81,13 @@ export class NoteComponent implements OnChanges {
       checked: !this.note.listItems[itemIndex].checked,
     };
     this.checkboxClicked.emit(checkboxItem);
-    // this.note.listItems[itemIndex].checked = !this.note.listItems[itemIndex].checked
+    this.note.listItems[itemIndex].checked = !this.note.listItems[itemIndex].checked
   }
 
   pinClicked() {
 
     // this.pinClicked.emit(this.note._id)
-    const idx = 1;
+
 
     this.noteService.pinNote(this.note._id).subscribe(
       (response) => {
@@ -158,7 +158,19 @@ export class NoteComponent implements OnChanges {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this note?',
       accept: () => {
-        this.deleteNoteEmitter.emit(this.note._id)
+        this.noteService.deleteNote(this.note._id).subscribe(
+          (response) => {
+            alert("deleted")
+            console.log(this.deleteNoteEmitter);
+
+            this.deleteNoteEmitter.emit()
+            this.showMessage('info', 'Information', 'Note Deleted')
+          }
+          , (error) => {
+            console.log("Error", error);
+            this.showMessage('error', 'Error', 'Failed to Delete Note')
+          }
+        )
       },
       reject: () => {
         // User canceled

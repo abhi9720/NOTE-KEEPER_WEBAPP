@@ -29,6 +29,7 @@ import { RemainderComponent } from './component/remainder/remainder.component';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { RemainderCardComponent } from './component/remainder-card/remainder-card.component';
+import { ShownotificationService } from '../core/shownotification.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { RemainderCardComponent } from './component/remainder-card/remainder-car
   ],
   providers: [
     DatePipe,
-
+    ShownotificationService
   ],
 })
 export class DashboardModule { }
