@@ -74,7 +74,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "note-keeper-app:build"
+            "browserTarget": "note-keeper-app:build",
+            "outputPath": "dist/note-keeper-app"
           }
         },
         "test": {
