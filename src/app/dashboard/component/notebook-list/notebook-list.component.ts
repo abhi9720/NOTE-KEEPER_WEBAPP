@@ -13,7 +13,8 @@ export class NotebookListComponent implements OnInit {
   Notebooks: any[] = [];
   showNoteBooks = true;
   addNotebookClicked = false;
-  isFetching = false
+  isFetching = false;
+  noteBookSelected: any;
   constructor(
     private notebookSelectionService: NotebookSelectionService,
     private notebookService: NotebookService,
@@ -27,10 +28,13 @@ export class NotebookListComponent implements OnInit {
 
 
   selectNotebook(notebook: any) {
+    this.noteBookSelected = notebook;
     this.notebookSelectionService.selectNotebook(notebook);
   }
 
   noteBookClicked(notebook: any) {
+    console.log("parent", notebook);
+
     this.selectNotebook(notebook)
     this.router.navigate(['/dashboard/note'])
   }
@@ -70,6 +74,21 @@ export class NotebookListComponent implements OnInit {
         this.isFetching = false;
         this.selectNotebook(this.Notebooks[0])
       });
+  }
+
+
+  deleteNoteBook(notebookId: any, idx: number) {
+    this.notebookService.deleteNotebook(notebookId).subscribe(
+      (response) => {
+        this.Notebooks.splice(idx, 1);
+        const nextIndex = idx == 0 ? idx + 1 : idx - 1;
+        this.notebookSelectionService.selectNotebook(this.Notebooks[nextIndex])
+        // this.showMessage('info', 'Information', 'NoteBook Deleted')
+      },
+      (error) => {
+
+      }
+    )
   }
 
 }

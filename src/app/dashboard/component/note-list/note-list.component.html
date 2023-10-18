@@ -16,15 +16,12 @@
           <p class="text-xl font-semibold m-0">{{ NotebookSelectedName }}</p>
           <button class="text-blue-600 hover:text-blue-800 p-2">
             <i class="fa fa-edit"></i>
-
           </button>
           <button (click)="openNotebookShareDialog()"
             class="card-menu-button text-blue-600 hover:text-blue-800 flex justify-center items-center gap-2">
             <i class="fa fa-share"></i>
           </button>
         </div>
-
-
         <input type="text" placeholder="Search notes" (input)="searchNotes($event)"
           class="p-2 pr-10 rounded-lg border flex-grow border-blue-300 focus:ring focus:ring-blue-300" />
       </div>

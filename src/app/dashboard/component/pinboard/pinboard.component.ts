@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { NoteService } from '../../service/note.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import Masonry from 'masonry-layout';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-pinboard',
@@ -12,8 +13,27 @@ import Masonry from 'masonry-layout';
 export class PinboardComponent implements OnInit {
   pinnedNotes: any = [];
   masonry: any;
-  constructor(private noteService: NoteService, private el: ElementRef
-  ) { }
+
+  mobileQuery!: MediaQueryList;
+  private mobileQueryListener: () => void;
+
+  constructor(private noteService: NoteService,
+    private el: ElementRef,
+    private media: MediaMatcher,
+
+  ) {
+
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => this.setDialogWidth();
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+
+  }
+
+
+  isMobileScreen = false;
+  setDialogWidth() {
+    this.isMobileScreen = this.mobileQuery.matches
+  }
 
   ngOnInit() {
     this.noteService.getPinNotes().subscribe((notes) => {
@@ -28,6 +48,8 @@ export class PinboardComponent implements OnInit {
     console.log(this.pinnedNotes);
 
   }
+
+
 
 
   ngAfterViewInit() {

@@ -31,6 +31,10 @@ import { ToastModule } from 'primeng/toast';
 import { RemainderCardComponent } from './component/remainder-card/remainder-card.component';
 import { ShownotificationService } from '../core/shownotification.service';
 import { EditorModule } from '../editor/editor.module';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { NotebooknameInputComponent } from './component/notebookname-input/notebookname-input.component';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,9 @@ import { EditorModule } from '../editor/editor.module';
     RemainderAddUpdateComponent,
     RemainderComponent,
 
-    RemainderCardComponent],
+    RemainderCardComponent,
+    NavbarComponent,
+    NotebooknameInputComponent],
   imports: [
 
     DashboardRoutingModule,
@@ -56,6 +62,7 @@ import { EditorModule } from '../editor/editor.module';
     CommonModule,
     HttpClientModule,
     SpeedDialModule,
+    DialogModule,
     DynamicDialogModule,
     ButtonModule,
     ScrollTopModule,
@@ -68,7 +75,10 @@ import { EditorModule } from '../editor/editor.module';
     CalendarModule,
     MessagesModule,
     ToastModule,
-    EditorModule
+    EditorModule,
+    ConfirmationPopoverModule.forRoot({
+      focusButton: 'confirm',
+    }),
   ],
   providers: [
     DatePipe,

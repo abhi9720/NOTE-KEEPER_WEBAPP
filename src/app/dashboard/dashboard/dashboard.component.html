@@ -4,15 +4,16 @@
 
         <div class="flex flex-col h-screen">
 
-            <div class="flex flex-col justify-between gap-4 mt-2 mb-5">
+            <div class="flex flex-col justify-between gap-4 my-3">
                 <div class="flex justify-between">
                     <h2 [ngClass]="{'hidden': sidebarHidden}" class="text-2xl font-semibold">
-                        Notewisepro
+                        NotewisePro
                     </h2>
-                    <button (click)="toggleSidebar()" [ngClass]="{'left-2': !isMobile, 'right-5': isMobile}"
-                        [class.fixed]="sidebarHidden" [class.sticky]="!sidebarHidden"
-                        class="toggle-button bg-blue-400 !text-white p-2  top-4">
-                        <i class="fa fa-bars"></i>
+                    <button (click)="toggleSidebar()" [class.fixed]="sidebarHidden" [class.sticky]="!sidebarHidden"
+                        class="toggle-button !text-white left-0 top-[50%]">
+
+                        <i *ngIf="!sidebarHidden" class="fa fa-arrow-left"></i>
+                        <i *ngIf="sidebarHidden" class="fa  bg-blue-600 py-[20px] px-[5px] fa-chevron-right"></i>
                     </button>
                 </div>
             </div>
@@ -21,14 +22,14 @@
 
             <div class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-blue-700"
                 [ngClass]="{'hidden': sidebarHidden}">
-                <i class="fa fa-address-card"></i>
-                <a routerLink="/dashboard/remainder" class="block font-semibold">REMAINDER</a>
+                <i class="fa fa-lg fa-bell"></i>
+                <a routerLink="/dashboard/remainder" class="block">REMAINDER</a>
             </div>
 
             <div class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-blue-700"
                 [ngClass]="{'hidden': sidebarHidden}">
-                <i class="fa fa-address-card"></i>
-                <a routerLink="/dashboard" class="block font-semibold">DASHBOARD</a>
+                <i class="fa fa-lg fa-compass"></i>
+                <a routerLink="/dashboard" class="block">DASHBOARD</a>
                 <!-- <p-divider [ngClass]="{'hidden !m-[10px]': sidebarHidden}"></p-divider> -->
             </div>
 

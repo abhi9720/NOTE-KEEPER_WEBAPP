@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NotebookSelectionService } from '../../service/notebook-selection.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import Masonry from 'masonry-layout';
@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { NotebookService } from '../../service/notebook.service';
 
 @Component({
   selector: 'app-note-list',
@@ -18,6 +19,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   providers: [DialogService, MessageService],
 })
 export class NoteListComponent implements OnInit, AfterViewInit {
+
   currentDate: Date;
   masonry: any;
 
@@ -32,7 +34,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
       // columnWidth: '250px',
       resize: true,
       percentPosition: true,
-      horizontalOrder: true,
+      // horizontalOrder: true,
     });
 
     console.log(this.masonry);
@@ -45,8 +47,10 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     this.messageService.add({ severity, summary, detail });
   }
 
+  count = 0
   refreshMasonryLayout() {
-    console.log(this.masonry);
+    this.count += 1;
+    console.log("run");
 
     if (this.masonry) {
       setTimeout(() => {
@@ -62,6 +66,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     private dialogService: DialogService,
     private notebookSelectionService: NotebookSelectionService,
     private noteService: NoteService,
+    private notebookService: NotebookService,
     private datePipe: DatePipe,
     private el: ElementRef,
     private messageService: MessageService,
@@ -79,6 +84,9 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
 
+
+  isEditing: boolean = false;
+
   isMobileScreen = false;
   setDialogWidth() {
     this.isMobileScreen = this.mobileQuery.matches
@@ -88,18 +96,10 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   notes: any = [];
   filteredNotes: any[] = [];
 
-  NotebookSelectedName = null;
+  NotebookSelectedName !: string;
+  NotebookSelectedId !: string;
 
   ngOnInit() {
-
-    this.route.paramMap.subscribe((params: ParamMap) => {
-
-      const noteId = params.get('noteId');
-
-
-    })
-
-
 
     this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
       console.log(selectedNotebook);
@@ -107,6 +107,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
       if (selectedNotebook) {
         console.log(selectedNotebook);
 
+        this.NotebookSelectedId = selectedNotebook._id;
         this.NotebookSelectedName = selectedNotebook.name;
         this.noteService.getNotesByNoteBook(selectedNotebook._id).subscribe(
           (notes: any) => {
@@ -253,6 +254,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     });
     this.refreshMasonryLayout()
   }
+
 
 
 }
