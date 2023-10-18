@@ -22,10 +22,16 @@ import { ToastModule } from 'primeng/toast';
     FormsModule,
     HttpClientModule,
     DividerModule,
-    ToastModule
+    ToastModule,
+
+
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor, multi: true
+    },
     MessageService
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 import { DialogService } from 'primeng/dynamicdialog';
 import { AddUpdateNoteComponent } from '../add-update-note/add-update-note.component';
 import { NoteService } from '../../service/note.service';
@@ -17,7 +19,6 @@ import { NotebookSelectionService } from '../../service/notebook-selection.servi
 })
 export class NoteComponent implements OnChanges {
   @Input() note: any;
-  @Output() checkboxClicked = new EventEmitter<any>();
   @Output() deleteNoteEmitter = new EventEmitter<any>();
 
   noteClass: string = '';
@@ -25,6 +26,7 @@ export class NoteComponent implements OnChanges {
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
   dialogWidth = '40%';
+  renderedContent!: SafeHtml;
 
   constructor(private dialogService: DialogService,
     private noteService: NoteService,
@@ -32,7 +34,7 @@ export class NoteComponent implements OnChanges {
     private confirmationService: ConfirmationService,
     private notebookSelectionService: NotebookSelectionService,
     private messageService: MessageService,
-
+    private sanitizer: DomSanitizer
 
   ) {
 
@@ -43,8 +45,13 @@ export class NoteComponent implements OnChanges {
 
   }
 
+  sanitizeHtml() {
+    this.renderedContent = this.sanitizer.bypassSecurityTrustHtml(this.note.body);
+  }
+
   ngOnChanges() {
     this.selectColor();
+    this.sanitizeHtml()
   }
 
   ngOnDestroy(): void {
@@ -71,17 +78,27 @@ export class NoteComponent implements OnChanges {
     this.messageService.add({ severity, summary, detail });
   }
 
-  toggleCheckbox(itemIndex: number) {
+  toggleCheckbox(listItemIndex: number) {
 
-    console.log(this.note.listItems, itemIndex);
+    const checked = !this.note.listItems[listItemIndex].checked;
 
-    const checkboxItem = {
-      noteId: this.note._id, // Assuming 'id' is the unique identifier for a note
-      listItemIndex: itemIndex,
-      checked: !this.note.listItems[itemIndex].checked,
+    const requestBody = {
+      listItemIndex,
+      checked,
     };
-    this.checkboxClicked.emit(checkboxItem);
-    this.note.listItems[itemIndex].checked = !this.note.listItems[itemIndex].checked
+
+    // Make an HTTP POST request to update the list item.
+    this.noteService.updateNoteCheckBox(this.note._id, requestBody).subscribe(
+      (response) => {
+        if (response)
+          this.note = response
+        this.showMessage('info', 'Information', 'Checkbox Updated')
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   pinClicked() {
@@ -134,7 +151,7 @@ export class NoteComponent implements OnChanges {
               console.log(res);
               this.note = res;
               console.log(this.note);
-
+              this.sanitizeHtml()
             }
             this.showMessage('info', 'Information', 'Note Updated')
           },
@@ -160,7 +177,6 @@ export class NoteComponent implements OnChanges {
       accept: () => {
         this.noteService.deleteNote(this.note._id).subscribe(
           (response) => {
-            alert("deleted")
             console.log(this.deleteNoteEmitter);
 
             this.deleteNoteEmitter.emit()

@@ -215,6 +215,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
   deleteNote(noteId: any, idx: number) {
     this.notes.splice(idx, 1);
+    this.refreshMasonryLayout()
   }
 
   updateCheckbox(checkboxItem: any, idx: any) {

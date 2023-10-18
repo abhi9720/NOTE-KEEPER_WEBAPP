@@ -50,12 +50,13 @@
 
   </div>
 
-  <p class="text-base text-gray-700">{{ note.body }}</p>
+  <div class="" [innerHTML]="renderedContent"></div>
 
   <ul *ngIf="note.listType === 'checkbox'" class="checklist">
-    <li *ngFor="let item of note.listItems; let i = index;" class="flex items-center">
-      <span class="checkbox w-5 h-5 border border-gray-400 rounded-full cursor-pointer mr-2"
-        [class.checked]="item.checked" (click)="toggleCheckbox(i)"></span>
+    <li (click)="toggleCheckbox(i)" *ngFor="let item of note.listItems; let i = index;"
+      class="flex items-center  cursor-pointer w-fit">
+      <span class="checkbox w-5 h-5 border border-gray-400 rounded-full mr-2" [class.checked]="item.checked">
+      </span>
       {{ item.label }}
     </li>
   </ul>

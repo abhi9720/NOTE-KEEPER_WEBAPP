@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -7,16 +7,18 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
   templateUrl: './add-update-note.component.html',
   styleUrls: ['./add-update-note.component.css'],
 })
+
+
 export class AddUpdateNoteComponent {
   noteForm: FormGroup;
   isEdit = false;
   noteId = null;
   constructor(private fb: FormBuilder, public ref: DynamicDialogRef, private config: DynamicDialogConfig) {
-    this.noteForm = this.fb.group({
-      title: [''],
-      body: [''],
-      color: ['#fff'],
-      listType: [null],
+    this.noteForm = new FormGroup({
+      title: new FormControl(''),
+      body: new FormControl('', [Validators.required]),
+      color: new FormControl('#fff'),
+      listType: new FormControl('select'),
       listItems: this.fb.array([]), // Use a FormArray to handle listItems
     });
 
@@ -32,6 +34,8 @@ export class AddUpdateNoteComponent {
         color: data.color,
         listType: data.listType,
       });
+
+      console.log(this.noteForm.controls);
 
 
       if (data.listItems) {
@@ -49,6 +53,10 @@ export class AddUpdateNoteComponent {
         });
       }
     }
+  }
+
+  get body() {
+    return this.noteForm.get("body") as FormControl
   }
 
   selectedColor: string | null = null;
@@ -85,6 +93,8 @@ export class AddUpdateNoteComponent {
   submit() {
     const data = this.noteForm.value;
     this.noteForm.value._id = this.noteId;
+    console.log(this.noteForm.value);
+
     this.ref.close(this.noteForm.value)
 
   }

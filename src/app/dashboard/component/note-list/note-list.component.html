@@ -34,7 +34,7 @@
   <div class="flex flex-col overflow-y-auto  justify-center align-center"
     [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen, 'flex-grow':filteredNotes.length}">
     <app-note *ngFor="let note of filteredNotes; let i =  index" [note]="note"
-      (deleteNoteEmitter)="deleteNote($event,i)" (checkboxClicked)="updateCheckbox($event,i)"></app-note>
+      (deleteNoteEmitter)="deleteNote($event,i)"></app-note>
   </div>
 
 

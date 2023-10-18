@@ -30,6 +30,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { RemainderCardComponent } from './component/remainder-card/remainder-card.component';
 import { ShownotificationService } from '../core/shownotification.service';
+import { EditorModule } from '../editor/editor.module';
 
 @NgModule({
   declarations: [
@@ -45,9 +46,10 @@ import { ShownotificationService } from '../core/shownotification.service';
     MoveNoteDialogComponent,
     RemainderAddUpdateComponent,
     RemainderComponent,
-    RemainderCardComponent,
-  ],
+
+    RemainderCardComponent],
   imports: [
+
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -65,7 +67,8 @@ import { ShownotificationService } from '../core/shownotification.service';
     InputTextareaModule,
     CalendarModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    EditorModule
   ],
   providers: [
     DatePipe,
