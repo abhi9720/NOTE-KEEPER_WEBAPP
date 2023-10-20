@@ -21,7 +21,8 @@ export class NotebooknameInputComponent implements OnInit {
 
   @Input() Notebook: any;
   @Output() noteBookClickedEmitter = new EventEmitter();
-  @Output() deleteNoteBookEmitter = new EventEmitter()
+  @Output() deleteNoteBookEmitter = new EventEmitter();
+  @Output() updateNoteBookEmitter = new EventEmitter();
   NotebookName: any;
   NotebookId: any;
   constructor(
@@ -59,7 +60,8 @@ export class NotebooknameInputComponent implements OnInit {
 
     this.notebookService.updateNotebook(this.NotebookId, data).subscribe(
       (response) => {
-        this.Notebook = response
+        this.Notebook = response;
+        this.updateNoteBookEmitter.emit(response)
         console.log("Updated ", response);
       },
       (error) => {
@@ -103,9 +105,6 @@ export class NotebooknameInputComponent implements OnInit {
 
 
   triggerDeleteNoteBook() {
-
-
-
     this.deleteNoteBookEmitter.emit(this.Notebook._id)
   }
 

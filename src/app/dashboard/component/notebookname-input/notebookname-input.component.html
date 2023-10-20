@@ -1,8 +1,12 @@
-<div class="flex  p-2 justify-between cursor-pointer relative" (click)="triggerNoteBookClicked()">
+<div class="flex p-1 px-2 justify-between cursor-pointer relative">
     <input *ngIf="isEditing" #notebookNameInput [(ngModel)]="NotebookName" (blur)="onInputBlur()"
         [disabled]="!isEditing" class="text-black" />
 
-    <p *ngIf="!isEditing" class="font-medium cursor-pointer">{{NotebookName}}</p>
+    <p (click)="triggerNoteBookClicked()" *ngIf="!isEditing" class="text-sm font-semibold rounded-md cursor-pointer p-2 font-medium cursor-pointer
+    hover:bg-blue-800 hover:text-red-100 hover:font-semibold transition-colors 
+    ">{{NotebookName}}</p>
+
+
     <div class="flex gap-2 justify-center items-center">
         <button *ngIf="!isEditing" (click)="toggleEditing($event)" class="text-white">
             <i class="fa fa-edit"></i>

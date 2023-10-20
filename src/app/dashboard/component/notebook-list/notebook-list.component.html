@@ -29,11 +29,11 @@
 <!-- -->
 <ul [ngClass]="{'h-0 opacity-0': !showNoteBooks, 'h-auto opacity-100': showNoteBooks}"
   class="p-2 mt-2 space-y-2 transition-all duration-300 ease-in-out" [ngClass]="{'bg-blue-700':Notebooks.length}">
-  <li *ngFor="let notebook of Notebooks; let i = index"
-    class="ml-5 text-sm font-semibold rounded-md cursor-pointer hover:bg-blue-800 hover:text-gray-100 hover:font-semibold transition-colors "
-    (click)="noteBookClicked(notebook)" [ngClass]="{'bg-blue-800':noteBookSelected._id===notebook._id}">
+  <li *ngFor="let notebook of Notebooks; let i = index" class="ml-5"
+    [ngClass]="{'bg-blue-800 rounded-lg':noteBookSelected._id===notebook._id}">
 
-    <app-notebookname-input (deleteNoteBookEmitter)="deleteNoteBook($event,i)"
-      (noteBookClickedEmitter)="noteBookClicked($event)" [Notebook]="notebook"></app-notebookname-input>
+    <app-notebookname-input (updateNoteBookEmitter)="updateNoteBookName($event,i)"
+      (deleteNoteBookEmitter)="deleteNoteBook($event,i)" (noteBookClickedEmitter)="noteBookClicked($event)"
+      [Notebook]="notebook"></app-notebookname-input>
   </li>
 </ul>

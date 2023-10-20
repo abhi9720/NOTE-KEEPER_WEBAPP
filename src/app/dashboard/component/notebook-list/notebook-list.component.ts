@@ -91,4 +91,8 @@ export class NotebookListComponent implements OnInit {
     )
   }
 
+  updateNoteBookName(event: Event, idx: number) {
+    this.Notebooks[idx] = event;
+  }
+
 }

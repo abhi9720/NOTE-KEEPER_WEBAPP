@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NotebookSelectionService } from '../../service/notebook-selection.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import Masonry from 'masonry-layout';
@@ -28,38 +28,15 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   dialogWidth = '40%';
 
 
-  ngAfterViewInit() {
-    this.masonry = new Masonry(this.el.nativeElement.querySelector('.masonry-container'), {
-      itemSelector: '.note-card',
-      // columnWidth: '250px',
-      resize: true,
-      percentPosition: true,
-      // horizontalOrder: true,
-    });
+  isEditing: boolean = false;
 
-    console.log(this.masonry);
-  }
+  isMobileScreen = false;
 
+  notes: any = [];
+  filteredNotes: any[] = [];
 
-
-
-  showMessage(severity: string, summary: string, detail: string) {
-    this.messageService.add({ severity, summary, detail });
-  }
-
-  count = 0
-  refreshMasonryLayout() {
-    this.count += 1;
-    console.log("run");
-
-    if (this.masonry) {
-      setTimeout(() => {
-        this.masonry.reloadItems()
-        this.masonry.layout();
-      }, 100);
-    }
-  }
-
+  NotebookSelectedName !: string;
+  NotebookSelectedId !: string;
 
   constructor(
     private media: MediaMatcher,
@@ -80,27 +57,20 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     this.setDialogWidth();
   }
 
-  ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+
+  ngAfterViewInit() {
+    this.masonry = new Masonry(this.el.nativeElement.querySelector('.masonry-container'), {
+      itemSelector: '.note-card',
+      // columnWidth: '250px',
+      resize: true,
+      percentPosition: true,
+      // horizontalOrder: true,
+    });
+    console.log(this.masonry);
   }
 
-
-  isEditing: boolean = false;
-
-  isMobileScreen = false;
-  setDialogWidth() {
-    this.isMobileScreen = this.mobileQuery.matches
-    this.dialogWidth = this.mobileQuery.matches ? '95%' : '40%';
-  }
-
-  notes: any = [];
-  filteredNotes: any[] = [];
-
-  NotebookSelectedName !: string;
-  NotebookSelectedId !: string;
 
   ngOnInit() {
-
     this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
       console.log(selectedNotebook);
 
@@ -116,6 +86,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
             this.filteredNotes = this.notes;
             console.log(this.notes);
             this.refreshMasonryLayout()
+
           },
           (error) => {
             console.log(error);
@@ -125,9 +96,40 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
       } else {
         this.notes = [];
+        this.filteredNotes = [];
       }
     });
   }
+
+
+  showMessage(severity: string, summary: string, detail: string) {
+    this.messageService.add({ severity, summary, detail });
+  }
+
+  refreshMasonryLayout() {
+
+    if (this.masonry) {
+      setTimeout(() => {
+        this.masonry.reloadItems()
+        this.masonry.layout();
+      }, 100);
+    }
+  }
+
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+  }
+
+
+  setDialogWidth() {
+    this.isMobileScreen = this.mobileQuery.matches
+    this.dialogWidth = this.mobileQuery.matches ? '95%' : '40%';
+  }
+
+
+
+
 
   openNoteModal() {
 
@@ -151,7 +153,8 @@ export class NoteListComponent implements OnInit, AfterViewInit {
           (res) => {
             if (res) {
               console.log(res);
-              this.filteredNotes.push(res);
+              this.notes.push(res);
+              this.filteredNotes = this.notes;
               this.refreshMasonryLayout()
             }
             this.showMessage('info', 'Information', 'Note Created')
@@ -215,7 +218,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
 
   deleteNote(noteId: any, idx: number) {
-    this.notes.splice(idx, 1);
+    this.filteredNotes.splice(idx, 1);
     this.refreshMasonryLayout()
   }
 
@@ -234,7 +237,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     this.noteService.updateNoteCheckBox(noteId, requestBody).subscribe(
       (response) => {
         if (response)
-          this.notes[idx] = response
+          this.filteredNotes[idx] = response
         this.showMessage('info', 'Information', 'Checkbox Updated')
 
       },

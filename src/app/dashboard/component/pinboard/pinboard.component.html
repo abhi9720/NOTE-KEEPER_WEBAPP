@@ -1,5 +1,19 @@
-<div class="flex flex-col">
+<!-- <div class="flex flex-wrap gap-2">
     <app-note *ngFor="let note of pinnedNotes; let i  =  index" [note]="note" (deleteNoteEmitter)="removeNote($event,i)"
         (checkboxClicked)="updateCheckbox($event)"></app-note>
+
+</div> -->
+
+
+<div class="flex-grow flex flex-col h-screen">
+
+    <div class="flex flex-col overflow-y-auto  justify-center align-center"
+        [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen, 'flex-grow':pinnedNotes.length}">
+        <app-note *ngFor="let note of pinnedNotes; let i =  index" [note]="note"
+            (deleteNoteEmitter)="removeNote($event,i)">
+
+
+        </app-note>
+    </div>
 
 </div>
