@@ -1,14 +1,13 @@
 <div class="flex flex-col justify-between items-center sticky top-0 bg-blue-600">
   <div class="flex justify-between items-center w-full">
-    <a (click)="fetchNoteBooks()" routerLink="./note"
-      class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-blue-700">
+    <a (click)="fetchNoteBooks()" class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-blue-700">
       <i class="fa fa-sticky-note"></i>
       NOTEBOOKS
 
     </a>
     <i *ngIf="isFetching" class="fa fa-refresh fa-spin"></i>
 
-    <button (click)="toggleNoteBookList()" class="w-10 rounded-lg px-2 py-1 hover:bg-blue-800">
+    <button *ngIf="Notebooks.length" (click)="toggleNoteBookList()" class="w-10 rounded-lg px-2 py-1 hover:bg-blue-800">
       <i class="fa fa-sort-desc"></i>
 
     </button>
@@ -27,13 +26,15 @@
 
 
 <!-- -->
-<ul [ngClass]="{'h-0 opacity-0': !showNoteBooks, 'h-auto opacity-100': showNoteBooks}"
-  class="p-2 mt-2 space-y-2 transition-all duration-300 ease-in-out" [ngClass]="{'bg-blue-700':Notebooks.length}">
+<ul [ngClass]="{'h-0 opacity-0 bg-blue-500': !showNoteBooks, 'h-auto opacity-100 bg-blue-700': showNoteBooks}"
+  class="p-2 mt-2 space-y-2 transition-all duration-300 ease-in-out">
+
+
+
   <li *ngFor="let notebook of Notebooks; let i = index" class="ml-5"
-    [ngClass]="{'bg-blue-800 rounded-lg':noteBookSelected._id===notebook._id}">
+    [ngClass]="{'bg-blue-800 rounded-lg': noteBookSelected?._id===notebook._id}">
 
     <app-notebookname-input (updateNoteBookEmitter)="updateNoteBookName($event,i)"
-      (deleteNoteBookEmitter)="deleteNoteBook($event,i)" (noteBookClickedEmitter)="noteBookClicked($event)"
-      [Notebook]="notebook"></app-notebookname-input>
+      (deleteNoteBookEmitter)="deleteNoteBook($event,i)" [Notebook]="notebook"></app-notebookname-input>
   </li>
 </ul>

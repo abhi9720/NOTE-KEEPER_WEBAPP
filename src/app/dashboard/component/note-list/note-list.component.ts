@@ -9,7 +9,7 @@ import { AddUpdateNoteComponent } from '../add-update-note/add-update-note.compo
 import { DatePipe } from '@angular/common';
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 import { MessageService } from 'primeng/api';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NotebookService } from '../../service/notebook.service';
 
 @Component({
@@ -29,14 +29,12 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
 
   isEditing: boolean = false;
-
   isMobileScreen = false;
 
   notes: any = [];
   filteredNotes: any[] = [];
 
-  NotebookSelectedName !: string;
-  NotebookSelectedId !: string;
+  NotebookSelected !: any;
 
   constructor(
     private media: MediaMatcher,
@@ -44,7 +42,6 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     private notebookSelectionService: NotebookSelectionService,
     private noteService: NoteService,
     private notebookService: NotebookService,
-    private datePipe: DatePipe,
     private el: ElementRef,
     private messageService: MessageService,
     private route: ActivatedRoute
@@ -71,34 +68,59 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
-      console.log(selectedNotebook);
 
-      if (selectedNotebook) {
-        console.log(selectedNotebook);
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
 
-        this.NotebookSelectedId = selectedNotebook._id;
-        this.NotebookSelectedName = selectedNotebook.name;
-        this.noteService.getNotesByNoteBook(selectedNotebook._id).subscribe(
-          (notes: any) => {
+        this.notebookService.getNotebookById(id).subscribe(
+          (notebook) => {
+            this.NotebookSelected = notebook;
+            console.log(this.NotebookSelected);
 
-            this.notes = notes;
-            this.filteredNotes = this.notes;
-            console.log(this.notes);
-            this.refreshMasonryLayout()
+            this.notebookSelectionService.selectNotebook(notebook);
 
+            this.noteService.getNotesByNoteBook(id).subscribe(
+              (notes: any) => {
+
+                this.notes = notes;
+                this.filteredNotes = this.notes;
+                console.log(this.notes);
+                this.refreshMasonryLayout()
+
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
           },
           (error) => {
-            console.log(error);
+
           }
-        );
 
 
-      } else {
-        this.notes = [];
-        this.filteredNotes = [];
+        )
+
+
       }
     });
+
+    // this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
+    //   console.log(selectedNotebook);
+
+    //   if (selectedNotebook) {
+    //     console.log(selectedNotebook);
+
+    //     this.NotebookSelectedId = selectedNotebook._id;
+    //     this.NotebookSelectedName = selectedNotebook.name;
+
+
+
+    //   } else {
+    //     this.notes = [];
+    //     this.filteredNotes = [];
+    //   }
+    // });
   }
 
 

@@ -1,8 +1,8 @@
-<div class="flex p-1 px-2 justify-between cursor-pointer relative">
+<div [routerLink]="['notebook', Notebook._id]" class="flex p-1 px-2 justify-between cursor-pointer relative">
     <input *ngIf="isEditing" #notebookNameInput [(ngModel)]="NotebookName" (blur)="onInputBlur()"
         [disabled]="!isEditing" class="text-black" />
 
-    <p (click)="triggerNoteBookClicked()" *ngIf="!isEditing" class="text-sm font-semibold rounded-md cursor-pointer p-2 font-medium cursor-pointer
+    <p *ngIf="!isEditing" class="text-sm font-semibold rounded-md cursor-pointer p-2 font-medium cursor-pointer
     hover:bg-blue-800 hover:text-red-100 hover:font-semibold transition-colors 
     ">{{NotebookName}}</p>
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NotebookSelectionService } from '../../service/notebook-selection.service';
-import { NoteService } from '../../service/note.service';
 import { Router } from '@angular/router';
 import { NotebookService } from '../../service/notebook.service';
 
@@ -11,33 +10,17 @@ import { NotebookService } from '../../service/notebook.service';
 })
 export class NotebookListComponent implements OnInit {
   Notebooks: any[] = [];
-  showNoteBooks = true;
+  showNoteBooks = false;
   addNotebookClicked = false;
   isFetching = false;
   noteBookSelected: any;
   constructor(
     private notebookSelectionService: NotebookSelectionService,
     private notebookService: NotebookService,
-    private router: Router
   ) {
+
   }
 
-  isActive(route: string): boolean {
-    return this.router.url === route;
-  }
-
-
-  selectNotebook(notebook: any) {
-    this.noteBookSelected = notebook;
-    this.notebookSelectionService.selectNotebook(notebook);
-  }
-
-  noteBookClicked(notebook: any) {
-    console.log("parent", notebook);
-
-    this.selectNotebook(notebook)
-    this.router.navigate(['/dashboard/note'])
-  }
 
   addNotebook(newNotebookName: string) {
 
@@ -59,20 +42,26 @@ export class NotebookListComponent implements OnInit {
 
   toggleNoteBookList() {
     this.showNoteBooks = !this.showNoteBooks;
-
   }
 
   ngOnInit() {
-    this.fetchNoteBooks();
+
+    this.notebookSelectionService.selectedNotebook$.subscribe(selectedNotebook => {
+      this.noteBookSelected = selectedNotebook;
+    })
+
+
+    this.fetchNoteBooks()
   }
 
   fetchNoteBooks() {
+
     this.isFetching = true
     this.notebookService.getNotebooks().subscribe(
       (notebooks: any) => {
         this.Notebooks = notebooks;
         this.isFetching = false;
-        this.selectNotebook(this.Notebooks[0])
+        this.showNoteBooks = true
       });
   }
 
@@ -83,7 +72,6 @@ export class NotebookListComponent implements OnInit {
         this.Notebooks.splice(idx, 1);
         const nextIndex = idx == 0 ? idx + 1 : idx - 1;
         this.notebookSelectionService.selectNotebook(this.Notebooks[nextIndex])
-        // this.showMessage('info', 'Information', 'NoteBook Deleted')
       },
       (error) => {
 

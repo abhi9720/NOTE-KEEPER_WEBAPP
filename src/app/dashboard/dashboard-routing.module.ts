@@ -15,10 +15,9 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
     children: [
       { path: 'remainder', component: RemainderComponent },
-      { path: 'note', component: NoteListComponent },
+      { path: 'notebook/:id', component: NoteListComponent },
       { path: '', component: PinboardComponent },
     ]
-
   }
 ];
 

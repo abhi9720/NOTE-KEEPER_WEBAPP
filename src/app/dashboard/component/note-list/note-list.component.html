@@ -13,7 +13,9 @@
       <div class="bg-gray-100 flex flex-wrap gap-4 sticky top-0 p-2 px-3 rounded-lg mt-4">
 
         <div class="flex  justify-center gap-2" style="align-items: center;">
-          <p class="text-xl font-semibold m-0">{{ NotebookSelectedName }}</p>
+
+
+          <p class="text-xl font-semibold m-0">{{ NotebookSelected?.name }}</p>
 
           <button (click)="openNotebookShareDialog()"
             class="card-menu-button text-blue-600 hover:text-blue-800 flex justify-center items-center gap-2">

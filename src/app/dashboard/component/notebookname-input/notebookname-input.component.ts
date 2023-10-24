@@ -20,7 +20,6 @@ export class NotebooknameInputComponent implements OnInit {
   private notebookNameInput: ElementRef | undefined;
 
   @Input() Notebook: any;
-  @Output() noteBookClickedEmitter = new EventEmitter();
   @Output() deleteNoteBookEmitter = new EventEmitter();
   @Output() updateNoteBookEmitter = new EventEmitter();
   NotebookName: any;
@@ -41,9 +40,7 @@ export class NotebooknameInputComponent implements OnInit {
     this.NotebookId = this.Notebook._id;
   }
 
-  triggerNoteBookClicked() {
-    this.noteBookClickedEmitter.emit(this.Notebook)
-  }
+
 
   toggleEditing(event: Event) {
     event.stopPropagation();

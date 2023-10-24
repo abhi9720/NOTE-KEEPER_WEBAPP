@@ -8,7 +8,8 @@ const routes: Routes = [
 
   { path: 'auth', loadChildren: () => AuthModule },
   { path: 'dashboard', loadChildren: () => DashboardModule, canActivate: [AuthGuard] },
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  // { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '**', loadChildren: () => AuthModule },
 
 ];
 
