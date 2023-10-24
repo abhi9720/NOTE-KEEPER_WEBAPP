@@ -57,9 +57,8 @@ export class PinboardComponent implements OnInit {
       itemSelector: '.note-card',
       // columnWidth: '250px',
       resize: true,
-
       percentPosition: true,
-      horizontalOrder: true,
+      // horizontalOrder: true,
     });
   }
 

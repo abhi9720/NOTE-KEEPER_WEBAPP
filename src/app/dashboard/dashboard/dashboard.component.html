@@ -1,10 +1,10 @@
 <div class="flex h-screen w-full">
     <!-- Sidebar -->
-    <div class="bg-blue-600  min-w-fit  text-white text-white" [ngClass]="{'px-5 w-64 min-w-fit': !sidebarHidden}"
-        [ngClass]="{'w-full px-4':isMobile &&  !sidebarHidden}">
 
-        <div class="flex flex-col h-screen">
+    <div class="bg-blue-600 text-white"
+        [ngClass]="{'w-64 px-4': !sidebarHidden,'w-full px-4':isMobile &&  !sidebarHidden}">
 
+        <div class="flex flex-col h-screen" [ngClass]="{'px-3':!sidebarHidden}">
             <div class="flex flex-col justify-between gap-4 my-3">
                 <div class="flex justify-between">
                     <h2 [ngClass]="{'hidden': sidebarHidden}" class="text-2xl font-semibold">
@@ -52,8 +52,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
 

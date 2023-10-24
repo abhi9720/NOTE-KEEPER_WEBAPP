@@ -28,8 +28,7 @@
     </div>
   </div>
 
-  <div class="flex flex-col overflow-y-auto  justify-center align-center"
-    [ngClass]="{ 'masonry-container': !isMobileScreen, 'flex flex-col justify-center':isMobileScreen, 'flex-grow':filteredNotes.length}">
+  <div class="overflow-y-auto masonry-container" [ngClass]="{'flex-grow':filteredNotes.length}">
     <app-note *ngFor="let note of filteredNotes; let i =  index" [note]="note"
       (deleteNoteEmitter)="deleteNote($event,i)"></app-note>
   </div>
@@ -49,7 +48,5 @@
       <i class="fa fa-plus"></i>
     </button>
   </div>
-
   <p-toast></p-toast>
-
 </div>
