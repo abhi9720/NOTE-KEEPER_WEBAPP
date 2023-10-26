@@ -1,9 +1,8 @@
-<div class="flex-grow flex flex-col h-screen">
+<div class="flex-grow flex flex-col">
 
-    <div class="overflow-y-auto masonry-container bg-green-200" [ngClass]="{'flex-grow':pinnedNotes.length}">
+    <div class="overflow-y-auto masonry-container flex-grow">
         <app-note *ngFor="let note of pinnedNotes; let i =  index" [note]="note"
-            (deleteNoteEmitter)="removeNote($event,i)">
-        </app-note>
+            (deleteNoteEmitter)="removeNote($event,i)"></app-note>
     </div>
 
 </div>

@@ -6,7 +6,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
 
 import { NoteService } from '../../service/note.service';
 import { AddUpdateNoteComponent } from '../add-update-note/add-update-note.component';
-import { DatePipe } from '@angular/common';
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';

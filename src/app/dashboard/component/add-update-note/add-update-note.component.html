@@ -22,16 +22,33 @@
     <div class="mb-4">
       <label class="text-gray-600 font-semibold">Note Color:</label>
       <div class="color-swatches">
-        <div [ngClass]="{'selected-color': selectedColor === 'rgb(254 205 211)'}" class="color-swatch red"
-          (click)="selectColor('rgb(254 205 211)')"></div>
-        <div [ngClass]="{'selected-color': selectedColor === 'rgb(224 231 255)'}" class="color-swatch blue"
-          (click)="selectColor('rgb(224 231 255)')"></div>
-        <div [ngClass]="{'selected-color': selectedColor === 'rgb(204 251 241)'}" class="color-swatch blue"
-          (click)="selectColor('rgb(204 251 241)')"></div>
-        <div [ngClass]="{'selected-color': selectedColor === 'rgb(254 243 199)'}" class="color-swatch pink"
-          (click)="selectColor('rgb(254 243 199)')"></div>
-        <div [ngClass]="{'selected-color': selectedColor === 'rgb(249 168 212)'}" class="color-swatch yellow"
-          (click)="selectColor('rgb(249 168 212)')"></div>
+        <!-- Blue Background (#7dd3fc) -->
+        <div [ngClass]="{'selected-color': selectedColor === '#7dd3fc'}" class="color-swatch blue"
+          (click)="selectColor('#7dd3fc')"></div>
+
+        <!-- green -->
+        <div [ngClass]="{'selected-color': selectedColor === '#86efac'}" class="color-swatch green"
+          (click)="selectColor('#86efac')"></div>
+
+        <!-- red -->
+        <div [ngClass]="{'selected-color': selectedColor === '#FCA5A5'}" class="color-swatch red"
+          (click)="selectColor('#FCA5A5')"></div>
+
+        <!-- purple -->
+        <div [ngClass]="{'selected-color': selectedColor === '#D6BCFA'}" class="color-swatch purple"
+          (click)="selectColor('#D6BCFA')"></div>
+
+        <!-- teal -->
+        <div [ngClass]="{'selected-color': selectedColor === '#5eead4'}" class="color-swatch teal"
+          (click)="selectColor('#5eead4')"></div>
+
+        <!-- yellow -->
+        <div [ngClass]="{'selected-color': selectedColor === '#fcd34d'}" class="color-swatch yellow"
+          (click)="selectColor('#fcd34d')"></div>
+
+        <!-- slate -->
+        <div [ngClass]="{'selected-color': selectedColor === '#cbd5e1'}" class="color-swatch slate"
+          (click)="selectColor('#cbd5e1')"></div>
       </div>
     </div>
 

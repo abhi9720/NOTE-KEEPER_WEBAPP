@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { NoteService } from '../../service/note.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import Masonry from 'masonry-layout';
@@ -10,9 +10,10 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: ['./pinboard.component.css'],
   providers: [DialogService],
 })
-export class PinboardComponent implements OnInit {
+export class PinboardComponent implements OnInit, AfterViewInit {
   pinnedNotes: any = [];
   masonry: any;
+  isMobileScreen = false;
 
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
@@ -30,7 +31,6 @@ export class PinboardComponent implements OnInit {
   }
 
 
-  isMobileScreen = false;
   setDialogWidth() {
     this.isMobileScreen = this.mobileQuery.matches
   }
@@ -42,25 +42,19 @@ export class PinboardComponent implements OnInit {
   }
 
   removeNote(event: any, idx: number) {
-    alert("remove note" + idx)
     this.pinnedNotes.splice(1, idx)
-
-    console.log(this.pinnedNotes);
-
   }
-
-
-
 
   ngAfterViewInit() {
     this.masonry = new Masonry(this.el.nativeElement.querySelector('.masonry-container'), {
       itemSelector: '.note-card',
-      // columnWidth: '250px',
       resize: true,
       percentPosition: true,
-      // horizontalOrder: true,
+      horizontalOrder: true,
     });
+    console.log(this.masonry);
   }
+
 
 
   refreshMasonryLayout() {

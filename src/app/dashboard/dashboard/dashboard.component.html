@@ -8,7 +8,7 @@
             <div class="flex flex-col justify-between gap-4 my-3">
                 <div class="flex justify-between">
                     <h2 [ngClass]="{'hidden': sidebarHidden}" class="text-2xl font-semibold">
-                        NotewisePro
+                        NoteMaster
                     </h2>
                     <button (click)="toggleSidebar()" [class.fixed]="sidebarHidden" [class.sticky]="!sidebarHidden"
                         class="toggle-button !text-white left-0 top-[50%]">
@@ -27,11 +27,19 @@
                 <a routerLink="/dashboard/remainder" class="block">REMAINDER</a>
             </div>
 
+
+
             <div class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-blue-700"
                 [ngClass]="{'hidden': sidebarHidden}">
                 <i class="fa fa-lg fa-compass"></i>
                 <a routerLink="/dashboard" class="block">DASHBOARD</a>
                 <!-- <p-divider [ngClass]="{'hidden !m-[10px]': sidebarHidden}"></p-divider> -->
+            </div>
+
+            <div class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-blue-700"
+                [ngClass]="{'hidden': sidebarHidden}">
+                <i class="fa fa-lg fa-bell"></i>
+                <a routerLink="/dashboard/remainder" class="block">Share With me</a>
             </div>
 
             <div class="flex-grow my-1 relative overflow-y-auto notelist" [ngClass]="{'hidden': sidebarHidden}">
@@ -58,8 +66,6 @@
     <!-- Right Part -->
     <div [ngClass]="{'w-5/6': !(isMobile && !sidebarHidden), 'w-0': isMobile && !sidebarHidden}"
         class="bg-gray-100 flex-grow overflow-y-auto flex flex-col rightpart relative">
-        <!-- <div class="flex flex-col flex-grow"> -->
         <router-outlet></router-outlet>
-        <!-- </div> -->
     </div>
 </div>

@@ -32,7 +32,6 @@ export class NoteComponent implements OnChanges {
     private noteService: NoteService,
     private media: MediaMatcher,
     private confirmationService: ConfirmationService,
-    private notebookSelectionService: NotebookSelectionService,
     private messageService: MessageService,
     private sanitizer: DomSanitizer
 

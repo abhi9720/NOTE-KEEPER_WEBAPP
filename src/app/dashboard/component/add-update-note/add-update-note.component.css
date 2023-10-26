@@ -15,26 +15,33 @@
 }
 
 .red {
-  background-color: #f87171;
+  background-color: #EF4444;
 }
 
 .blue {
-  background-color: #60a5fa;
+  background-color: #3B82F6;
 }
 
-.blue {
-  background-color: #86efac;
+.green {
+  background-color: #4ADE80;
 }
 
 .yellow {
-  background-color: #fef08a
+  background-color: #F59E0B
 }
 
-.pink {
-  background-color: rgb(249 168 212);
+.purple {
+  background-color: #9333EA;
+}
+
+.slate {
+  background-color: #64748b;
+}
+
+.teal {
+  background-color: #14b8a6;
 }
 
 .selected-color {
   border: 5px solid #817a7a;
-
 }
