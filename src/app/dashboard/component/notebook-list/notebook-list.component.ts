@@ -17,6 +17,7 @@ export class NotebookListComponent implements OnInit {
   constructor(
     private notebookSelectionService: NotebookSelectionService,
     private notebookService: NotebookService,
+    private router: Router
   ) {
 
   }
@@ -30,6 +31,7 @@ export class NotebookListComponent implements OnInit {
       (response) => {
         if (response) {
           this.Notebooks.push(response);
+          this.notebookService.UpdateNotebookList(this.Notebooks)
           console.log(this.Notebooks);
         }
       },
@@ -62,6 +64,7 @@ export class NotebookListComponent implements OnInit {
         this.Notebooks = notebooks;
         this.isFetching = false;
         this.showNoteBooks = true
+        this.notebookService.UpdateNotebookList(this.Notebooks)
       });
   }
 
@@ -69,9 +72,16 @@ export class NotebookListComponent implements OnInit {
   deleteNoteBook(notebookId: any, idx: number) {
     this.notebookService.deleteNotebook(notebookId).subscribe(
       (response) => {
+        // this.Notebooks.splice(idx, 1);
+        console.log(this.notebookSelectionService.getLastSelectedNotebook());
+        console.log(this.Notebooks[idx]);
+
+        console.log(this.notebookSelectionService.getLastSelectedNotebook()?._id === this.Notebooks[idx]._id);
+
+        if (this.notebookSelectionService.getLastSelectedNotebook()?._id === this.Notebooks[idx]._id) {
+          this.router.navigate(['/dashboard/notebooks'])
+        }
         this.Notebooks.splice(idx, 1);
-        const nextIndex = idx == 0 ? idx + 1 : idx - 1;
-        this.notebookSelectionService.selectNotebook(this.Notebooks[nextIndex])
       },
       (error) => {
 

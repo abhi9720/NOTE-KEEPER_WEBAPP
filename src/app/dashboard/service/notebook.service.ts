@@ -1,11 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotebookService {
+
+  private NotebookSource = new BehaviorSubject<any>(null);
+  Notebook$ = this.NotebookSource.asObservable();
+
+  UpdateNotebookList(notebooks: any) {
+    this.NotebookSource.next(notebooks)
+  }
 
   private baseUrl = `${environment.baseUrl}/v1/notebooks`;
 

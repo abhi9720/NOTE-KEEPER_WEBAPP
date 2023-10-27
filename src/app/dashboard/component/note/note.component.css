@@ -3,10 +3,13 @@
   border-radius: 8px;
   padding: 12px;
   margin: 10px;
-  width: 220px;
+  width: 250px;
 
 }
 
+.note-card * {
+  word-break: break-word;
+}
 
 .note-card p {
   font-size: 1rem;

@@ -37,9 +37,12 @@ import { NotebooknameInputComponent } from './component/notebookname-input/noteb
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { NotebookpageComponent } from './component/notebookpage/notebookpage.component';
+import { MomentModule } from 'angular2-moment';
+
 
 @NgModule({
   declarations: [
+
     DashboardComponent,
     NoteListComponent,
     SharedWithMeComponent,
@@ -79,6 +82,7 @@ import { NotebookpageComponent } from './component/notebookpage/notebookpage.com
     MessagesModule,
     ToastModule,
     EditorModule,
+    MomentModule,
     ConfirmationPopoverModule.forRoot({
       focusButton: 'confirm',
     }),

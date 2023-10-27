@@ -1,11 +1,7 @@
 <div class="note-card  p-6 bg-white border border-gray-200 rounded-lg shadow relative"
   [style.background-color]="note.color">
 
-  <button class="pin-button absolute bottom-0 right-0 p-2"
-    [ngClass]="{'text-gray-400':!note.isPinned,'text-blue-600':note.isPinned, 'pinned': note.isPinned }"
-    (click)="pinClicked()">
-    <i class="fa fa-lg fa-thumb-tack rotate-[30deg]" aria-hidden="true"></i>
-  </button>
+
 
 
   <div *ngIf="isMenuOpen" (click)="closeMenu()" class="fixed top-0 left-0 w-screen h-screen  z-10"></div>
@@ -65,5 +61,16 @@
     <li *ngFor="let item of note.listItems">{{ item.label }}</li>
   </ul>
 
+
+  <div class="flex justify-between">
+    <p class="text-sm text-slate-600"> {{note.createdAt | amTimeAgo}} </p>
+    <p>
+      <button class=""
+        [ngClass]="{'text-gray-400':!note.isPinned,'text-blue-600':note.isPinned, 'pinned': note.isPinned }"
+        (click)="pinClicked()">
+        <i class="fa fa-lg fa-thumb-tack rotate-[30deg]" aria-hidden="true"></i>
+      </button>
+    </p>
+  </div>
 
 </div>

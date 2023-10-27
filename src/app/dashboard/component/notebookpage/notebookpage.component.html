@@ -1,16 +1,12 @@
-<!-- notebook-list.component.html -->
-<div class="p-4">
+<div class="p-4 flex-grow">
     <h2 class="text-2xl font-semibold mb-4">Notebooks</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <ng-container *ngFor="let notebook of notebooks">
             <a [routerLink]="['/dashboard/notebook', notebook._id]"
-                class="block bg-white border rounded overflow-hidden shadow-lg">
-                <img src="your-image-source-here" alt="{{ notebook.name }}" class="w-full h-40 object-cover">
+                class="block bg-white border border-gray-300 rounded-lg shadow-lg hover:shadow-xl">
                 <div class="p-4">
-                    <h3 class="text-lg font-medium mb-2">
-                        <p>{{ notebook.name }}</p>
-                    </h3>
-                    <p class="text-gray-600">Created By: {{ notebook.createdBy }}</p>
+                    <i class="fas fa-book text-5xl text-blue-700"></i>
+                    <h3 class="text-lg font-medium mt-4">{{ notebook.name }}</h3>
                 </div>
             </a>
         </ng-container>
