@@ -45,7 +45,7 @@ export class NoteComponent implements OnChanges {
   }
 
   sanitizeHtml() {
-    this.renderedContent = this.sanitizer.bypassSecurityTrustHtml(this.note.body);
+    this.renderedContent = this.sanitizer.bypassSecurityTrustHtml(this.note.body || '');
   }
 
   ngOnChanges() {

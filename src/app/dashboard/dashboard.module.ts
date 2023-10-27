@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SharedWithMeComponent } from './component/shared-with-me/shared-with-me.component';
 import { NotebookListComponent } from './component/notebook-list/notebook-list.component';
 import { NoteListComponent } from './component/note-list/note-list.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -35,12 +36,13 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { NotebooknameInputComponent } from './component/notebookname-input/notebookname-input.component';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { NotebookpageComponent } from './component/notebookpage/notebookpage.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NoteListComponent,
-    NotebookListComponent,
+    SharedWithMeComponent,
     PinboardComponent,
     NoteComponent,
     AddUpdateNoteComponent,
@@ -50,10 +52,11 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     MoveNoteDialogComponent,
     RemainderAddUpdateComponent,
     RemainderComponent,
-
+    NotebookListComponent,
     RemainderCardComponent,
     NavbarComponent,
-    NotebooknameInputComponent],
+    NotebooknameInputComponent,
+    NotebookpageComponent],
   imports: [
 
     DashboardRoutingModule,

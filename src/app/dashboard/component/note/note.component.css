@@ -3,8 +3,9 @@
   border-radius: 8px;
   padding: 12px;
   margin: 10px;
-  min-width: 200px;
-  width: calc(100%/5);
+  width: calc(100%/4.5);
+  /* max-width: 220px; */
+
 }
 
 

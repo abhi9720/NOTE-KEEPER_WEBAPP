@@ -223,13 +223,13 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     let greeting;
 
     if (currentHour >= 5 && currentHour < 12) {
-      greeting = "Good morning!";
+      greeting = "Good Morning!";
       this.bgImageUrl = this.ImageUrl["Morning"]
     } else if (currentHour >= 12 && currentHour < 18) {
-      greeting = "Good afternoon!";
+      greeting = "Good Afternoon!";
       this.bgImageUrl = this.ImageUrl["Noon"]
     } else {
-      greeting = "Good evening!";
+      greeting = "Good Evening!";
       this.bgImageUrl = this.ImageUrl["Night"]
 
     }

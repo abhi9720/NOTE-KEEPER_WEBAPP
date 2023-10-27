@@ -28,6 +28,7 @@ export class RichTextEditorComponent implements OnInit {
 export const QuillConfiguration = {
   toolbar: [
     ['bold', 'italic', 'underline', 'strike'],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
     ['blockquote', 'code-block'],
     [{ list: 'ordered' }, { list: 'bullet' }],
     [{ color: [] }, { background: [] }],
