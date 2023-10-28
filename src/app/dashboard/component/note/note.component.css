@@ -7,7 +7,7 @@
 
 }
 
-.note-card * {
+::ng-deep .notesbody * {
   word-break: break-word;
 }
 
