@@ -8,12 +8,12 @@ import { environment } from 'src/environment/environment';
 })
 export class SharedNoteService {
 
-  private baseUrl = `${environment.baseUrl}/v1/share`;
+  private baseUrl = `${environment.baseUrl}/v1/share-notes`;
 
   constructor(private http: HttpClient) { }
 
-  shareNote(noteId: string, sharedWith: string, permissions: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, { noteId, sharedWith, permissions });
+  shareNote(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, payload);
   }
 
   unshareNote(sharedNoteId: string): Observable<any> {

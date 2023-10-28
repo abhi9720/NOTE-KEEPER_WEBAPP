@@ -126,23 +126,32 @@
 
 
     <div class="mt-4 gap-2">
-      <p class="text-slate-400 font-medium">Shared With</p>
+      <div class="flex gap-1 items-center cursor-pointer">
+        <p class="text-slate-400 font-medium">Shared With</p>
+        <i class="fa fa-edit"></i>
+      </div>
+      <div class="flex gap-2 flex-col max-h-full overflow-y-auto">
+        <div class="flex justify-between" *ngFor="let user of dialogInputData?.sharedWith">
 
-      <ul class="flex gap-2 flex-col">
-        <li class="">
-          <span class="mr-2">abhishek@gmail.com</span>
-          <i class="fa fa-times rounded-full bg-slate-200 p-1 text-red-500"></i>
-        </li>
-        <li class="">
-          <span class="mr-2">abhishek@gmail.com</span>
-          <i class="fa fa-times rounded-full bg-slate-200 p-1 text-red-500"></i>
-        </li>
-        <li class="">
-          <span class="mr-2">abhishek@gmail.com</span>
-          <i class="fa fa-times rounded-full bg-slate-200 p-1 text-red-500"></i>
-        </li>
-      </ul>
+          <div class="group flex gap-2 items-center relative w-fit">
+            <p-avatar shape="circle" label="{{user.username.charAt(0)}}" size="medium"></p-avatar>
+
+            <!-- Show username on hover -->
+            <p class="font-medium text">{{user.username}}</p>
+
+            <p
+              class="hidden group-hover:flex absolute bg-white p-1 text-sm rounded-md bg-gray-300 border border-gray-100 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+              {{user.email}}</p>
+
+          </div>
+
+          <button class="cursor-pointer text-red-500 font-normal p-1">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
     </div>
+
 
 
   </div>

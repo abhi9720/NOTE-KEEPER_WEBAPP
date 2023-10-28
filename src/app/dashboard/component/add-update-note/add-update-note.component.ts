@@ -4,6 +4,8 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MoveNoteDialogComponent } from '../move-note-dialog/move-note-dialog.component';
+import { NoteService } from '../../service/note.service';
+import { SharedNoteService } from '../../service/shared-note.service';
 
 @Component({
   selector: 'app-add-update-note',
@@ -19,8 +21,10 @@ export class AddUpdateNoteComponent implements OnInit {
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
   dialogWidth!: string;
+  dialogInputData: any;
 
   constructor(
+    private sharedNoteService: SharedNoteService,
     private dialogService: DialogService,
     private fb: FormBuilder,
     private media: MediaMatcher,
@@ -35,7 +39,7 @@ export class AddUpdateNoteComponent implements OnInit {
   }
 
   setDialogWidth() {
-    this.dialogWidth = this.mobileQuery.matches ? '95%' : '60%';
+    this.dialogWidth = this.mobileQuery.matches ? '80%' : '40%';
   }
 
   ngOnInit() {
@@ -51,6 +55,7 @@ export class AddUpdateNoteComponent implements OnInit {
       console.log(this.config.data);
 
       const data = this.config.data;
+      this.dialogInputData = data;
       this.noteId = this.config.data._id;
       this.isEdit = true
       this.noteForm.patchValue({
@@ -130,6 +135,7 @@ export class AddUpdateNoteComponent implements OnInit {
     const ref = this.dialogService.open(MoveNoteDialogComponent, {
       header: 'Move Note',
       width: this.dialogWidth,
+      contentStyle: { overflow: 'auto' },
       data: {}, // Pass available notebooks
       baseZIndex: 10000,
       dismissableMask: true
@@ -151,25 +157,36 @@ export class AddUpdateNoteComponent implements OnInit {
     const ref = this.dialogService.open(AccessInputEmailComponent, {
       header: 'Share Note',
       width: this.dialogWidth,
-      height: "auto",
       draggable: true,
       maximizable: true,
       baseZIndex: 10000,
-      dismissableMask: true
-
+      dismissableMask: true,
+      contentStyle: { overflow: 'auto' },
     });
 
-    ref.onClose.subscribe((recipientEmail) => {
-      if (recipientEmail) {
+    ref.onClose.subscribe((data) => {
+      if (data) {
 
 
-        // this.noteService.shareNote(this.note.id, recipientEmail).subscribe((response) => {
-        //   if (response.success) {
-        //     // Handle success, e.g., show a confirmation message
-        //   } else {
-        //     // Handle error, e.g., show an error message
-        //   }
-        // });
+        const payload = {
+          ...data,
+          noteId: this.noteId
+        }
+        console.log(payload);
+
+        this.sharedNoteService.shareNote(payload).subscribe(
+          (response) => {
+
+            console.log(response);
+
+
+          },
+          (error) => {
+            console.log(error);
+
+          }
+        )
+
       }
     });
 

@@ -39,6 +39,8 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { NotebookpageComponent } from './component/notebookpage/notebookpage.component';
 import { MomentModule } from 'angular2-moment';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     ToastModule,
     EditorModule,
     MomentModule,
+    AvatarModule,
+    AvatarGroupModule,
     ConfirmationPopoverModule.forRoot({
       focusButton: 'confirm',
     }),
