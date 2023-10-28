@@ -27,15 +27,15 @@
 
 
 <!-- -->
-<ul [ngClass]="{'h-0 opacity-0 bg-blue-500': !showNoteBooks, 'h-auto opacity-100 bg-blue-700': showNoteBooks}"
+<div [ngClass]="{'h-0 opacity-0 bg-blue-500': !showNoteBooks, 'h-auto opacity-100 bg-blue-700': showNoteBooks}"
   class="p-2 mt-2 space-y-2 transition-all duration-300 ease-in-out">
 
 
 
-  <li *ngFor="let notebook of Notebooks; let i = index" class="ml-5"
+  <div *ngFor="let notebook of Notebooks; let i = index" class="ml-5"
     [ngClass]="{'bg-blue-800 rounded-lg': noteBookSelected?._id===notebook._id}">
 
     <app-notebookname-input (updateNoteBookEmitter)="updateNoteBookName($event,i)"
       (deleteNoteBookEmitter)="deleteNoteBook($event,i)" [Notebook]="notebook"></app-notebookname-input>
-  </li>
-</ul>
+  </div>
+</div>

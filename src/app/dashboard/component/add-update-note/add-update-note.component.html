@@ -1,11 +1,11 @@
-<div class="p-1 w-full">
+<div class="p-1 w-full flex flex-col md:flex-row ">
 
-  <form [formGroup]="noteForm" (ngSubmit)="submit()">
+  <form [formGroup]="noteForm" class="p-2 w-full md:w-5/6" (ngSubmit)="submit()">
 
 
     <div class="mb-4">
       <input formControlName="title"
-        class="w-full p-2 border-none bg-slate-100 rounded focus:outline-none focus:border-none text-xl font-bold"
+        class="w-full p-2 border-none bg-slate-50 rounded focus:outline-none focus:border-none text-xl font-bold"
         placeholder="Title">
 
     </div>
@@ -59,7 +59,7 @@
 
 
         <select formControlName="listType"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg appearance-none focus:outline-none focus:border-blue-400 focus:ring focus:ring-blue-300 text-lg bg-white text-gray-700">
+          class="w-full px-2 py-1 border border-gray-300 rounded-lg appearance-none focus:outline-none focus:border-blue-400 focus:ring focus:ring-blue-300 text-lg bg-white text-gray-700">
           <option value="select">Select List Type</option>
           <option value="checkbox">Checkbox List</option>
           <!-- <option value="bullet">Bullet List</option> -->
@@ -92,11 +92,61 @@
 
     <button type="button" *ngIf="noteForm.get('listType')?.value && noteForm.get('listType')?.value !== 'null'"
       class="text-blue-500 font-semibold p-2 rounded-lg bg-blue-100 hover:bg-blue-200 focus:outline-none text-lg"
-      (click)="addlistItems()">Add Item</button>
+      (click)="addlistItems()">Add Item
+    </button>
     <div class="flex justify-end">
-      <button type="submit" class="text-white bg-blue-500 rounded-lg p-2 hover:bg-blue-600 focus:outline-none text-xl">
-
+      <button type="submit" class="text-white bg-blue-600 rounded-lg p-2 hover:bg-blue-800 focus:outline-none text-xl">
         {{noteId ? 'Update' : 'Add'}} Note</button>
     </div>
   </form>
+
+  <div class="p-4">
+
+
+    <!-- <div class="mb-4">
+      <p class="text-slate-400 font-medium">Add to Note</p>
+      <button class="bg-slate-200 text-slate-800 px-2 py-1 rounded-md w-full mt-1">
+        <i class="fa fa-user mr-2"></i> Member
+      </button>
+    </div> -->
+
+    <div class="mb-4 gap-2">
+      <p class="text-slate-400 font-medium">Actions</p>
+      <button (click)="moveNote()" class="bg-slate-200 text-slate-800 px-2 py-1 rounded-md w-full mt-1">
+        <i class="fa fa-arrow-right mr-2"></i> Move
+      </button>
+      <button class="bg-slate-200 text-slate-800 px-2 py-1 rounded-md w-full mt-1">
+        <i class="fa fa-copy mr-2"></i> Copy
+      </button>
+      <button (click)="shareNote()" class="bg-slate-200 text-slate-800 px-2 py-1 rounded-md w-full mt-1">
+        <i class="fa fa-share mr-2"></i> Share
+      </button>
+    </div>
+
+
+
+    <div class="mt-4 gap-2">
+      <p class="text-slate-400 font-medium">Shared With</p>
+
+      <ul class="flex gap-2 flex-col">
+        <li class="">
+          <span class="mr-2">abhishek@gmail.com</span>
+          <i class="fa fa-times rounded-full bg-slate-200 p-1 text-red-500"></i>
+        </li>
+        <li class="">
+          <span class="mr-2">abhishek@gmail.com</span>
+          <i class="fa fa-times rounded-full bg-slate-200 p-1 text-red-500"></i>
+        </li>
+        <li class="">
+          <span class="mr-2">abhishek@gmail.com</span>
+          <i class="fa fa-times rounded-full bg-slate-200 p-1 text-red-500"></i>
+        </li>
+      </ul>
+    </div>
+
+
+  </div>
+
+
+
 </div>

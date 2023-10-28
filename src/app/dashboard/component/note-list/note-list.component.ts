@@ -24,7 +24,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
-  dialogWidth = '40%';
+  dialogWidth = '60%';
 
 
   isEditing: boolean = false;
@@ -145,7 +145,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
   setDialogWidth() {
     this.isMobileScreen = this.mobileQuery.matches
-    this.dialogWidth = this.mobileQuery.matches ? '95%' : '40%';
+    this.dialogWidth = this.mobileQuery.matches ? '95%' : '60%';
   }
 
 
@@ -272,9 +272,13 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   searchNotes(event: any) {
     console.log(event,);
 
+    console.log(this.filteredNotes);
+    console.log(this.notes);
+
+
     const searchText = event.target.value;
     this.filteredNotes = this.notes.filter((note: any) => {
-      return note.body.toLowerCase().includes(searchText.toLowerCase()) || note.title.toLowerCase().includes(searchText.toLowerCase());
+      return note.body?.toLowerCase().includes(searchText?.toLowerCase()) || note.title.toLowerCase().includes(searchText.toLowerCase());
     });
     this.refreshMasonryLayout()
   }

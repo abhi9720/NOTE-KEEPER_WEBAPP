@@ -27,6 +27,10 @@ export class NotebookService {
     return this.http.get(`${this.baseUrl}`);
   }
 
+  getNotebooksPopulated() {
+    return this.http.get(`${this.baseUrl}?populated=true`);
+  }
+
   getNotebookById(notebookId: string) {
     return this.http.get(`${this.baseUrl}/${notebookId}`);
   }

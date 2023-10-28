@@ -38,7 +38,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { NotebookpageComponent } from './component/notebookpage/notebookpage.component';
 import { MomentModule } from 'angular2-moment';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,7 @@ import { MomentModule } from 'angular2-moment';
     NotebooknameInputComponent,
     NotebookpageComponent],
   imports: [
-
+    AutoCompleteModule,
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,

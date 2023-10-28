@@ -1,0 +1,4 @@
+::ng-deep .ui-autocomplete-panel {
+    z-index: 100000000;
+    /* Adjust the value as needed */
+}

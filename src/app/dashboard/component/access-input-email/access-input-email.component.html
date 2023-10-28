@@ -1,13 +1,15 @@
 <div class="p-1 w-full">
-  <form [formGroup]="shareForm">
-    <div class="relative">
-      <input type="text" formControlName="email" placeholder="Enter recipient's email"
-        class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-300 focus:outline-none" />
+  <form [formGroup]="shareForm" class="p-2">
 
-      <button (click)="onShareNotebook()" [disabled]="!shareForm.valid" type="button"
-        class="absolute right-0 px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Share
-      </button>
-    </div>
+
+    <p-autoComplete [multiple]="true" formControlName="email" [suggestions]="emailSuggestions"
+      (completeMethod)="searchEmails($event)" placeholder="Enter recipient's email" class="w-full"></p-autoComplete>
+
+    <button (click)="onShareNotebook()" [disabled]="!shareForm.valid" type="button"
+      class="m-2 px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Share
+    </button>
+
+
   </form>
 </div>

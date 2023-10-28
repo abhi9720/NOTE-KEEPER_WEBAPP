@@ -30,7 +30,7 @@
 
   <div class="overflow-y-auto masonry-container" [ngClass]="{'flex-grow':filteredNotes.length}">
     <app-note *ngFor="let note of filteredNotes; let i =  index" [note]="note"
-      (deleteNoteEmitter)="deleteNote($event,i)"></app-note>
+      (refershLayoutEmitter)="refreshMasonryLayout()" (deleteNoteEmitter)="deleteNote($event,i)"></app-note>
   </div>
 
 

@@ -79,3 +79,87 @@
   color: #666;
   background-color: white;
 }
+
+
+
+/* Reset some default browser styles */
+html,
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set a base font size and family */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* Style headings */
+::ng-deep h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+::ng-deep h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+::ng-deep h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+::ng-deep ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+::ng-deep ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+::ng-deep ul ul,
+::ng-deep ol ul {
+  list-style-type: circle;
+  list-style-position: inside;
+  margin-left: 15px;
+}
+
+::ng-deep ol ol,
+::ng-deep ul ol {
+  list-style-type: lower-latin;
+  list-style-position: inside;
+  margin-left: 15px;
+}
+
+
+::ng-deep blockquote {
+  padding: 0.5rem 1rem;
+  background-color: #f7f7f7;
+  border-left: 4px solid #333;
+}
+
+::ng-deep pre {
+  font-family: 'Courier New', monospace;
+  background-color: #091e42;
+  color: #ccc;
+  padding: 0.5rem;
+  overflow-x: auto;
+}
+
+::ng-deep code {
+  font-family: 'Courier New', monospace;
+  background-color: #f7f7f7;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid #ccc;
+}

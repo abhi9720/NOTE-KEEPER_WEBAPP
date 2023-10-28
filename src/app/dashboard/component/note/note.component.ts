@@ -8,7 +8,6 @@ import { AccessInputEmailComponent } from '../access-input-email/access-input-em
 import { MoveNoteDialogComponent } from '../move-note-dialog/move-note-dialog.component';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { NotebookSelectionService } from '../../service/notebook-selection.service';
 
 
 @Component({
@@ -20,12 +19,13 @@ import { NotebookSelectionService } from '../../service/notebook-selection.servi
 export class NoteComponent implements OnChanges {
   @Input() note: any;
   @Output() deleteNoteEmitter = new EventEmitter<any>();
+  @Output() refershLayoutEmitter = new EventEmitter<any>();
 
   noteClass: string = '';
 
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
-  dialogWidth = '40%';
+  dialogWidth = '60%';
   renderedContent!: SafeHtml;
 
   constructor(private dialogService: DialogService,
@@ -59,7 +59,7 @@ export class NoteComponent implements OnChanges {
 
 
   setDialogWidth() {
-    this.dialogWidth = this.mobileQuery.matches ? '95%' : '40%';
+    this.dialogWidth = this.mobileQuery.matches ? '95%' : '60%';
   }
 
 
@@ -150,15 +150,14 @@ export class NoteComponent implements OnChanges {
               console.log(res);
               this.note = res;
               console.log(this.note);
-              this.sanitizeHtml()
+              this.sanitizeHtml();
+              this.refershLayoutEmitter.emit();
             }
             this.showMessage('info', 'Information', 'Note Updated')
           },
           (err) => {
             this.showMessage('error', 'Error', 'Failed to Update Note')
-
           }
-
         )
       }
 

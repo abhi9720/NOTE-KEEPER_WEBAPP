@@ -13,17 +13,25 @@ export class NotebookpageComponent implements OnInit {
 
   constructor(private notebookService: NotebookService) {
     this.notebookService.Notebook$.subscribe(notebooks => {
-      console.log(notebooks);
-
-      this.notebooks = notebooks
-      console.log(this.notebooks);
-
+      // this.notebooks = notebooks;
+      this.fetchNoteIWthPopulated()
     })
   }
 
   ngOnInit(): void {
-
+    this.fetchNoteIWthPopulated()
   }
 
+  fetchNoteIWthPopulated() {
+    this.notebookService.getNotebooksPopulated().subscribe(
+      (response) => {
+        this.notebooks = response
+      },
+      (error) => {
+        console.log(error);
+
+      }
+    )
+  }
 
 }
