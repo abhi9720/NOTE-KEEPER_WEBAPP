@@ -4,7 +4,6 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { AccessInputEmailComponent } from '../access-input-email/access-input-email.component';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MoveNoteDialogComponent } from '../move-note-dialog/move-note-dialog.component';
-import { NoteService } from '../../service/note.service';
 import { SharedNoteService } from '../../service/shared-note.service';
 
 @Component({
@@ -39,7 +38,17 @@ export class AddUpdateNoteComponent implements OnInit {
   }
 
   setDialogWidth() {
-    this.dialogWidth = this.mobileQuery.matches ? '80%' : '40%';
+    this.dialogWidth = this.mobileQuery.matches ? '94%' : '40%';
+  }
+
+  isColorSwatchOpen = false;
+
+  openColorSwatch() {
+    this.isColorSwatchOpen = true;
+  }
+
+  closeColorSwatch() {
+    this.isColorSwatchOpen = false;
   }
 
   ngOnInit() {
@@ -47,9 +56,12 @@ export class AddUpdateNoteComponent implements OnInit {
       title: new FormControl(''),
       body: new FormControl('', [Validators.required]),
       color: new FormControl('#fff'),
-      listType: new FormControl('select'),
+      listType: new FormControl(null),
       listItems: this.fb.array([]),
     });
+
+    console.log(this.noteForm.value);
+
 
     if (this.config?.data) {
       console.log(this.config.data);
@@ -100,6 +112,11 @@ export class AddUpdateNoteComponent implements OnInit {
 
   get listItems(): FormArray {
     return this.noteForm.get('listItems') as FormArray;
+  }
+
+  AddCheckList() {
+    this.noteForm.get('listType')?.setValue("checkbox");
+    this.addlistItems()
   }
 
   // Add user input items to the FormArray dynamically

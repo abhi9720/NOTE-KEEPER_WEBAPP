@@ -145,7 +145,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
   setDialogWidth() {
     this.isMobileScreen = this.mobileQuery.matches
-    this.dialogWidth = this.mobileQuery.matches ? '95%' : '60%';
+    this.dialogWidth = this.mobileQuery.matches ? '98%' : '70%';
   }
 
 
@@ -157,6 +157,8 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     const ref = this.dialogService.open(AddUpdateNoteComponent, {
       header: 'Add Note',
       width: this.dialogWidth,
+      keepInViewport: true,
+      height: "100%",
       draggable: true,
       maximizable: true,
       data: {},

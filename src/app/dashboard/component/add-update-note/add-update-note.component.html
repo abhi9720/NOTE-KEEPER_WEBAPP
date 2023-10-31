@@ -13,43 +13,64 @@
       <app-rich-text-editor [control]="body" />
       <!-- <textarea rows="3" pInputTextarea [autoResize]="true" placeholder="Write your note content here"
         formControlName="body"
-        class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-blue-300 w-full h-auto border rounded p-2 focus:outline-none text-lg"></textarea> -->
+        class="w-full px-3 py-2 border rounded bg-gray-50 focus:ring focus:ring-teal-300 w-full h-auto border rounded p-2 focus:outline-none text-lg"></textarea> -->
 
       <!-- <textarea formControlName="body" class="w-full p-2 border-none bg-slate-100 rounded-lg focus:outline-none text-lg"
         placeholder="Write your note content here"></textarea> -->
     </div>
 
-    <div class="mb-4">
-      <label class="text-gray-600 font-semibold">Note Color:</label>
-      <div class="color-swatches">
-        <!-- Blue Background (#7dd3fc) -->
-        <div [ngClass]="{'selected-color': selectedColor === '#7dd3fc'}" class="color-swatch blue"
-          (click)="selectColor('#7dd3fc')"></div>
+    <div class="relative">
+      <div class="flex gap-3">
 
-        <!-- green -->
-        <div [ngClass]="{'selected-color': selectedColor === '#86efac'}" class="color-swatch green"
-          (click)="selectColor('#86efac')"></div>
+        <div class="relative" (mouseenter)="openColorSwatch()" (mouseleave)="closeColorSwatch()">
+          <button type="button" class="text-slate-500 bg-white border border-2"
+            [style.background-color]="selectedColor">
 
-        <!-- red -->
-        <div [ngClass]="{'selected-color': selectedColor === '#FCA5A5'}" class="color-swatch red"
-          (click)="selectColor('#FCA5A5')"></div>
+            <i class="fa fa-paint-brush p-2 rounded-lg" aria-hidden="true"></i>
+          </button>
 
-        <!-- purple -->
-        <div [ngClass]="{'selected-color': selectedColor === '#D6BCFA'}" class="color-swatch purple"
-          (click)="selectColor('#D6BCFA')"></div>
+          <div *ngIf="isColorSwatchOpen" class="mb-4 p-2 absolute top-[-30px] bg-slate-100 shadow-lg rounded-lg">
+            <div class="color-swatches">
+              <!-- blue Background (#7dd3fc) -->
+              <div [ngClass]="{'selected-color': selectedColor === '#bfdbfe'}" class="color-swatch blue"
+                (click)="selectColor('#bfdbfe')"></div>
 
-        <!-- teal -->
-        <div [ngClass]="{'selected-color': selectedColor === '#5eead4'}" class="color-swatch teal"
-          (click)="selectColor('#5eead4')"></div>
+              <!-- Green -->
+              <div [ngClass]="{'selected-color': selectedColor === '#a7f3d0'}" class="color-swatch green"
+                (click)="selectColor('#a7f3d0')"></div>
 
-        <!-- yellow -->
-        <div [ngClass]="{'selected-color': selectedColor === '#fcd34d'}" class="color-swatch yellow"
-          (click)="selectColor('#fcd34d')"></div>
+              <!-- Red -->
+              <div [ngClass]="{'selected-color': selectedColor === '#fecaca'}" class="color-swatch red"
+                (click)="selectColor('#fecaca')"></div>
 
-        <!-- slate -->
-        <div [ngClass]="{'selected-color': selectedColor === '#cbd5e1'}" class="color-swatch slate"
-          (click)="selectColor('#cbd5e1')"></div>
+              <!-- Purple -->
+              <div [ngClass]="{'selected-color': selectedColor === '#ddd6fe'}" class="color-swatch purple"
+                (click)="selectColor('#ddd6fe')"></div>
+
+              <!-- Teal -->
+              <div [ngClass]="{'selected-color': selectedColor === '#99f6e4'}" class="color-swatch teal"
+                (click)="selectColor('#99f6e4')"></div>
+
+              <!-- Yellow -->
+              <div [ngClass]="{'selected-color': selectedColor === '#fde68a'}" class="color-swatch yellow"
+                (click)="selectColor('#fde68a')"></div>
+
+              <!-- Slate -->
+              <div [ngClass]="{'selected-color': selectedColor === '#e2e8f0'}" class="color-swatch slate"
+                (click)="selectColor('#e2e8f0')"></div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <button [disabled]="listItems.value.length !== 0" type="button" (click)="AddCheckList()"
+          class="text-slate-500 bg-slate-100 border border-2  disabled:bg-gray-100 hover:bg-slate-200">
+          <i class="fa fa-check-square p-2 rounded-lg" aria-hidden="true"></i>
+        </button>
       </div>
+
+
     </div>
 
 
@@ -58,15 +79,17 @@
       <div class="relative inline-block w-full">
 
 
-        <select formControlName="listType"
-          class="w-full px-2 py-1 border border-gray-300 rounded-lg appearance-none focus:outline-none focus:border-blue-400 focus:ring focus:ring-blue-300 text-lg bg-white text-gray-700">
-          <option value="select">Select List Type</option>
+        <!-- <select formControlName="listType"
+          class="w-full px-2 py-1 border border-gray-300 rounded-lg appearance-none focus:outline-none focus:border-teal-400 focus:ring focus:ring-teal-300 text-lg bg-white text-gray-700">
+          <option value="">Select List Type</option>
           <option value="checkbox">Checkbox List</option>
-          <!-- <option value="bullet">Bullet List</option> -->
-        </select>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          <option value="bullet">Bullet List</option>
+        </select> -->
+
+
+        <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
           <i class="fa fa-angle-down text-gray-600"></i>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -78,7 +101,7 @@
           <input class="w-full p-2 border rounded focus:outline-none text-lg ml-3" formControlName="label"
             placeholder="List Item">
 
-          <button (click)="removelistItems(i)" class="cursor-pointer p-2 bg-gray-100 ml-2 text-red-500">
+          <button type="button" (click)="removelistItems(i)" class="cursor-pointer p-2 bg-gray-100 ml-2 text-red-500">
             <i class="fa fa-trash"></i>
           </button>
 
@@ -90,12 +113,14 @@
 
 
 
-    <button type="button" *ngIf="noteForm.get('listType')?.value && noteForm.get('listType')?.value !== 'null'"
-      class="text-blue-500 font-semibold p-2 rounded-lg bg-blue-100 hover:bg-blue-200 focus:outline-none text-lg"
+
+
+    <button *ngIf="listItems.value.length>0" type="button"
+      class="text-teal-500 font-semibold p-2 rounded-lg bg-teal-100 hover:bg-teal-200 focus:outline-none text-lg"
       (click)="addlistItems()">Add Item
     </button>
     <div class="flex justify-end">
-      <button type="submit" class="text-white bg-blue-600 rounded-lg p-2 hover:bg-blue-800 focus:outline-none text-xl">
+      <button type="submit" class="text-white bg-teal-600 rounded-lg p-2 hover:bg-teal-800 focus:outline-none text-xl">
         {{noteId ? 'Update' : 'Add'}} Note</button>
     </div>
   </form>
@@ -145,7 +170,7 @@
 
           </div>
 
-          <button class="cursor-pointer text-red-500 font-normal p-1">
+          <button type="button" class="cursor-pointer text-red-500 font-normal p-1">
             <i class="fa fa-times"></i>
           </button>
         </div>
