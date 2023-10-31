@@ -1,10 +1,9 @@
-<div class="flex flex-col px-1 justify-between items-center sticky top-0 bg-teal-600">
+<div class="flex flex-col px-1 justify-between items-center sticky top-0 bg-[#004f4a]">
   <div class="flex justify-between items-center w-full">
     <a [routerLink]="['/dashboard/notebooks']" (click)=" fetchNoteBooks()"
-      class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-teal-700">
+      class="my-2 flex block p-2 font-semibold text-lg rounded-lg items-center gap-2 hover:bg-teal-700">
       <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
-      NOTEBOOKS
-
+      Notebooks
     </a>
     <i *ngIf="isFetching" class="fa fa-refresh fa-spin"></i>
 

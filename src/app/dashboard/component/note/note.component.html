@@ -1,5 +1,4 @@
-<div class="note-card p-6 bg-white border border-gray-200 rounded-lg shadow relative"
-  [style.background-color]="note.color">
+<div class="note-card p-6 bg-white shadow-lg rounded-lg relative" [style.background-color]="note.color">
 
   <div *ngIf="isMenuOpen" (click)="closeMenu()" class="fixed top-0 left-0 w-screen h-screen z-10"></div>
   <p-confirmDialog header="Confirmation" icon="fa fa-exclamation-triangle" width="425"></p-confirmDialog>
@@ -8,10 +7,10 @@
     <h3 class="text-lg font-semibold mb-4">{{ note.title }}</h3>
 
     <div class="relative inline-block flex gap-2">
-      <button class="text-teal-600 hover:text-teal-800 p-2" (click)="editNote()">
+      <button class="text-blue-600 hover:text-blue-800 p-2" (click)="editNote()">
         <i class="fa fa-edit"></i>
       </button>
-      <button type="button" class="text-gray-600 hover:text-teal-800 p-2" (click)="OpenMenu()">
+      <button type="button" class="text-gray-600 hover:text-blue-800 p-2" (click)="OpenMenu()">
         <i class="fa fa-ellipsis-v"></i>
       </button>
 
@@ -56,7 +55,7 @@
   <div class="flex justify-between">
     <p class="text-sm text-slate-600">{{ note.createdAt | amTimeAgo }}</p>
     <p>
-      <button [ngClass]="{'text-gray-400': !note.isPinned, 'text-teal-600': note.isPinned, 'pinned': note.isPinned }"
+      <button [ngClass]="{'text-gray-400': !note.isPinned, 'text-blue-600': note.isPinned, 'pinned': note.isPinned }"
         (click)="pinClicked()">
         <i class="fa fa-lg fa-thumb-tack rotate-30" aria-hidden="true"></i>
       </button>

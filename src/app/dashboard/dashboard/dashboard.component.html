@@ -1,7 +1,7 @@
 <div class="flex h-screen w-full">
     <!-- Sidebar -->
 
-    <div class="bg-teal-600 text-white"
+    <div class="bg-[#004f4a] text-white"
         [ngClass]="{'w-72':!isMobile && !sidebarHidden,'fixed z-40 w-10/12':isMobile &&  !sidebarHidden}">
 
         <div class="flex flex-col h-screen" [ngClass]="{'px-3':!sidebarHidden}">
@@ -21,22 +21,22 @@
 
 
 
-            <div class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-teal-800"
+            <div class="my-2 flex block p-2 rounded-lg items-center font-semibold text-lg gap-2 hover:bg-teal-800"
                 [ngClass]="{'hidden': sidebarHidden}">
                 <i class="fa fa-bell-o" aria-hidden="true"></i>
-                <a routerLink="/dashboard/remainder" class="block">REMAINDER</a>
+                <a routerLink="/dashboard/remainder" class="block">Remainder</a>
             </div>
 
 
 
-            <div class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-teal-800"
+            <div class="my-2 flex block p-2 rounded-lg items-center font-semibold text-lg gap-2 hover:bg-teal-800"
                 [ngClass]="{'hidden': sidebarHidden}">
                 <i class="fa fa-tachometer" aria-hidden="true"></i>
-                <a routerLink="/dashboard" class="block">DASHBOARD</a>
+                <a routerLink="/dashboard" class="block">Dashboard</a>
                 <!-- <p-divider [ngClass]="{'hidden !m-[10px]': sidebarHidden}"></p-divider> -->
             </div>
 
-            <div class="my-2 flex block p-2 rounded-lg items-center gap-2 hover:bg-teal-800"
+            <div class="my-2 flex block p-2 rounded-lg items-center font-semibold text-lg gap-2 hover:bg-teal-800"
                 [ngClass]="{'hidden': sidebarHidden}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="1em"
                     viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -69,7 +69,7 @@
 
     <!-- Right Part -->
     <div [ngClass]="{'w-5/6': !(isMobile && !sidebarHidden), 'w-0': isMobile && !sidebarHidden}"
-        class="bg-gray-100 flex-grow overflow-y-auto flex flex-col rightpart relative">
+        class="bg-slate-50 flex-grow overflow-y-auto flex flex-col rightpart relative">
         <router-outlet></router-outlet>
     </div>
 </div>

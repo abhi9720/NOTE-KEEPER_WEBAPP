@@ -2,8 +2,8 @@
     <input *ngIf="isEditing" #notebookNameInput [(ngModel)]="NotebookName" (blur)="onInputBlur()"
         [disabled]="!isEditing" class="text-black" />
 
-    <p *ngIf="!isEditing" class="text-sm font-semibold rounded-md cursor-pointer p-2 font-medium cursor-pointer
-    hover:bg-teal-800 hover:text-red-100 hover:font-semibold transition-colors 
+    <p *ngIf="!isEditing" class="text-sm rounded-md cursor-pointer p-2 font-medium cursor-pointer
+    hover:bg-teal-800
     ">{{NotebookName}}</p>
 
 
