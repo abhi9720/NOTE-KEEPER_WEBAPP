@@ -1,7 +1,7 @@
 <div class="flex h-screen w-full">
     <!-- Sidebar -->
 
-    <div class="bg-[#004f4a] text-white"
+    <div *ngIf="!isMobile" class="bg-[#004f4a] text-white"
         [ngClass]="{'w-72':!isMobile && !sidebarHidden,'fixed z-40 w-10/12':isMobile &&  !sidebarHidden}">
 
         <div class="flex flex-col h-screen" [ngClass]="{'px-3':!sidebarHidden}">
@@ -70,9 +70,41 @@
     </div>
 
 
+
+    <div *ngIf="isMobile"
+        class="fixed bottom-0 left-0 right-0 bg-[#004f4a] z-40 text-white p-2  flex  justify-between ">
+        <a routerLink="/dashboard/remainder" class="text-center flex flex-col gap-2 block">
+            <i class="fa fa-bell-o" aria-hidden="true text-2xl"></i>
+            <span class="text-sm">Remainder</span>
+        </a>
+
+        <a routerLink="/dashboard" class="text-center flex flex-col gap-2 block">
+            <i class="fa fa-thumb-tack" aria-hidden="true text-2xl"></i>
+            <span class="text-sm">Pinned Notes</span>
+        </a>
+
+        <a routerLink="/dashboard/shared-with-me" class="text-center flex flex-col gap-2 block">
+
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="1em"
+                viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                    d="M246.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3V320c0 17.7 14.3 32 32 32s32-14.3 32-32V109.3l73.4 73.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-128-128zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 53 43 96 96 96H352c53 0 96-43 96-96V352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V352z" />
+            </svg>
+
+            <span class="text-sm">Shared</span>
+
+        </a>
+
+        <a routerLink="/dashboard/notebooks" class="text-center flex flex-col gap-2 block">
+            <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+            <span class="text-sm">Notebook</span>
+        </a>
+    </div>
+
+
     <!-- Right Part -->
     <div [ngClass]="{'w-5/6': !(isMobile && !sidebarHidden), 'w-0': isMobile && !sidebarHidden}"
-        class="flex-grow overflow-y-auto flex flex-col rightpart relative bg-green-50">
+        class="flex-grow overflow-y-auto flex flex-col rightpart relative bg-green-50 mb-14">
         <router-outlet (activate)="onActivate($event)"></router-outlet>
     </div>
 </div>
