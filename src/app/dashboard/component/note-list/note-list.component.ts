@@ -25,7 +25,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
   mobileQuery!: MediaQueryList;
   private mobileQueryListener: () => void;
   dialogWidth = '60%';
-
+  isFetching: boolean = false;
 
   isEditing: boolean = false;
   isMobileScreen = false;
@@ -51,6 +51,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     this.mobileQueryListener = () => this.setDialogWidth();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     this.setDialogWidth();
+    this.getGreeting()
   }
 
 
@@ -72,6 +73,10 @@ export class NoteListComponent implements OnInit, AfterViewInit {
       const id = params.get('id');
       if (id) {
 
+        this.isFetching = true;
+        this.filteredNotes = [];
+        this.notes = [];
+
         this.notebookService.getNotebookById(id).subscribe(
           (notebook) => {
             this.NotebookSelected = notebook;
@@ -81,7 +86,7 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
             this.noteService.getNotesByNoteBook(id).subscribe(
               (notes: any) => {
-
+                this.isFetching = false;
                 this.notes = notes;
                 this.filteredNotes = this.notes;
                 console.log(this.notes);
@@ -99,7 +104,6 @@ export class NoteListComponent implements OnInit, AfterViewInit {
 
 
         )
-
 
       }
     });
@@ -218,25 +222,25 @@ export class NoteListComponent implements OnInit, AfterViewInit {
     "Night": "https://c4.wallpaperflare.com/wallpaper/800/831/598/digital-art-neon-mountains-lake-wallpaper-preview.jpg"
   }
 
-  bgImageUrl = this.ImageUrl["Night"]
+  bgImageUrl!: string;
+  greeting!: string
 
   getGreeting() {
     const currentHour = new Date().getHours();
-    let greeting;
+
 
     if (currentHour >= 5 && currentHour < 12) {
-      greeting = "Good Morning!";
+      this.greeting = "Good Morning!";
       this.bgImageUrl = this.ImageUrl["Morning"]
     } else if (currentHour >= 12 && currentHour < 18) {
-      greeting = "Good Afternoon!";
+      this.greeting = "Good Afternoon!";
       this.bgImageUrl = this.ImageUrl["Noon"]
     } else {
-      greeting = "Good Evening!";
+      this.greeting = "Good Evening!";
       this.bgImageUrl = this.ImageUrl["Night"]
 
     }
 
-    return greeting;
   }
 
 

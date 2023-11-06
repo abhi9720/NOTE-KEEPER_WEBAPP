@@ -1,6 +1,7 @@
-<div class="min-h-screen flex items-center justify-center bg-[#0052cc]">
+<div class="min-h-screen flex items-center justify-center bg-green-100">
   <div class="max-w-md w-full bg-white p-8 shadow-lg rounded-lg">
-    <h2 class="text-3xl font-semibold text-center text-[#091e42] mb-4">Login</h2>
+    <h2 class="text-2xl text-center mb-10 font-bold text-teal-600">Welcome to NoteMaster</h2>
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-4">
         <label for="email" class="text-gray-600 font-semibold text-sm block">Email</label>
@@ -19,12 +20,12 @@
         </div>
       </div>
       <button type="submit"
-        class="w-full bg-[#0052cc] text-white font-semibold py-2 rounded-lg hover:bg-teal-600">Login</button>
+        class="w-full bg-teal-600 text-white font-semibold py-2 rounded-lg hover:bg-teal-700">Login</button>
 
       <div class="mt-4 text-center text-gray-600">
         Or Continue with:
-        <a href="#" class="ml-2 text-[#0052cc]"><i class="fa fa-google"></i> Google</a>
-        <a href="#" class="ml-2 text-[#091e42]"><i class="fa fa-github"></i> GitHub</a>
+        <a href="#" class="ml-2"><i class="fa fa-google"></i> Google</a>
+        <a href="#" class="ml-2"><i class="fa fa-github"></i> GitHub</a>
       </div>
       <div class="text-center mt-4">
         <p class="text-gray-600">Don't have an account? <a routerLink="/auth/register"

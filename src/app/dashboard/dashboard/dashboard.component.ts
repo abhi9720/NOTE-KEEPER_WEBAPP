@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { NoteListComponent } from '../component/note-list/note-list.component';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 
@@ -12,8 +11,8 @@ import { Router } from '@angular/router';
 export class DashboardComponent {
 
   sidebarHidden = false;
-  @ViewChild(NoteListComponent, { static: false })
-  noteListComponent!: NoteListComponent;
+
+  childComponent!: any;
 
 
   mobileQuery!: MediaQueryList;
@@ -39,9 +38,11 @@ export class DashboardComponent {
   toggleSidebar() {
     this.sidebarHidden = !this.sidebarHidden;
 
-    if (this.noteListComponent) {
-      this.noteListComponent.refreshMasonryLayout();
-    }
+    console.log("refresh layout");
+
+
+    this.childComponent.refreshMasonryLayout();
+
   }
 
 
@@ -56,5 +57,9 @@ export class DashboardComponent {
     return this.router.url === route;
   }
 
+  onActivate(componentRef: any) {
+    this.childComponent = componentRef;
+
+  }
 
 }

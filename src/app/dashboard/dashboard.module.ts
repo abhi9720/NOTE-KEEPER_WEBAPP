@@ -42,6 +42,10 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 
+
+import { CalendarModule as AngularCalender, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 @NgModule({
   declarations: [
 
@@ -61,7 +65,8 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     RemainderCardComponent,
     NavbarComponent,
     NotebooknameInputComponent,
-    NotebookpageComponent],
+    NotebookpageComponent
+  ],
   imports: [
     AutoCompleteModule,
     DashboardRoutingModule,
@@ -90,6 +95,11 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     ConfirmationPopoverModule.forRoot({
       focusButton: 'confirm',
     }),
+    AngularCalender.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+
   ],
   providers: [
     DatePipe,

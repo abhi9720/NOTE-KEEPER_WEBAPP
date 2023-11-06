@@ -1,10 +1,9 @@
 .note-card {
-  border: 1px solid #a8a8aa2f;
+  /* border: 1px solid #a8a8aa2f; */
   border-radius: 8px;
   padding: 12px;
   margin: 10px;
-  width: 250px;
-
+  width: 270px;
 }
 
 ::ng-deep .notesbody * {

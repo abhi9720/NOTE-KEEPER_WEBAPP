@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NoteService } from '../../service/note.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -23,6 +23,8 @@ export class RemainderAddUpdateComponent {
     });
 
 
+
+    console.log(this.config?.data);
 
 
     if (this.config?.data) {

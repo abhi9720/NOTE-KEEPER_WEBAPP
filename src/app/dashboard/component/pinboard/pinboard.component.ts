@@ -10,7 +10,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: ['./pinboard.component.css'],
   providers: [DialogService],
 })
-export class PinboardComponent implements OnInit, AfterViewInit {
+export class PinboardComponent implements OnInit {
   pinnedNotes: any = [];
   masonry: any;
   isMobileScreen = false;
@@ -36,16 +36,7 @@ export class PinboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.noteService.getPinNotes().subscribe((notes) => {
-      this.pinnedNotes = notes;
-    });
-  }
 
-  removeNote(event: any, idx: number) {
-    this.pinnedNotes.splice(1, idx)
-  }
-
-  ngAfterViewInit() {
     this.masonry = new Masonry(this.el.nativeElement.querySelector('.masonry-container'), {
       itemSelector: '.note-card',
       resize: true,
@@ -53,18 +44,31 @@ export class PinboardComponent implements OnInit, AfterViewInit {
       horizontalOrder: true,
     });
     console.log(this.masonry);
+
+    this.noteService.getPinNotes().subscribe((notes) => {
+      this.pinnedNotes = notes;
+      this.refreshMasonryLayout()
+
+    });
+
+
+
+  }
+
+  removeNote(event: any, idx: number) {
+    this.pinnedNotes.splice(1, idx)
   }
 
 
 
+
   refreshMasonryLayout() {
-    console.log(this.masonry);
 
     if (this.masonry) {
       setTimeout(() => {
         this.masonry.reloadItems()
         this.masonry.layout();
-      }, 100);
+      });
     }
   }
 

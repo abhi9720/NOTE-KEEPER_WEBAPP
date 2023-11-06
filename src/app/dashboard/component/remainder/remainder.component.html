@@ -1,17 +1,34 @@
-<div class="w-full flex flex-col">
-    <div class="w-full flex items-center justify-center">
-        <div class="w-full md:w-2/4 p-4 ">
-            <input type="text" *ngIf="!isReminderModalOpen"
-                class="w-full px-4 py-3 text-gray-700 placeholder-gray-400 border rounded-md shadow-md focus:outline-none focus:ring focus:ring-teal-300"
-                placeholder="Add Reminder" (click)="openReminderModal()" [readonly]="isReminderModalOpen" />
-        </div>
-        <app-remainder-add-update *ngIf="isReminderModalOpen"></app-remainder-add-update>
-    </div>
+<div class="w-full flex flex-col items-center justify-center p-4">
+    <input type="text" *ngIf="!isReminderModalOpen"
+        class="w-full p-5 text-gray-700 placeholder-gray-400 border rounded-md shadow-md focus:outline-none focus:ring focus:ring-teal-300"
+        placeholder="Add Reminder" (click)="openReminderModal()" [readonly]="isReminderModalOpen" />
+    <app-remainder-add-update *ngIf="isReminderModalOpen"></app-remainder-add-update>
 </div>
 
-<div class="wrapper ">
-    <div class="box-border max-w-7xl sm:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
-        <app-remainder-card *ngFor="let remainder of remainders; let i = index"
-            (deleteRemainderEmitter)="deleteRemainder($event, i)" [remainder]="remainder"></app-remainder-card>
+<div class="w-full p-4">
+    <div class="bg-gray-200 py-4 px-2 md:px-8 gap-5 flex items-center flex-wrap justify-between">
+
+        <div class="flex gap-3 items-center text-center">
+            <p class="font-semibold text-2xl text-gray-800">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</p>
+
+            <button
+                class="px-4 py-2 max-h-max rounded-md shadow-md bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                (click)="goToToday()">Today</button>
+
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <button
+                class="px-4 py-2 max-h-max rounded-md shadow-md bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                (click)="goToPreviousMonth()">Previous Month</button>
+            <button
+                class="px-4 py-2 max-h-max rounded-md shadow-md bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                (click)="goToNextMonth()">Next Month</button>
+        </div>
+
+
     </div>
+
+    <mwl-calendar-month-view #calendar [activeDayIsOpen]="activeDayIsOpen" [viewDate]="viewDate" [events]="events"
+        [refresh]="refresh" [locale]="'en'" (dayClicked)="dayClicked($event)"></mwl-calendar-month-view>
 </div>

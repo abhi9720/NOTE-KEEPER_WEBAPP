@@ -31,10 +31,11 @@
 
             <div class="my-2 flex block p-2 rounded-lg items-center font-semibold text-lg gap-2 hover:bg-teal-800"
                 [ngClass]="{'hidden': sidebarHidden}">
-                <i class="fa fa-tachometer" aria-hidden="true"></i>
-                <a routerLink="/dashboard" class="block">Dashboard</a>
-                <!-- <p-divider [ngClass]="{'hidden !m-[10px]': sidebarHidden}"></p-divider> -->
+                <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                <a routerLink="/dashboard" class="block">Pinned Notes</a>
             </div>
+
+
 
             <div class="my-2 flex block p-2 rounded-lg items-center font-semibold text-lg gap-2 hover:bg-teal-800"
                 [ngClass]="{'hidden': sidebarHidden}">
@@ -50,17 +51,19 @@
                 <app-notebook-list></app-notebook-list>
             </div>
 
+            <p-divider [ngClass]="{'hidden !m-[10px]': sidebarHidden}"></p-divider>
+
+
             <div [ngClass]="{'hidden': sidebarHidden}"
-                class="flex justify-between align-center text-center p-2 cursor-pointer hover:bg-teal-500 rounded">
+                class="flex justify-between align-center text-center mb-2 p-2 cursor-pointer hover:bg-teal-700 rounded">
                 <div class="flex gap-2 justify-between align-center text-center">
                     <img src="https://avatars.githubusercontent.com/u/68281476?v=4" alt="User Profile"
                         class="w-8 h-8 rounded-full">
-                    <h2 class="text-xl font-semibold">John Doe</h2>
+                    <h2 class="text-xl font-semibold">Abhishek Tiwari</h2>
                 </div>
 
                 <div class="flex gap-2 justify-between align-center text-center bor">
                     <i class="fa fa-sort-desc" aria-hidden="true"></i>
-
                 </div>
             </div>
         </div>
@@ -69,7 +72,7 @@
 
     <!-- Right Part -->
     <div [ngClass]="{'w-5/6': !(isMobile && !sidebarHidden), 'w-0': isMobile && !sidebarHidden}"
-        class="bg-slate-50 flex-grow overflow-y-auto flex flex-col rightpart relative">
-        <router-outlet></router-outlet>
+        class="flex-grow overflow-y-auto flex flex-col rightpart relative bg-green-50">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
     </div>
 </div>

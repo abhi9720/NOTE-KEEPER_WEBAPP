@@ -1,12 +1,13 @@
 <div class="flex-grow flex flex-col">
 
-  <div class="p-2 bg-gray-100">
 
+
+  <div class="p-2">
     <div class="p-3 rounded-lg "
       style=" background-image: url({{bgImageUrl}}); background-size: cover; background-position: center;">
 
       <div>
-        <p class="text-xl font-semibold text-white">{{ getGreeting() }}</p>
+        <p class="text-xl font-semibold text-white">{{ greeting }}</p>
         <p class="text-gray-200">{{ currentDate | date: 'longDate' }}</p>
       </div>
 
@@ -28,13 +29,35 @@
     </div>
   </div>
 
-  <div class="overflow-y-auto masonry-container" [ngClass]="{'flex-grow':filteredNotes.length}">
+  <div class="w-full h-full flex-grow flex justify-center items-center" *ngIf="isFetching">
+    <!-- <div class="w-16 h-16 border-t-4 border-teal-500 border-solid rounded-full animate-spin"></div> -->
+
+
+    <div class="flex flex-col gap-10 justify-center items-center h-16">
+      <i class="fas fa-sticky-note fa-3x text-teal-500 animate-pulse"></i>
+      <div class="flex space-x-2">
+        <div class="w-3 h-3 bg-teal-500 rounded-full animate-bounce ml-2"></div>
+        <div class="w-3 h-3 bg-teal-500 rounded-full animate-bounce ml-2"></div>
+        <div class="w-3 h-3 bg-teal-500 rounded-full animate-bounce ml-2"></div>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+
+  <div class="overflow-y-auto masonry-container p-0 md:px-5" [ngClass]="{'flex-grow':filteredNotes.length}">
+
+
     <app-note *ngFor="let note of filteredNotes; let i =  index" [note]="note"
       (refershLayoutEmitter)="refreshMasonryLayout()" (deleteNoteEmitter)="deleteNote($event,i)"></app-note>
   </div>
 
 
-  <div *ngIf="!filteredNotes.length">
+  <div *ngIf="!isFetching && !filteredNotes.length">
     <div class="flex items-center justify-center h-40">
       <div class="text-gray-400 text-center">
         <i class="fa fa-sticky-note fa-3x"></i>
@@ -44,7 +67,7 @@
   </div>
 
   <div class="fab-container">
-    <button class="fab-button !bg-teal-800" (click)="openNoteModal()">
+    <button class="fab-button !bg-teal-700" (click)="openNoteModal()">
       <i class="fa fa-plus"></i>
     </button>
   </div>
