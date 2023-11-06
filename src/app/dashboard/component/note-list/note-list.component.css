@@ -16,8 +16,8 @@
 
 @media(max-width:700px) {
   .fab-container {
-    bottom: 20px;
-    right: 20px;
+    bottom: 70px;
+    right: 10px;
   }
 }
 
